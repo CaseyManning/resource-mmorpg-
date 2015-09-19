@@ -6,12 +6,13 @@ import assets.Item;
 
 public class PlayerAttributes {
 
-	int health = 10;
+	int health;
 	int attack;
-	ArrayList<Item> items = new ArrayList<Item>();
+	ArrayList<Item> items;
 	
 	public PlayerAttributes() {
-		
+		health = 10;
+		items = new ArrayList<Item>();
 	}
 
 	public int getHealth() {
