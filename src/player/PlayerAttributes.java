@@ -2,8 +2,6 @@ package player;
 
 import java.util.ArrayList;
 
-import assets.Item;
-
 public class PlayerAttributes {
 
 	int health;

@@ -15,7 +15,7 @@ public class Tile {
 		this.passable = passable;
 	}
 	
-	public boolean CanPass() {
+	public boolean IsPassable() {
 		return passable;
 	}
 	

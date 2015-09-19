@@ -7,9 +7,11 @@
 package engine;
 
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -24,8 +26,14 @@ public class Engine extends JPanel {
 	Tile tree;
 	
 	// The map
-	Tile[][] testMap;
+	public static Tile[][] map;
 	
+	public HashMap<Player, Point> players = new HashMap<Player, Point>();
+	
+	public static Point characterLocation;
+	
+	
+	//we are not actually going to want a main in this class
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
 		frame.setTitle("Resource MMORPG");

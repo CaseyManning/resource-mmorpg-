@@ -1,4 +1,4 @@
-package assets;
+package player;
 
 public class Item {
 
