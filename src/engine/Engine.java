@@ -9,7 +9,6 @@ package engine;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -47,7 +46,7 @@ public class Engine extends JPanel {
 		players = new HashMap<Player, Point>();
 		BufferedImage gImg = null;
 		try {
-			gImg = ImageIO.read(new File("/assets/grass.png"));
+			gImg = ImageIO.read(this.getClass().getResourceAsStream("/assets/grass.png"));
 		} catch (IOException e) {
 			
 		}
