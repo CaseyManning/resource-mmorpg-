@@ -17,9 +17,9 @@ import javax.swing.JPanel;
 public class Engine extends JPanel {
 
 	// The grass tile
-	Tile g;
+	Tile grass;
 	// The tree tile
-	Tile t;
+	Tile tree;
 	
 	// The map
 	Tile[][] testMap;
@@ -40,15 +40,15 @@ public class Engine extends JPanel {
 		} catch (IOException e) {
 			
 		}
-		g = new Tile(gImg, true);
-		System.out.println(g.GetImg());
+		grass = new Tile(gImg, true);
+		System.out.println(grass.GetImg());
 	}
 	
 	
 	@Override
 	public void paint(Graphics g) {
 		super.paintComponent(g);
-		System.out.println(g.drawImage(this.g.GetImg(), 0, 0, null));
+		System.out.println(g.drawImage(this.grass.GetImg(), 0, 0, null));
 	}
 
 }

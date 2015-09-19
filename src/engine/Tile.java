@@ -6,6 +6,9 @@ public class Tile {
 
 	protected BufferedImage img;
 	protected boolean passable;
+	boolean hasPlayer;
+	Player player;
+	
 	
 	public Tile(BufferedImage img, boolean passable) {
 		this.img = img;
