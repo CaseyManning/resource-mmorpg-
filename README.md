@@ -1,3 +1,2 @@
 # resource-mmorpg-
-# resource-mmorpg-
-# resource-mmorpg-
+An MMORPG about collecting resources
