@@ -2,6 +2,8 @@
  * Engine.java: the game's engine
  */
 
+// Test
+
 package engine;
 
 import java.awt.Graphics;
@@ -36,7 +38,7 @@ public class Engine extends JPanel {
 	public Engine() {
 		BufferedImage gImg = null;
 		try {
-			gImg = ImageIO.read(new File("/com/tripplyons/tmp/assets/grass.png"));
+			gImg = ImageIO.read(new File("/assets/grass.png"));
 		} catch (IOException e) {
 			
 		}
