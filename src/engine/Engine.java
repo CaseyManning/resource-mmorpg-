@@ -28,12 +28,12 @@ public class Engine extends JPanel {
 	// The map
 	public static Tile[][] map;
 	
-	public HashMap<Player, Point> players = new HashMap<Player, Point>();
+	public HashMap<Player, Point> players;
 	
 	public static Point characterLocation;
 	
 	
-	//we are not actually going to want a main in this class
+	// we are not actually going to want a main in this class
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
 		frame.setTitle("Resource MMORPG");
@@ -44,6 +44,7 @@ public class Engine extends JPanel {
 	}
 	
 	public Engine() {
+		players = new HashMap<Player, Point>();
 		BufferedImage gImg = null;
 		try {
 			gImg = ImageIO.read(new File("/assets/grass.png"));
