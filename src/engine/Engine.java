@@ -10,6 +10,9 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.imageio.ImageIO;
@@ -31,6 +34,7 @@ public class Engine extends JPanel {
 	
 	public static Point characterLocation;
 	
+	HashMap<Character, Tile> tileChars;
 	
 	// we are not actually going to want a main in this class
 	public static void main(String[] args) {
@@ -43,6 +47,7 @@ public class Engine extends JPanel {
 	}
 	
 	public Engine() {
+		tileChars = new HashMap<Character, Tile>();
 		players = new HashMap<Player, Point>();
 		BufferedImage gImg = null;
 		try {
@@ -51,14 +56,73 @@ public class Engine extends JPanel {
 			
 		}
 		grass = new Tile(gImg, true);
-		System.out.println(grass.GetImg());
+		
+		BufferedImage tImg = null;
+		try {
+			tImg = ImageIO.read(this.getClass().getResourceAsStream("/assets/tree.png"));
+		} catch (IOException e) {
+			
+		}
+		tree = new Tile(tImg, false);
+		
+		tileChars.put('#', tree);
+		tileChars.put('.', grass);
+		
+		map = mapFromFile(this.getClass().getResourceAsStream("/engine/testMap.txt"), Charset.defaultCharset());
 	}
 	
+	Tile[][] mapFromFile(InputStream is, Charset encoding) {
+		try {
+			byte[] encoded = new byte[1024];
+			is.read(encoded);
+			is.close();
+			String contents = new String(encoded, encoding);
+			System.out.println(contents);
+			
+			ArrayList<ArrayList<Tile> > returnList = new ArrayList<ArrayList<Tile> >();
+			
+			ArrayList<Tile> buffer = new ArrayList<Tile>();
+			for(int i = 0; i < contents.length() && contents.charAt(i) != 0; i++) {
+				if(contents.charAt(i) == '\n') {
+					System.out.println("buffer cleared");
+					returnList.add(buffer);
+					buffer.clear();
+				} else {
+					System.out.println("char: " + contents.charAt(i));
+					buffer.add(tileChars.get(contents.charAt(i)));
+				}
+			}
+			returnList.add(buffer);
+			
+			final Tile[][] returnArr = new Tile[returnList.size()][returnList.get(0).size()];
+			int i = 0;
+			for (ArrayList<Tile> l : returnList) 
+				returnArr[i++] = l.toArray(new Tile[l.size()]);
+			
+			String buffer2 = "";
+			for(int row=0; row < returnArr.length; row++) {
+				for(int col=0; col < returnArr[0].length; col++) {
+					buffer2 += returnArr[row][col];
+				}
+				System.out.println(buffer2);
+				buffer2 = "";
+			}
+			
+			return returnArr;
+		} catch (IOException e) {
+			return null;
+		}
+	}
 	
 	@Override
 	public void paint(Graphics g) {
 		super.paintComponent(g);
-		System.out.println(g.drawImage(this.grass.GetImg(), 0, 0, null));
+		
+		for(int row=0; row < map.length; row++) {
+			for(int col=0; col < map[0].length; col++) {
+				g.drawImage(map[row][col].GetImg(), 32*row, 32*col, null);
+			}
+		}
 	}
 
 }
