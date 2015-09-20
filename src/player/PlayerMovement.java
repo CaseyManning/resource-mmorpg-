@@ -13,34 +13,35 @@ public class PlayerMovement implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		System.out.println("keypressed");
 
-		Point pos = Engine.userPlayer.GetPos();
+		int newX = Engine.userPlayer.GetPos().x;
+		int newY = Engine.userPlayer.GetPos().y;
 		
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_W:
-			Tile t = Engine.GetTile(pos.x, pos.y-1);
+			Tile t = Engine.GetTile(newX, newY-1);
 			if(t != null && t.IsPassable()) {
-				pos.y--;
+				newY--;
 			}
 			break;
 			
 		case KeyEvent.VK_A:
-			t = Engine.GetTile(pos.x-1, pos.y);
+			t = Engine.GetTile(newX-1, newY);
 			if(t != null && t.IsPassable()) {
-				pos.x--;
+				newX--;
 			}
 			break;
 		
 		case KeyEvent.VK_S:
-			t = Engine.GetTile(pos.x, pos.y-1);
+			t = Engine.GetTile(newX, newY-1);
 			if(t != null && t.IsPassable()) {
-				pos.y++;
+				newY++;
 			}
 			break;
 			
 		case KeyEvent.VK_D:
-			t = Engine.GetTile(pos.x-1, pos.y);
+			t = Engine.GetTile(newX+1, newY);
 			if(t != null && t.IsPassable()) {
-				pos.x++;
+				newX++;
 			}
 			break;
 		
@@ -48,10 +49,7 @@ public class PlayerMovement implements KeyListener {
 			break;
 		}
 		
-		Engine.userPlayer.SetPos(pos);
-		System.out.println(pos);
-		System.out.println(Engine.userPlayer.GetPos());
-		System.out.println();
+		Engine.userPlayer.SetPos(new Point(newX, newY));
 
 	}
 
