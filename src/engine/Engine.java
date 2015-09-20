@@ -28,7 +28,7 @@ public class Engine extends JPanel {
 	Tile tree;
 	
 	// The map
-	public static Tile[][] map;
+	public static String[] map;
 	
 	public HashMap<Player, Point> players;
 	
@@ -71,44 +71,13 @@ public class Engine extends JPanel {
 		map = mapFromFile(this.getClass().getResourceAsStream("/engine/testMap.txt"), Charset.defaultCharset());
 	}
 	
-	Tile[][] mapFromFile(InputStream is, Charset encoding) {
+	String[] mapFromFile(InputStream is, Charset encoding) {
 		try {
 			byte[] encoded = new byte[1024];
 			is.read(encoded);
 			is.close();
 			String contents = new String(encoded, encoding);
-			System.out.println(contents);
-			
-			ArrayList<ArrayList<Tile> > returnList = new ArrayList<ArrayList<Tile> >();
-			
-			ArrayList<Tile> buffer = new ArrayList<Tile>();
-			for(int i = 0; i < contents.length() && contents.charAt(i) != 0; i++) {
-				if(contents.charAt(i) == '\n') {
-					System.out.println("buffer cleared");
-					returnList.add(buffer);
-					buffer.clear();
-				} else {
-					System.out.println("char: " + contents.charAt(i));
-					buffer.add(tileChars.get(contents.charAt(i)));
-				}
-			}
-			returnList.add(buffer);
-			
-			final Tile[][] returnArr = new Tile[returnList.size()][returnList.get(0).size()];
-			int i = 0;
-			for (ArrayList<Tile> l : returnList) 
-				returnArr[i++] = l.toArray(new Tile[l.size()]);
-			
-			String buffer2 = "";
-			for(int row=0; row < returnArr.length; row++) {
-				for(int col=0; col < returnArr[0].length; col++) {
-					buffer2 += returnArr[row][col];
-				}
-				System.out.println(buffer2);
-				buffer2 = "";
-			}
-			
-			return returnArr;
+			return contents.split("\\n");
 		} catch (IOException e) {
 			return null;
 		}
@@ -119,8 +88,8 @@ public class Engine extends JPanel {
 		super.paintComponent(g);
 		
 		for(int row=0; row < map.length; row++) {
-			for(int col=0; col < map[0].length; col++) {
-				g.drawImage(map[row][col].GetImg(), 32*row, 32*col, null);
+			for(int col=0; col < map[0].length(); col++) {
+				g.drawImage(tileChars.get(map[row].charAt(col)).GetImg(), 32*row, 32*col, null);
 			}
 		}
 	}
