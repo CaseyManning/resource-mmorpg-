@@ -12,22 +12,22 @@ public class PlayerMovement implements KeyListener {
 
 		if(e.getKeyCode() == KeyEvent.VK_W) {
 			if(Engine.map[Engine.characterLocation.x][Engine.characterLocation.y - 1].IsPassable()) {
-
+				Engine.characterLocation.y--;
 			}
 
 		} else if(e.getKeyCode() == KeyEvent.VK_A) {
 			if(Engine.map[Engine.characterLocation.x - 1][Engine.characterLocation.y].IsPassable()) {
-
+				Engine.characterLocation.x--;
 			}
 
 		} else if(e.getKeyCode() == KeyEvent.VK_S) {
 			if(Engine.map[Engine.characterLocation.x][Engine.characterLocation.y + 1].IsPassable()) {
-
+				Engine.characterLocation.y++;
 			}
 
 		} else if(e.getKeyCode() == KeyEvent.VK_D) {
 			if(Engine.map[Engine.characterLocation.x + 1][Engine.characterLocation.y].IsPassable()) {
-
+				Engine.characterLocation.x++;
 			}
 
 		}

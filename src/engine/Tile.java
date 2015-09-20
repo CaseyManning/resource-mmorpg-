@@ -22,5 +22,9 @@ public class Tile {
 	public BufferedImage GetImg() {
 		return img;
 	}
+	
+	public  void setPassable(boolean passable) {
+		this.passable = passable;
+	}
 
 }

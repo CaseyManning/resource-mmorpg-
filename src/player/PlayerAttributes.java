@@ -1,12 +1,14 @@
 package player;
 
+import java.awt.Point;
 import java.util.ArrayList;
 
 public class PlayerAttributes {
 
-	int health;
+	public int health;
 	int attack;
 	ArrayList<Item> items;
+	public Point location;
 	
 	public PlayerAttributes() {
 		health = 10;
