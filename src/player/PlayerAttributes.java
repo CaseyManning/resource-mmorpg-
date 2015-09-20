@@ -3,6 +3,8 @@ package player;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import engine.Item;
+
 public class PlayerAttributes {
 
 	public int health;
@@ -19,35 +21,41 @@ public class PlayerAttributes {
 		return health;
 	}
 
-	public void setHealth(int health) {
+	public int setHealth(int health) {
 		this.health = health;
+		return health;
 	}
 	
-	public void addHealth(int health) {
+	public int addHealth(int health) {
 		this.health += health;
+		return this.health;
 	}
 	
-	public void removeHealth(int health) {
+	public int removeHealth(int health) {
 		this.health -= health;
+		return this.health;
 	}
 
 	public int getAttack() {
 		return attack;
 	}
 
-	public void setAttack(int attack) {
+	public int setAttack(int attack) {
 		this.attack = attack;
+		return attack;
 	}
 
 	public ArrayList<Item> getItems() {
 		return items;
 	}
 
-	public void setItems(ArrayList<Item> items) {
+	public ArrayList<Item> setItems(ArrayList<Item> items) {
 		this.items = items;
+		return items;
 	}
 	
-	public void addItem(Item item) {
+	public Item addItem(Item item) {
 		items.add(item);
+		return item;
 	}
 }

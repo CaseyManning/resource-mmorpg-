@@ -1,36 +1,57 @@
 package player;
 
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import engine.Engine;
+import engine.Tile;
 
 public class PlayerMovement implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		System.out.println("keypressed");
 
-		if(e.getKeyCode() == KeyEvent.VK_W) {
-			if(Engine.map[Engine.characterLocation.x][Engine.characterLocation.y - 1].IsPassable()) {
-				Engine.characterLocation.y--;
+		Point pos = Engine.userPlayer.GetPos();
+		
+		switch (e.getKeyCode()) {
+		case KeyEvent.VK_W:
+			Tile t = Engine.GetTile(pos.x, pos.y-1);
+			if(t != null && t.IsPassable()) {
+				pos.y--;
 			}
-
-		} else if(e.getKeyCode() == KeyEvent.VK_A) {
-			if(Engine.map[Engine.characterLocation.x - 1][Engine.characterLocation.y].IsPassable()) {
-				Engine.characterLocation.x--;
+			break;
+			
+		case KeyEvent.VK_A:
+			t = Engine.GetTile(pos.x-1, pos.y);
+			if(t != null && t.IsPassable()) {
+				pos.x--;
 			}
-
-		} else if(e.getKeyCode() == KeyEvent.VK_S) {
-			if(Engine.map[Engine.characterLocation.x][Engine.characterLocation.y + 1].IsPassable()) {
-				Engine.characterLocation.y++;
+			break;
+		
+		case KeyEvent.VK_S:
+			t = Engine.GetTile(pos.x, pos.y-1);
+			if(t != null && t.IsPassable()) {
+				pos.y++;
 			}
-
-		} else if(e.getKeyCode() == KeyEvent.VK_D) {
-			if(Engine.map[Engine.characterLocation.x + 1][Engine.characterLocation.y].IsPassable()) {
-				Engine.characterLocation.x++;
+			break;
+			
+		case KeyEvent.VK_D:
+			t = Engine.GetTile(pos.x-1, pos.y);
+			if(t != null && t.IsPassable()) {
+				pos.x++;
 			}
-
+			break;
+		
+		default:
+			break;
 		}
+		
+		Engine.userPlayer.SetPos(pos);
+		System.out.println(pos);
+		System.out.println(Engine.userPlayer.GetPos());
+		System.out.println();
 
 	}
 

@@ -8,16 +8,19 @@ package engine;
 
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import player.PlayerMovement;
 
 
 public class Engine extends JPanel {
@@ -27,28 +30,45 @@ public class Engine extends JPanel {
 	// The tree tile
 	Tile tree;
 	
+	BufferedImage playerImg;
+	
 	// The map
 	public static String[] map;
 	
-	public HashMap<Player, Point> players;
+	// public HashMap<Player, Point> players;
 	
-	public static Point characterLocation;
+	public static Player[] otherPlayers;
+	public static Player userPlayer;
 	
-	HashMap<Character, Tile> tileChars;
+	public static PlayerMovement movement;
+	
+	static HashMap<Character, Tile> tileChars;
 	
 	// we are not actually going to want a main in this class
 	public static void main(String[] args) {
+		movement = new PlayerMovement();
+		otherPlayers = new Player[1];
+		userPlayer = new Player(new Point(0, 0));
+		
 		JFrame frame = new JFrame();
 		frame.setTitle("Resource MMORPG");
 		frame.setSize(1024, 768);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(new Engine());
+		frame.addKeyListener(new PlayerMovement());
 		frame.setVisible(true);
 	}
 	
 	public Engine() {
 		tileChars = new HashMap<Character, Tile>();
-		players = new HashMap<Player, Point>();
+		
+		playerImg = null;
+		try {
+			playerImg = ImageIO.read(this.getClass().getResourceAsStream("/assets/player.png"));
+		} catch (IOException e) {
+			
+		}
+		
 		BufferedImage gImg = null;
 		try {
 			gImg = ImageIO.read(this.getClass().getResourceAsStream("/assets/grass.png"));
@@ -87,11 +107,31 @@ public class Engine extends JPanel {
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		
-		for(int row=0; row < map.length; row++) {
-			for(int col=0; col < map[0].length(); col++) {
-				g.drawImage(tileChars.get(map[row].charAt(col)).GetImg(), 32*row, 32*col, null);
+		for(int row=0; row < 25; row++) {
+			for(int col=0; col < 33; col++) {
+				try {
+					g.drawImage(tileChars.get(map[row-12+userPlayer.GetPos().y].charAt(col-16+userPlayer.GetPos().x)).GetImg(), 32*col-16, 32*row-16, null);
+				} catch(Exception e) {
+					g.drawImage(tileChars.get('#').GetImg(), 32*col-16, 32*row-16, null);
+				}
 			}
 		}
+		
+		g.drawImage(playerImg, 16*32-16, 12*32-16, null);
+		
+		System.out.println(userPlayer.GetPos().toString());
+	}
+	
+	public static Tile GetTile(int x, int y) {
+		try {
+			return tileChars.get(map[y].charAt(x));
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	public static Tile GetTile(Point p) {
+		return GetTile(p.x, p.y);
 	}
 
 }
