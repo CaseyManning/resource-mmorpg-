@@ -2,8 +2,6 @@
  * Engine.java: the game's engine
  */
 
-// Test
-
 package engine;
 
 import java.awt.Graphics;

@@ -15,10 +15,10 @@ public class PlayerMovement implements KeyListener {
 
 		int newX = Engine.userPlayer.GetPos().x;
 		int newY = Engine.userPlayer.GetPos().y;
-		
+		Tile t;
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_W:
-			Tile t = Engine.GetTile(newX, newY-1);
+			t = Engine.GetTile(newX, newY-1);
 			if(t != null && t.IsPassable()) {
 				newY--;
 			}
