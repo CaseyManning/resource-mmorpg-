@@ -50,11 +50,25 @@ public class Engine extends JPanel {
 		otherPlayers = new Player[1];
 		userPlayer = new Player(new Point(0, 0));
 		
+		Engine engine = new Engine();
+		
 		JFrame frame = new JFrame();
 		frame.setTitle("Resource MMORPG");
 		frame.setSize(1024, 768);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(new Engine());
+		frame.add(engine);
+		frame.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) { }
+			
+			@Override
+			public void keyReleased(KeyEvent e) { }
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				engine.paint(engine.getGraphics());
+			}
+		});
 		frame.addKeyListener(new PlayerMovement());
 		frame.setVisible(true);
 	}
@@ -107,19 +121,27 @@ public class Engine extends JPanel {
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		
+		BufferedImage[][] imgs = new BufferedImage[25][33];
+		
 		for(int row=0; row < 25; row++) {
 			for(int col=0; col < 33; col++) {
 				try {
-					g.drawImage(tileChars.get(map[row-12+userPlayer.GetPos().y].charAt(col-16+userPlayer.GetPos().x)).GetImg(), 32*col-16, 32*row-16, null);
+					imgs[row][col] = tileChars.get(map[row-12-userPlayer.GetPos().y].charAt(col-16-userPlayer.GetPos().x)).GetImg();
 				} catch(Exception e) {
-					g.drawImage(tileChars.get('#').GetImg(), 32*col-16, 32*row-16, null);
+					imgs[row][col] = tileChars.get('#').GetImg();
 				}
+			}
+		}
+		
+		for(int row=0; row < 25; row++) {
+			for(int col=0; col < 33; col++) {
+				g.drawImage(imgs[row][col], 32*col-16, 32*row-16, null);
 			}
 		}
 		
 		g.drawImage(playerImg, 16*32-16, 12*32-16, null);
 		
-		System.out.println(userPlayer.GetPos().toString());
+		System.out.println(userPlayer.GetPos());
 	}
 	
 	public static Tile GetTile(int x, int y) {
