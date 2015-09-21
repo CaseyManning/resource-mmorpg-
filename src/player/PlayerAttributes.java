@@ -3,7 +3,6 @@ package player;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import engine.Item;
 
 public class PlayerAttributes {
 

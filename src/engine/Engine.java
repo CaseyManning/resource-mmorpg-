@@ -31,6 +31,8 @@ public class Engine extends JPanel {
 	BufferedImage playerImg;
 	
 	// The map
+	
+	//Why Strings?????
 	public static String[] map;
 	
 	// public HashMap<Player, Point> players;
