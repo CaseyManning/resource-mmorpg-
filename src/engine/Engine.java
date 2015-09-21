@@ -46,9 +46,9 @@ public class Engine extends JPanel {
 	public static void main(String[] args) {
 		movement = new PlayerMovement();
 		otherPlayers = new Player[1];
-		userPlayer = new Player(new Point(0, 0));
+		userPlayer = new Player("Test", new Point(0, 0));
 		
-		Engine engine = new Engine();
+		final Engine engine = new Engine();
 		
 		JFrame frame = new JFrame();
 		frame.setTitle("Resource MMORPG");
