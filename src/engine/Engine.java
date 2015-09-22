@@ -33,6 +33,7 @@ public class Engine extends JPanel {
 	// The map
 	
 	//Why Strings?????
+	//So we don't have to store HUGE amounts of data, instead, we calculate what is visible
 	public static String[] map;
 	
 	// public HashMap<Player, Point> players;
