@@ -1,5 +1,5 @@
-resource-mmorpg-
-=================
+Resource MMORPG
+===============
 
 An MMORPG about collecting resources
 ------------------------------------
@@ -13,3 +13,10 @@ Within the map, there are different areas with different resources.
 > * 10 health
 > * An (undecided) weak weapon
 > * A few resources
+#### Map
+##### The map is randomly generated with:
+> * Biomes
+> * Some sort of central area
+#### Biomes
+##### The current biomes are:
+> * Forest
