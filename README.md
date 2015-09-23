@@ -15,10 +15,15 @@ Within the map, there are different areas with different resources.
 > * A few resources
 
 #### Map
-##### The map is randomly generated with:
+##### The map will be randomly generated with:
 > * Biomes
 > * Some sort of central area
 
 #### Biomes
-##### The current biomes are:
+##### The current biomes will be:
 > * Forest
+
+#### Inventory
+##### The player's inventory will have space for:
+> * 1 of each armor piece type
+> * 32 items/resources (8x4 grid)
