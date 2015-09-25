@@ -13,6 +13,7 @@ public class PlayerAttributes {
 	ArrayList<Item> items;
 	public Point location;
 	
+	
 	public PlayerAttributes() {
 		health = 10;
 		items = new ArrayList<Item>();

@@ -16,8 +16,10 @@ import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import player.PlayerAttributes;
 import player.PlayerMovement;
 
 
@@ -41,13 +43,16 @@ public class Engine extends JPanel {
 	public static Player[] otherPlayers;
 	public static Player userPlayer;
 	
-	public static PlayerMovement movement;
+	public PlayerMovement movement;
 	
 	static HashMap<Character, Tile> tileChars;
 	
+	JLabel health = new JLabel("Health: 10");
+	
+	
 	// we are not actually going to want a main in this class
 	public static void main(String[] args) {
-		movement = new PlayerMovement();
+		
 		otherPlayers = new Player[1];
 		userPlayer = new Player("Test", new Point(0, 0));
 		
@@ -75,6 +80,8 @@ public class Engine extends JPanel {
 	}
 	
 	public Engine() {
+		add(health);
+		movement = new PlayerMovement();
 		tileChars = new HashMap<Character, Tile>();
 		
 		playerImg = null;
@@ -141,7 +148,7 @@ public class Engine extends JPanel {
 		}
 		
 		g.drawImage(playerImg, 16*32-16, 12*32-16, null);
-		
+		//g.drawString(PlayerAttributes.getHealth(), 2, 1);
 		System.out.println(userPlayer.GetPos());
 	}
 	
