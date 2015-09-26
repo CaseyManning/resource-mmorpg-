@@ -27,3 +27,11 @@ Within the map, there are different areas with different resources.
 ##### The player's inventory will have space for:
 > * 1 of each armor piece type
 > * 32 items/resources (8x4 grid)
+
+TODO
+----
+
+* Use clock example
+* Game loop from Engine2
+* Threading from Engine2
+* Realtime FPS printing
