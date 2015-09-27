@@ -1,14 +1,17 @@
 package player;
 
+/*
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import engine.Engine;
 import engine.Tile;
+*/
 
-public class PlayerMovement implements KeyListener {
+public class PlayerMovement /*implements KeyListener*/ {
 
+	/*
 	@Override
 	public void keyPressed(KeyEvent e) {
 		System.out.println("keypressed");
@@ -58,5 +61,6 @@ public class PlayerMovement implements KeyListener {
 	
 	@Override
 	public void keyTyped(KeyEvent e) { }
+	*/
 
 }

@@ -1,39 +1,56 @@
+// The GamePanel is the drawing canvas.
+// It contains the game loop which
+// keeps the game moving forward.
+// This class is also the one that grabs key events.
+
 package engine;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
-@SuppressWarnings("serial")
-public class Engine2 extends JPanel implements Runnable, KeyListener {
+import engine.Keys;
 
-	// Dimensions
-	public static final int WIDTH = 128;
+@SuppressWarnings("serial")
+public class GamePanel extends JPanel implements Runnable, KeyListener {
+	
+	// dimensions
+	// HEIGHT is the playing area size
+	// HEIGHT2 includes the bottom window
+	public static final int WIDTH = 192;
 	public static final int HEIGHT = 128;
 	public static final int HEIGHT2 = HEIGHT + 16;
-	public static final int SCALE = 3;
+	public static final int SCALE = 4;
 	
-	// Game loop stuff
+	// game loop stuff
 	private Thread thread;
 	private boolean running;
 	private final int FPS = 30;
-	private final int TARGET_TIME = 1000  / FPS;
+	private final int TARGET_TIME = 1000 / FPS;
 	
-	// Game state manager
-	private GameStateManager gam;
+	// drawing stuff
+	private BufferedImage image;
+	private Graphics2D g;
 	
-	// Constructor
-	public Engine2() {
+	// game state manager
+	private GameManager gm;
+	
+	// constructor
+	public GamePanel() {
 		setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT2 * SCALE));
 		setFocusable(true);
 		requestFocus();
 	}
 	
+	// ready to display
 	public void addNotify() {
 		super.addNotify();
 		if(thread == null) {
@@ -45,6 +62,7 @@ public class Engine2 extends JPanel implements Runnable, KeyListener {
 	
 	// run new thread
 	public void run() {
+		
 		init();
 		
 		long start;
@@ -53,49 +71,56 @@ public class Engine2 extends JPanel implements Runnable, KeyListener {
 		
 		// game loop
 		while(running) {
+			
 			start = System.nanoTime();
 			
 			update();
 			draw();
 			drawToScreen();
 			
-			elapsed = System.nanoTime();
+			elapsed = System.nanoTime() - start;
 			
-			wait = TARGET_TIME - elapsed / 1_000_000;
-			
+			wait = TARGET_TIME - elapsed / 1000000;
 			if(wait < 0) wait = TARGET_TIME;
 			
 			try {
 				Thread.sleep(wait);
-			} catch(Exception e) {
+			}
+			catch(Exception e) {
 				e.printStackTrace();
 			}
+			
 		}
+		
 	}
 	
-	// Initializes fields
+	// initializes fields
 	private void init() {
 		running = true;
 		image = new BufferedImage(WIDTH, HEIGHT2, 1);
 		g = (Graphics2D) image.getGraphics();
-		gam = new Game();
+		gm = new GameManager();
 	}
 	
-	// Updates game
+	// updates game
 	private void update() {
-		gam.update();
+		gm.update();
 		Keys.update();
 	}
 	
-	// Draws game
+	// draws game
 	private void draw() {
-		gam.draw(g);
+		gm.draw(g);
+		g.setColor(new Color(255, 255, 255));
+		g.setStroke(new BasicStroke(0));
+		g.fill(new Rectangle(0, HEIGHT, WIDTH, HEIGHT2 - HEIGHT));
 	}
 	
 	// copy buffer to screen
 	private void drawToScreen() {
 		Graphics g2 = getGraphics();
-		g2.drawImage(image, 0, 0, WIDTH*SCALE, HEIGHT2 * SCALE, null);
+		g2.drawImage(image, 0, 0, WIDTH * SCALE, HEIGHT2 * SCALE, null);
+		g2.dispose();
 	}
 	
 	// key event
@@ -106,5 +131,5 @@ public class Engine2 extends JPanel implements Runnable, KeyListener {
 	public void keyReleased(KeyEvent key) {
 		Keys.keySet(key.getKeyCode(), false);
 	}
-
+	
 }

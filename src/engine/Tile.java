@@ -6,8 +6,6 @@ public class Tile {
 
 	protected BufferedImage img;
 	protected boolean passable;
-	boolean hasPlayer;
-	Player player;
 	
 	
 	public Tile(BufferedImage img, boolean passable) {
@@ -15,16 +13,12 @@ public class Tile {
 		this.passable = passable;
 	}
 	
-	public boolean IsPassable() {
+	public boolean isPassable() {
 		return passable;
 	}
 	
-	public BufferedImage GetImg() {
+	public BufferedImage getImg() {
 		return img;
-	}
-	
-	public  void setPassable(boolean passable) {
-		this.passable = passable;
 	}
 
 }

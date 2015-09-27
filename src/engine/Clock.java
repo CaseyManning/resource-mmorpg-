@@ -11,8 +11,6 @@ import javax.swing.Timer;
 
 public class Clock extends JFrame {
 
-
-
 	public Clock() {
 		super("Timer Demo");
 		setSize(300, 100);
