@@ -33,7 +33,7 @@ public class GameManager {
 	}
 	
 	public void draw(Graphics2D g) {
-		// map.draw(g, player.getPos()); - NOT WORKINGwas
+		// map.draw(g, player.getPos()); - NOT WORKING
 		player.draw(g);
 	}
 	
