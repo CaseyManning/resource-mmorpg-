@@ -8,6 +8,7 @@ package engine;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -15,9 +16,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import engine.Keys;
+import player.PlayerAttributes;
 
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel implements Runnable, KeyListener {
@@ -39,6 +42,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	// drawing stuff
 	private BufferedImage image;
 	private Graphics2D g;
+	
+	static PlayerAttributes pa = new PlayerAttributes();
+	AttributesPanel ap;
 	
 	// game state manager
 	private GameManager gm;
@@ -100,6 +106,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		image = new BufferedImage(WIDTH, HEIGHT2, 1);
 		g = (Graphics2D) image.getGraphics();
 		gm = new GameManager();
+		ap = new AttributesPanel();
+		add(ap);
+		
 	}
 	
 	// updates game
@@ -111,9 +120,11 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	// draws game
 	private void draw() {
 		gm.draw(g);
-		g.setColor(new Color(255, 255, 255));
+		//g.setColor(new Color(255, 255, 255));
 		g.setStroke(new BasicStroke(0));
 		g.fill(new Rectangle(0, HEIGHT, WIDTH, HEIGHT2 - HEIGHT));
+		ap.repaint();
+		
 	}
 	
 	// copy buffer to screen
@@ -124,7 +135,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	}
 	
 	// key event
-	public void keyTyped(KeyEvent key) {}
+	public void keyTyped(KeyEvent key) {
+		
+	}
+	
 	public void keyPressed(KeyEvent key) {
 		Keys.keySet(key.getKeyCode(), true);
 	}
@@ -132,4 +146,25 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		Keys.keySet(key.getKeyCode(), false);
 	}
 	
+}
+
+@SuppressWarnings("serial")
+class AttributesPanel extends JPanel {
+	
+	JLabel l = new JLabel("HEalTh = " + Integer.toString(GamePanel.pa.getHealth()));
+	
+	public AttributesPanel() {
+		super();
+		setSize(100, 100);
+		
+	}
+	
+	@Override
+	public void paintComponent(Graphics g) {
+		g.setColor(Color.RED);
+		g.drawString(Integer.toString(GamePanel.pa.getHealth()), 0, 0);
+		System.out.println(GamePanel.pa.getHealth());
+		l.setFont(new Font("", 5, 4));
+		add(l);
+	}
 }
