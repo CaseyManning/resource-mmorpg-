@@ -47,7 +47,7 @@ public class Tilemap {
 		for(int row=0; row < (GamePanel.HEIGHT / GameManager.TILESIZE)+1; row++) {
 			for(int col=0; col < (GamePanel.WIDTH / GameManager.TILESIZE)+1; col++) {
 				try {
-					data[playerPos.y+row][playerPos.x+col].draw(g, col, row);
+					data[playerPos.y+row-(GamePanel.HEIGHT / GameManager.TILESIZE)/2][playerPos.x+col-(GamePanel.WIDTH / GameManager.TILESIZE)/2].draw(g, col, row);
 				} catch(ArrayIndexOutOfBoundsException e) {
 					outOfBoundsTile.draw(g, col, row);
 				}
