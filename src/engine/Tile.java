@@ -1,5 +1,6 @@
 package engine;
 
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 public class Tile {
@@ -19,6 +20,10 @@ public class Tile {
 	
 	public BufferedImage getImg() {
 		return img;
+	}
+	
+	public void draw(Graphics2D g, int x, int y) {
+		g.drawImage(img, x*GameManager.TILESIZE-GameManager.TILESIZE/2, y*GameManager.TILESIZE-GameManager.TILESIZE/2, null);
 	}
 
 }

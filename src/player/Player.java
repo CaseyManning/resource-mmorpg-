@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 
 import engine.GamePanel;
 import engine.Keys;
+import engine.Tile;
 import engine.Vec2;
 
 public class Player {
@@ -41,18 +42,19 @@ public class Player {
 	}
 	
 	public void draw(Graphics2D g) {
+		System.out.println("PLAYER DRAWN");
 		g.drawImage(img, GamePanel.WIDTH/2-img.getWidth()/2, GamePanel.HEIGHT/2-img.getHeight()/2, null);
 	}
 	
-	public void update() {
+	public void update(Tile above, Tile below, Tile left, Tile right) {
 		if(Keys.isDown(Keys.UP) && !(Keys.isDown(Keys.LEFT) || Keys.isDown(Keys.DOWN) || Keys.isDown(Keys.RIGHT))) {
-			pos.y--;
+			if(above.isPassable()) pos.y--;
 		} else if(Keys.isDown(Keys.LEFT) && !(Keys.isDown(Keys.UP) || Keys.isDown(Keys.DOWN) || Keys.isDown(Keys.RIGHT))) {
-			pos.x--;
+			if(left.isPassable()) pos.x--;
 		} else if(Keys.isDown(Keys.DOWN) && !(Keys.isDown(Keys.UP) || Keys.isDown(Keys.LEFT) || Keys.isDown(Keys.RIGHT))) {
-			pos.y++;
+			if(below.isPassable()) pos.y++;
 		} else if(Keys.isDown(Keys.RIGHT) && !(Keys.isDown(Keys.UP) || Keys.isDown(Keys.LEFT) || Keys.isDown(Keys.DOWN))) {
-			pos.x++;
+			if(right.isPassable()) pos.x++;
 		}
 		System.out.println(pos.x + ", " + pos.y);
 	}

@@ -60,6 +60,17 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		}
 	}
 	
+	public void action() {
+		new Thread(new Runnable() {
+			public void run() {
+				for(int i = 0; i < 3; i++) {
+					// update();
+					draw();
+				}
+			}
+		}).start();
+	}
+	
 	// run new thread
 	public void run() {
 		
@@ -79,6 +90,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 			drawToScreen();
 			
 			elapsed = System.nanoTime() - start;
+			
+			action();
 			
 			wait = TARGET_TIME - elapsed / 1000000;
 			if(wait < 0) wait = TARGET_TIME;

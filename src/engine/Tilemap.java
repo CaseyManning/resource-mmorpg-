@@ -8,41 +8,55 @@ import java.util.HashMap;
 
 public class Tilemap {
 
-	protected HashMap<Character, Tile> key;
-	protected String[] data;
+	protected Tile[][] data;
 	
-	public Tilemap(HashMap<Character, Tile> key, String[] data) {
-		this.key = key;
+	public Tilemap(Tile[][] data) {
 		this.data = data;
 	}
 	
 	public Tilemap(HashMap<Character, Tile> key, InputStream is, Charset encoding) {
-		this.key = key;
 		try {
 			byte[] encoded = new byte[4096];
 			is.read(encoded);
 			is.close();
 			String contents = new String(encoded, encoding);
-			data = contents.split("\\n");
+			String[] lines = contents.split("\\n");
+			data = new Tile[lines.length][lines[0].length()];
+			for(int line = 0; line < lines.length; line++) {
+				for(int ch = 0; ch < lines[0].length(); ch++) {
+					data[line][ch] = key.get(lines[line].charAt(ch));
+				}
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	public Tile getTile(int x, int y) {
-		return key.get(data[y].charAt(x));
+		return data[y][x];
 	}
 	
-	public void draw(Graphics2D g, Vec2 playerPos) {
+	public Tile getTile(Vec2 v) {
+		return getTile(v.x, v.y);
+	}
+	
+	public void draw(Graphics2D g, Vec2 playerPos, Tile outOfBoundsTile) {
 		// (GamePanel.HEIGHT / GameManager.TILESIZE)/2;
+		System.out.println("TILEMAP DRAWN");
+		
 		for(int row=0; row < (GamePanel.HEIGHT / GameManager.TILESIZE)+1; row++) {
-			for(int col=0; col < (GamePanel.WIDTH / GameManager.TILESIZE)+1; row++) {
+			for(int col=0; col < (GamePanel.WIDTH / GameManager.TILESIZE)+1; col++) {
 				try {
-					g.drawImage(key.get(data[row+playerPos.y-(GamePanel.HEIGHT / GameManager.TILESIZE)/2].charAt(col+playerPos.x-(GamePanel.WIDTH / GameManager.TILESIZE)/2)).getImg(), row*GameManager.TILESIZE-GameManager.TILESIZE/2, col*GameManager.TILESIZE-GameManager.TILESIZE/2, null);
-					System.out.println("In array: "+data[row+playerPos.y-(GamePanel.HEIGHT / GameManager.TILESIZE)/2].charAt(col+playerPos.x-(GamePanel.WIDTH / GameManager.TILESIZE)/2));
-				} catch(Exception e) {
-					g.drawImage(key.get('#').getImg(), row*GameManager.TILESIZE-GameManager.TILESIZE/2, col*GameManager.TILESIZE-GameManager.TILESIZE/2, null);
+					data[playerPos.y+row][playerPos.x+col].draw(g, col, row);
+				} catch(ArrayIndexOutOfBoundsException e) {
+					outOfBoundsTile.draw(g, col, row);
 				}
+//				try {
+//					g.drawImage(data[row+playerPos.y-(GamePanel.HEIGHT / GameManager.TILESIZE)/2][col+playerPos.x-(GamePanel.WIDTH / GameManager.TILESIZE)/2].getImg(), row*GameManager.TILESIZE-GameManager.TILESIZE/2, col*GameManager.TILESIZE-GameManager.TILESIZE/2, null);
+//					System.out.println("In array: "+data[row+playerPos.y-(GamePanel.HEIGHT / GameManager.TILESIZE)/2][col+playerPos.x-(GamePanel.WIDTH / GameManager.TILESIZE)/2]);
+//				} catch(Exception e) {
+//					g.drawImage(outOfBoundsTile.getImg(), row*GameManager.TILESIZE-GameManager.TILESIZE/2, col*GameManager.TILESIZE-GameManager.TILESIZE/2, null);
+//				}
 			}
 		}
 	}
