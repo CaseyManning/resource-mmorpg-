@@ -17,6 +17,7 @@ public class PlayerAttributes {
 	public PlayerAttributes() {
 		health = 10;
 		items = new ArrayList<Item>();
+		attack = 1;
 	}
 
 	public int getHealth() {
@@ -59,5 +60,14 @@ public class PlayerAttributes {
 	public Item addItem(Item item) {
 		items.add(item);
 		return item;
+	}
+	
+	public void main(String[] args) {
+		PlayerAttributes pa = new PlayerAttributes();
+		System.out.println(pa.getAttack());
+		Item i = new Item("");
+		pa.addItem(i);
+		System.out.println(pa.getItems());
+		
 	}
 }
