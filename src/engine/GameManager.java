@@ -39,13 +39,10 @@ public class GameManager {
 	}
 	
 	public void draw(Graphics2D g) {
-<<<<<<< HEAD
 		map.draw(g, player.getPos(), tree);
 		System.out.println("Relative Rectangle Drawn");
 		g.drawRect(GamePanel.WIDTH/2-player.getPos().x*TILESIZE-TILESIZE/2, GamePanel.HEIGHT/2-player.getPos().y*TILESIZE-TILESIZE/2, TILESIZE, TILESIZE);
-=======
-		//map.draw(g, player.getPos());
->>>>>>> origin/master
+		
 		player.draw(g);
 	}
 	
