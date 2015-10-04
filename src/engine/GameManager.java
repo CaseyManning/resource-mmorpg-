@@ -49,13 +49,13 @@ public class GameManager {
 	public void update() {
 		Vec2 current = player.getPos();
 		Vec2 above = current;
-		above.y--;
+		above.y = above.y - 1;
 		Vec2 below = current;
-		below.y++;
+		below.y = below.y + 1;
 		Vec2 left = current;
-		left.x--;
+		left.x = left.x -1;
 		Vec2 right = current;
-		right.x++;
+		right.x = right.x + 1;
 		
 		Tile aboveT = null;
 		try {
