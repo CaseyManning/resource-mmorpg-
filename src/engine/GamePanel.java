@@ -161,19 +161,15 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	
 }
 
-@SuppressWarnings("serial")
 class AttributesPanel extends JPanel {
 	
 	
-//	JLabel l = new JLabel("Health = " + Integer.toString(GamePanel.pa.getHealth()));
-//	Font f = l.getFont();
-//	f.setSise(10);
-//	l.setFont(f);
-	
+	JLabel l;
 	public AttributesPanel() {
 		super();
 		setSize(100, 100);
-		
+		l = new JLabel("Health = " + Integer.toString(GamePanel.pa.getHealth()));
+		l.setFont(l.getFont().deriveFont(18.0f));
 	}
 	
 	@Override
@@ -181,7 +177,7 @@ class AttributesPanel extends JPanel {
 		g.setColor(Color.RED);
 		g.drawString(Integer.toString(GamePanel.pa.getHealth()), 0, 0);
 		System.out.println(GamePanel.pa.getHealth());
-//		l.setFont(new Font("", 5, 4));
-//		add(l);
+		l.setFont(l.getFont().deriveFont(18.0f));
+		add(l);
 	}
 }

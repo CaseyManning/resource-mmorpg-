@@ -61,13 +61,4 @@ public class PlayerAttributes {
 		items.add(item);
 		return item;
 	}
-	
-	public void main(String[] args) {
-		PlayerAttributes pa = new PlayerAttributes();
-		System.out.println(pa.getAttack());
-		Item i = new Item("");
-		pa.addItem(i);
-		System.out.println(pa.getItems());
-		
-	}
 }
