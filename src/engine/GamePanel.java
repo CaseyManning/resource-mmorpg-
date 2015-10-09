@@ -43,7 +43,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	private BufferedImage image;
 	private Graphics2D g;
 	
-	static PlayerAttributes pa = new PlayerAttributes();
+	public static PlayerAttributes pa = new PlayerAttributes();
 	AttributesPanel ap;
 	
 	// game state manager
@@ -176,8 +176,8 @@ class AttributesPanel extends JPanel {
 	public void paintComponent(Graphics g) {
 		g.setColor(Color.RED);
 		g.drawString(Integer.toString(GamePanel.pa.getHealth()), 0, 0);
-		System.out.println(GamePanel.pa.getHealth());
 		l.setFont(l.getFont().deriveFont(18.0f));
+		l.setBackground(Color.GREEN);
 		add(l);
 	}
 }
