@@ -3,8 +3,6 @@ package engine;
 public class Item {
 
 	String name;
-	int attackModifier;
-	int healthModifier;
 	
 	public Item(String name) {
 		this.name = name;
