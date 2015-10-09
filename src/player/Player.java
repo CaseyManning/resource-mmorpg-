@@ -48,9 +48,17 @@ public class Player {
 	
 	public void update(Tile above, Tile below, Tile left, Tile right) {
 		if(Keys.isDown(Keys.UP) && !(Keys.isDown(Keys.LEFT) || Keys.isDown(Keys.DOWN) || Keys.isDown(Keys.RIGHT))) {
-			if(above.isPassable()) pos.y--;
+			if(above.isPassable()) {
+				pos.y--;
+			} else {
+				GamePanel.pa.removeHealth(2);
+			}
 		} else if(Keys.isDown(Keys.LEFT) && !(Keys.isDown(Keys.UP) || Keys.isDown(Keys.DOWN) || Keys.isDown(Keys.RIGHT))) {
-			if(left.isPassable()) pos.x--;
+			if(left.isPassable()) {
+				pos.x--;
+			} else {
+				GamePanel.pa.removeHealth(2);
+			}
 		} else if(Keys.isDown(Keys.DOWN) && !(Keys.isDown(Keys.UP) || Keys.isDown(Keys.LEFT) || Keys.isDown(Keys.RIGHT))) {
 			if(below.isPassable()) pos.y++;
 		} else if(Keys.isDown(Keys.RIGHT) && !(Keys.isDown(Keys.UP) || Keys.isDown(Keys.LEFT) || Keys.isDown(Keys.DOWN))) {

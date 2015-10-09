@@ -14,6 +14,7 @@ public class PlayerAttributes {
 	public Point location;
 	
 	
+	
 	public PlayerAttributes() {
 		health = 10;
 		items = new ArrayList<Item>();
