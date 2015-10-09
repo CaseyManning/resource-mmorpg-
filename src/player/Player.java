@@ -15,7 +15,6 @@ public class Player {
 
 	Vec2 pos;
 	PlayerAttributes attributes;
-	int health;
 	BufferedImage img;
 	
 	public Player(Vec2 pos) {
@@ -48,11 +47,9 @@ public class Player {
 	
 	public void update(boolean abovePassable, boolean belowPassable, boolean leftPassable, boolean rightPassable) {
 		if(Keys.isDown(Keys.UP) && !(Keys.isDown(Keys.LEFT) || Keys.isDown(Keys.DOWN) || Keys.isDown(Keys.RIGHT))) {
-<<<<<<< HEAD
 			if(abovePassable) pos.y--;
 		} else if(Keys.isDown(Keys.LEFT) && !(Keys.isDown(Keys.UP) || Keys.isDown(Keys.DOWN) || Keys.isDown(Keys.RIGHT))) {
 			if(leftPassable) pos.x--;
-=======
 			if(above.isPassable()) {
 				pos.y--;
 			} else {
@@ -64,7 +61,6 @@ public class Player {
 			} else {
 				GamePanel.pa.removeHealth(2);
 			}
->>>>>>> origin/master
 		} else if(Keys.isDown(Keys.DOWN) && !(Keys.isDown(Keys.UP) || Keys.isDown(Keys.LEFT) || Keys.isDown(Keys.RIGHT))) {
 			if(belowPassable) pos.y++;
 		} else if(Keys.isDown(Keys.RIGHT) && !(Keys.isDown(Keys.UP) || Keys.isDown(Keys.LEFT) || Keys.isDown(Keys.DOWN))) {
