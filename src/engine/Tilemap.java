@@ -9,7 +9,7 @@ import java.util.HashMap;
 public class Tilemap {
 
 	protected Tile[][] data;
-	// protected Item[]
+	protected HashMap<Vec2, Item> items;
 	
 	public Tilemap(Tile[][] data) {
 		this.data = data;
@@ -31,6 +31,17 @@ public class Tilemap {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public Item itemAt(Vec2 v) {
+		if (items.containsKey(v)) {
+			return items.get(v);
+		}
+		return null;
+	}
+	
+	public Item itemAt(int x, int y) {
+		return this.itemAt(new Vec2(x, y));
 	}
 	
 	public Tile getTile(int x, int y) {
