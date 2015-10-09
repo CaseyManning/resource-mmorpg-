@@ -40,41 +40,42 @@ public class GameManager {
 	
 	public void draw(Graphics2D g) {
 		map.draw(g, player.getPos(), tree);
-		System.out.println("Relative Rectangle Drawn");
-		g.drawRect(GamePanel.WIDTH/2-player.getPos().x*TILESIZE-TILESIZE/2, GamePanel.HEIGHT/2-player.getPos().y*TILESIZE-TILESIZE/2, TILESIZE, TILESIZE);
+		// System.out.println("Relative Rectangle Drawn");
+		// g.drawRect(GamePanel.WIDTH/2-player.getPos().x*TILESIZE-TILESIZE/2, GamePanel.HEIGHT/2-player.getPos().y*TILESIZE-TILESIZE/2, TILESIZE, TILESIZE);
 		
 		player.draw(g);
 	}
 	
 	public void update() {
+		System.out.println("UPDATE");
 		Vec2 current = player.getPos();
-		Vec2 above = current;
-		above.y = above.y - 1;
-		Vec2 below = current;
-		below.y = below.y + 1;
-		Vec2 left = current;
-		left.x = left.x -1;
-		Vec2 right = current;
-		right.x = right.x + 1;
 		
-		Tile aboveT = null;
+		boolean abovePassable = false;
 		try {
-			aboveT = map.getTile(above);
-		} catch(Exception e) { aboveT = tree; }
-		Tile belowT = null;
-		try {
-			belowT = map.getTile(below);
-		} catch(Exception e) { belowT = tree; }
-		Tile leftT = null;
-		try {
-			leftT = map.getTile(left);
-		} catch(Exception e) { leftT = tree; }
-		Tile rightT = null;
-		try {
-			rightT = map.getTile(right);
-		} catch(Exception e) { rightT = tree; }
+			abovePassable = map.getTile(current.x, current.y-1).isPassable();
+		} catch(Exception e) {  }
 		
-		player.update(aboveT, belowT, leftT, rightT);
+		boolean belowPassable = false;
+		try {
+			belowPassable = map.getTile(current.x, current.y+1).isPassable();
+		} catch(Exception e) {  }
+
+		boolean leftPassable = false;
+		try {
+			leftPassable = map.getTile(current.x-1, current.y).isPassable();
+		} catch(Exception e) {  }
+
+		boolean rightPassable = false;
+		try {
+			rightPassable = map.getTile(current.x+1, current.y).isPassable();
+		} catch(Exception e) {  }
+		
+		
+		player.update(
+			abovePassable,
+			belowPassable,
+			leftPassable,
+			rightPassable);
 	}
 
 }

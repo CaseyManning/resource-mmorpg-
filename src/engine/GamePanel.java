@@ -69,7 +69,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	public void action() {
 		new Thread(new Runnable() {
 			public void run() {
-				for(int i = 0; i < 3; i++) {
+				for(int i = 0; i < 1; i++) {
 					update();
 					draw();
 				}

@@ -9,6 +9,7 @@ import java.util.HashMap;
 public class Tilemap {
 
 	protected Tile[][] data;
+	// protected Item[]
 	
 	public Tilemap(Tile[][] data) {
 		this.data = data;
@@ -48,7 +49,7 @@ public class Tilemap {
 			for(int col=0; col < (GamePanel.WIDTH / GameManager.TILESIZE)+1; col++) {
 				try {
 					data[playerPos.y+row-(GamePanel.HEIGHT / GameManager.TILESIZE)/2][playerPos.x+col-(GamePanel.WIDTH / GameManager.TILESIZE)/2].draw(g, col, row);
-				} catch(ArrayIndexOutOfBoundsException e) {
+				} catch(Exception e) {
 					outOfBoundsTile.draw(g, col, row);
 				}
 //				try {

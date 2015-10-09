@@ -46,15 +46,15 @@ public class Player {
 		g.drawImage(img, GamePanel.WIDTH/2-img.getWidth()/2, GamePanel.HEIGHT/2-img.getHeight()/2, null);
 	}
 	
-	public void update(Tile above, Tile below, Tile left, Tile right) {
+	public void update(boolean abovePassable, boolean belowPassable, boolean leftPassable, boolean rightPassable) {
 		if(Keys.isDown(Keys.UP) && !(Keys.isDown(Keys.LEFT) || Keys.isDown(Keys.DOWN) || Keys.isDown(Keys.RIGHT))) {
-			if(above.isPassable()) pos.y--;
+			if(abovePassable) pos.y--;
 		} else if(Keys.isDown(Keys.LEFT) && !(Keys.isDown(Keys.UP) || Keys.isDown(Keys.DOWN) || Keys.isDown(Keys.RIGHT))) {
-			if(left.isPassable()) pos.x--;
+			if(leftPassable) pos.x--;
 		} else if(Keys.isDown(Keys.DOWN) && !(Keys.isDown(Keys.UP) || Keys.isDown(Keys.LEFT) || Keys.isDown(Keys.RIGHT))) {
-			if(below.isPassable()) pos.y++;
+			if(belowPassable) pos.y++;
 		} else if(Keys.isDown(Keys.RIGHT) && !(Keys.isDown(Keys.UP) || Keys.isDown(Keys.LEFT) || Keys.isDown(Keys.DOWN))) {
-			if(right.isPassable()) pos.x++;
+			if(rightPassable) pos.x++;
 		}
 		System.out.println(pos.x + ", " + pos.y);
 	}
