@@ -16,7 +16,7 @@ public class PlayerAttributes {
 	
 	
 	public PlayerAttributes() {
-		health = 10;
+		health = 100;
 		items = new ArrayList<Item>();
 		attack = 1;
 	}

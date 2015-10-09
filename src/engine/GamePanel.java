@@ -149,7 +149,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	
 	// key event
 	public void keyTyped(KeyEvent key) {
-		
+		pa.removeHealth(2);
 	}
 	
 	public void keyPressed(KeyEvent key) {
@@ -177,6 +177,7 @@ class AttributesPanel extends JPanel {
 		g.setColor(Color.RED);
 		g.drawString(Integer.toString(GamePanel.pa.getHealth()), 0, 0);
 		l.setFont(l.getFont().deriveFont(18.0f));
+		l.setText("Health = " + Integer.toString(GamePanel.pa.getHealth()));
 		l.setBackground(Color.GREEN);
 		add(l);
 	}
