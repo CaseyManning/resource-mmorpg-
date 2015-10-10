@@ -4,12 +4,16 @@ import java.awt.Graphics2D;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
+import java.security.KeyStore.Entry;
 import java.util.HashMap;
+
+import javax.annotation.Resource;
 
 public class Tilemap {
 
 	protected Tile[][] data;
 	protected HashMap<Vec2, Item> items;
+	protected HashMap<Vec2, Resource> resources;
 	
 	public Tilemap(Tile[][] data) {
 		this.data = data;
@@ -52,8 +56,20 @@ public class Tilemap {
 		return getTile(v.x, v.y);
 	}
 	
+	public void update(int elapsed) {
+		for(java.util.Map.Entry<Vec2, Resource> entry : resources.entrySet()) {
+			((Tilemap) resources.get(entry.getKey())).update(elapsed);
+		}
+	}
+	
 	public void draw(Graphics2D g, Vec2 playerPos, Tile outOfBoundsTile) {
 		// (GamePanel.HEIGHT / GameManager.TILESIZE)/2;
+		
+		// WILL BE USED LATER:
+//		for(java.util.Map.Entry<Vec2, Resource> entry : resources.entrySet()) {
+//			
+//		}
+		
 		System.out.println("TILEMAP DRAWN");
 		
 		for(int row=0; row < (GamePanel.HEIGHT / GameManager.TILESIZE)+1; row++) {

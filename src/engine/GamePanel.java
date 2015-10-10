@@ -43,7 +43,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	private BufferedImage image;
 	public Graphics2D g;
 	
-	public PlayerAttributes pa = new PlayerAttributes();
+	public static PlayerAttributes pa = new PlayerAttributes();
 	AttributesPanel ap;
 	
 	// game state manager
@@ -70,8 +70,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		new Thread(new Runnable() {
 			public void run() {
 				for(int i = 0; i < 1; i++) {
-					update();
-					draw();
+					gm.update(TARGET_TIME);
+					gm.draw(g);
 				}
 			}
 		}).start();
@@ -91,7 +91,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 			
 			start = System.nanoTime();
 			
-			update();
+			update(TARGET_TIME);
 			draw();
 			drawToScreen();
 			
@@ -125,8 +125,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	}
 	
 	// updates game
-	private void update() {
-		gm.update();
+	private void update(int elapsed) {
+		gm.update(elapsed);
 		Keys.update();
 	}
 	
