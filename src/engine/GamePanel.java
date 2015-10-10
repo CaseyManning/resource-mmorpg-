@@ -43,7 +43,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	private BufferedImage image;
 	private Graphics2D g;
 	
-	public static PlayerAttributes pa = new PlayerAttributes();
+	public PlayerAttributes pa = new PlayerAttributes();
 	AttributesPanel ap;
 	
 	// game state manager
@@ -119,7 +119,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		image = new BufferedImage(WIDTH, HEIGHT2, 1);
 		g = (Graphics2D) image.getGraphics();
 		gm = new GameManager();
-		ap = new AttributesPanel();
+		ap = new AttributesPanel(this);
 		add(ap);
 		
 	}
@@ -163,22 +163,23 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
 class AttributesPanel extends JPanel {
 	
-	
+	GamePanel gp;
 	JLabel l;
-	public AttributesPanel() {
+	public AttributesPanel(GamePanel gp) {
 		super();
+		this.gp = gp;
 		setSize(100, 100);
-		l = new JLabel("Health = " + Integer.toString(GamePanel.pa.getHealth()));
+		l = new JLabel("Health = " + Integer.toString(gp.pa.getHealth()));
 		l.setFont(l.getFont().deriveFont(18.0f));
 	}
 	
 	@Override
 	public void paintComponent(Graphics g) {
-		g.setColor(Color.RED);
-		g.drawString(Integer.toString(GamePanel.pa.getHealth()), 0, 0);
-		l.setFont(l.getFont().deriveFont(18.0f));
-		l.setText("Health = " + Integer.toString(GamePanel.pa.getHealth()));
-		l.setBackground(Color.GREEN);
+		l.setText("Health = " + Integer.toString(gp.pa.getHealth()));
 		add(l);
+		
+		for(Item t : gp.pa.getItems()) {
+			
+		}
 	}
 }
