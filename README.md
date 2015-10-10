@@ -31,7 +31,5 @@ Within the map, there are different areas with different resources.
 TODO
 ----
 
-* Use clock example
-* Game loop from Engine2
-* Threading from Engine2
-* Realtime FPS printing
+* Recources and Items
+* Inventory
