@@ -46,7 +46,7 @@ public class GameManager {
 		player.draw(g);
 	}
 	
-	public void update() {
+	public void update(int elapsed) {
 		System.out.println("UPDATE");
 		Vec2 current = player.getPos();
 		
