@@ -50,15 +50,11 @@ public class Player {
 			if(abovePassable) pos.y--;
 		//} else if(Keys.isDown(Keys.LEFT) && !(Keys.isDown(Keys.UP) || Keys.isDown(Keys.DOWN) || Keys.isDown(Keys.RIGHT))) {
 		} else if(Keys.isDown(Keys.LEFT) && !(Keys.isDown(Keys.UP) || Keys.isDown(Keys.DOWN) || Keys.isDown(Keys.RIGHT))) {
-<<<<<<< HEAD
 			if(leftPassable) {
 				pos.x--;
 			} else {
 				GamePanel.pa.removeHealth(2);
 			}
-=======
-			if(leftPassable) pos.x--;
->>>>>>> origin/master
 		} else if(Keys.isDown(Keys.DOWN) && !(Keys.isDown(Keys.UP) || Keys.isDown(Keys.LEFT) || Keys.isDown(Keys.RIGHT))) {
 			if(belowPassable) pos.y++;
 		} else if(Keys.isDown(Keys.RIGHT) && !(Keys.isDown(Keys.UP) || Keys.isDown(Keys.LEFT) || Keys.isDown(Keys.DOWN))) {
