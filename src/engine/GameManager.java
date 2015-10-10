@@ -44,6 +44,7 @@ public class GameManager {
 		// g.drawRect(GamePanel.WIDTH/2-player.getPos().x*TILESIZE-TILESIZE/2, GamePanel.HEIGHT/2-player.getPos().y*TILESIZE-TILESIZE/2, TILESIZE, TILESIZE);
 		
 		player.draw(g);
+		
 	}
 	
 	public void update(int elapsed) {
