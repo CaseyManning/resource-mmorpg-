@@ -41,7 +41,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	
 	// drawing stuff
 	private BufferedImage image;
-	private Graphics2D g;
+	public Graphics2D g;
 	
 	public PlayerAttributes pa = new PlayerAttributes();
 	AttributesPanel ap;
@@ -177,9 +177,8 @@ class AttributesPanel extends JPanel {
 	public void paintComponent(Graphics g) {
 		l.setText("Health = " + Integer.toString(gp.pa.getHealth()));
 		add(l);
-		
 		for(Item t : gp.pa.getItems()) {
-			
+			t.draw(gp.g, gp.pa.getItems().indexOf(t)*20, 5);
 		}
 	}
 }
