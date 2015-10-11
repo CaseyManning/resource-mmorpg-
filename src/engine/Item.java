@@ -9,8 +9,9 @@ public class Item {
 	String name;
 	BufferedImage icon;
 	
-	public Item(String name) {
+	public Item(String name, BufferedImage icon) {
 		this.name = name;
+		this.icon = icon;
 	}
 
 	public String getName() {

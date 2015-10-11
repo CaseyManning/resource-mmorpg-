@@ -1,7 +1,11 @@
 package player;
 
 import java.awt.Point;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 import engine.Item;
 
@@ -19,6 +23,12 @@ public class PlayerAttributes {
 		health = 100;
 		items = new ArrayList<Item>();
 		attack = 1;
+		try {
+			items.add(new Item("Test",ImageIO.read(this.getClass().getResourceAsStream("/assets/wood.png"))));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	public int getHealth() {
