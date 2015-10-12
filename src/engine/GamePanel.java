@@ -133,6 +133,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	// draws game
 	private void draw() {
 		gm.draw(g);
+		ap.draw(g);
 		//g.setColor(new Color(255, 255, 255));
 		g.setStroke(new BasicStroke(0));
 		g.fill(new Rectangle(0, HEIGHT, WIDTH, HEIGHT2 - HEIGHT));
@@ -173,8 +174,8 @@ class AttributesPanel extends JPanel {
 		l.setFont(l.getFont().deriveFont(18.0f));
 	}
 	
-	@Override
-	public void paintComponent(Graphics g) {
+
+	public void draw(Graphics g) {
 		l.setText("Health = " + Integer.toString(gp.pa.getHealth()));
 		add(l);
 		for(Item t : gp.pa.getItems()) {
