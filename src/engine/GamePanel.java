@@ -172,14 +172,18 @@ class AttributesPanel extends JPanel {
 		setSize(100, 100);
 		l = new JLabel("Health = " + Integer.toString(gp.pa.getHealth()));
 		l.setFont(l.getFont().deriveFont(18.0f));
+		l.setOpaque(true);
 	}
 	
 
 	public void draw(Graphics g) {
+		l.setOpaque(false);
 		l.setText("Health = " + Integer.toString(gp.pa.getHealth()));
-		add(l);
+		//add(l);
+		g.setFont(l.getFont().deriveFont(8.0f));
+		g.drawString("Health = " + Integer.toString(gp.pa.getHealth()), 50, 10);
 		for(Item t : gp.pa.getItems()) {
-			t.draw(gp.g, gp.pa.getItems().indexOf(t)*20, 5);
+			t.draw(gp.g, gp.pa.getItems().indexOf(t)*20 + 10, 5);
 		}
 	}
 }
