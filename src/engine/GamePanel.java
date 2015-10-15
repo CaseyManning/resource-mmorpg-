@@ -14,11 +14,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import engine.Keys;
-import player.PlayerAttributes;
 
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel implements Runnable, KeyListener {
@@ -40,9 +38,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	// drawing stuff
 	private BufferedImage image;
 	public Graphics2D g;
-	
-	public static PlayerAttributes pa = new PlayerAttributes();
-	AttributesPanel ap;
 	
 	// game state manager
 	private GameManager gm;
@@ -117,8 +112,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		image = new BufferedImage(WIDTH, HEIGHT2, 1);
 		g = (Graphics2D) image.getGraphics();
 		gm = new GameManager();
-		ap = new AttributesPanel(this);
-		add(ap);
 		
 	}
 	
@@ -131,11 +124,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	// draws game
 	private void draw() {
 		gm.draw(g);
-		ap.draw(g);
 		//g.setColor(new Color(255, 255, 255));
 		g.setStroke(new BasicStroke(0));
 		g.fill(new Rectangle(0, HEIGHT, WIDTH, HEIGHT2 - HEIGHT));
-		ap.repaint();
 		
 	}
 	
@@ -148,7 +139,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	
 	// key event
 	public void keyTyped(KeyEvent key) {
-		pa.removeHealth(2);
+		
 	}
 	
 	public void keyPressed(KeyEvent key) {
@@ -160,28 +151,28 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	
 }
 
-class AttributesPanel extends JPanel {
-	
-	GamePanel gp;
-	JLabel l;
-	public AttributesPanel(GamePanel gp) {
-		super();
-		this.gp = gp;
-		setSize(100, 100);
-		l = new JLabel("Health = " + Integer.toString(gp.pa.getHealth()));
-		l.setFont(l.getFont().deriveFont(18.0f));
-		l.setOpaque(true);
-	}
-	
-
-	public void draw(Graphics g) {
-		l.setOpaque(false);
-		l.setText("Health = " + Integer.toString(gp.pa.getHealth()));
-		//add(l);
-		g.setFont(l.getFont().deriveFont(8.0f));
-		g.drawString("Health = " + Integer.toString(gp.pa.getHealth()), 50, 10);
-		for(Item t : gp.pa.getItems()) {
-			t.draw(gp.g, gp.pa.getItems().indexOf(t)*20 + 10, 5);
-		}
-	}
-}
+//class AttributesPanel extends JPanel {
+//	
+//	GamePanel gp;
+//	JLabel l;
+//	public AttributesPanel(GamePanel gp) {
+//		super();
+//		this.gp = gp;
+//		setSize(100, 100);
+//		l = new JLabel("Health = " + Integer.toString(gp.pa.getHealth()));
+//		l.setFont(l.getFont().deriveFont(18.0f));
+//		l.setOpaque(true);
+//	}
+//	
+//
+//	public void draw(Graphics g) {
+//		l.setOpaque(false);
+//		l.setText("Health = " + Integer.toString(gp.pa.getHealth()));
+//		//add(l);
+//		g.setFont(l.getFont().deriveFont(8.0f));
+//		g.drawString("Health = " + Integer.toString(gp.pa.getHealth()), 50, 10);
+//		for(Item t : gp.pa.getItems()) {
+//			t.draw(gp.g, gp.pa.getItems().indexOf(t)*20 + 10, 5);
+//		}
+//	}
+//}

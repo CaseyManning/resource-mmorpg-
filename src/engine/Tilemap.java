@@ -4,7 +4,6 @@ import java.awt.Graphics2D;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
-import java.security.KeyStore.Entry;
 import java.util.HashMap;
 
 import javax.annotation.Resource;
