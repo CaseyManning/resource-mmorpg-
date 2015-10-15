@@ -15,6 +15,7 @@ public class GameManager {
 	Tilemap map;
 	Tile tree;
 	Tile grass;
+	Resource wood;
 	
 	public static final int TILESIZE = 8;
 	
@@ -35,7 +36,18 @@ public class GameManager {
 			e.printStackTrace();
 		}
 		tileChars.put('.', grass);
-		map = new Tilemap(tileChars, this.getClass().getResourceAsStream("testMap.txt"), Charset.forName("UTF8"));
+		
+		wood = null;
+		try {
+			wood = new Resource("Wood", ImageIO.read(this.getClass().getResourceAsStream("/assets/wood.png")), 1000, 5, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		HashMap<Vec2, Resource> resources = new HashMap<>();
+		resources.put(new Vec2(0, 0), wood);
+		
+		map = new Tilemap(tileChars, this.getClass().getResourceAsStream("testMap.txt"), Charset.forName("UTF8"), resources);
 	}
 	
 	public void draw(Graphics2D g) {

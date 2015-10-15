@@ -6,19 +6,19 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 
-import javax.annotation.Resource;
-
 public class Tilemap {
 
 	protected Tile[][] data;
 	protected HashMap<Vec2, Item> items;
 	protected HashMap<Vec2, Resource> resources;
 	
-	public Tilemap(Tile[][] data) {
+	public Tilemap(Tile[][] data, HashMap<Vec2, Resource> resources) {
+		this.resources = resources;
 		this.data = data;
 	}
 	
-	public Tilemap(HashMap<Character, Tile> key, InputStream is, Charset encoding) {
+	public Tilemap(HashMap<Character, Tile> key, InputStream is, Charset encoding, HashMap<Vec2, Resource> resources) {
+		this.resources = resources;
 		try {
 			byte[] encoded = new byte[4096];
 			is.read(encoded);
@@ -44,7 +44,18 @@ public class Tilemap {
 	}
 	
 	public Item itemAt(int x, int y) {
-		return this.itemAt(new Vec2(x, y));
+		return itemAt(new Vec2(x, y));
+	}
+	
+	public Resource resourceAt(Vec2 v) {
+		if (resources.containsKey(v)) {
+			return resources.get(v);
+		}
+		return null;
+	}
+	
+	public Resource resourceAt(int x, int y) {
+		return resourceAt(new Vec2(x, y));
 	}
 	
 	public Tile getTile(int x, int y) {
@@ -57,17 +68,19 @@ public class Tilemap {
 	
 	public void update(int elapsed) {
 		for(java.util.Map.Entry<Vec2, Resource> entry : resources.entrySet()) {
-			((Tilemap) resources.get(entry.getKey())).update(elapsed);
+			resources.get(entry.getKey()).update(elapsed);
 		}
 	}
 	
 	public void draw(Graphics2D g, Vec2 playerPos, Tile outOfBoundsTile) {
 		// (GamePanel.HEIGHT / GameManager.TILESIZE)/2;
 		
-		// WILL BE USED LATER:
-//		for(java.util.Map.Entry<Vec2, Resource> entry : resources.entrySet()) {
-//			
-//		}
+		for(java.util.Map.Entry<Vec2, Resource> entry : resources.entrySet()) {
+			Vec2 pos = entry.getKey();
+			Resource r = entry.getValue();
+			
+			g.drawImage(r.getImg(), playerPos.x-pos.x+(GamePanel.WIDTH / GameManager.TILESIZE)/2, playerPos.y-pos.y+(GamePanel.HEIGHT / GameManager.TILESIZE)/2, null);
+		}
 		
 		System.out.println("TILEMAP DRAWN");
 		

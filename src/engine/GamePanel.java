@@ -123,10 +123,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	
 	// draws game
 	private void draw() {
-		gm.draw(g);
-		//g.setColor(new Color(255, 255, 255));
 		g.setStroke(new BasicStroke(0));
 		g.fill(new Rectangle(0, HEIGHT, WIDTH, HEIGHT2 - HEIGHT));
+		gm.draw(g);
+		//g.setColor(new Color(255, 255, 255));
 		
 	}
 	

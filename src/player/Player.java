@@ -51,7 +51,7 @@ public class Player {
 		g.drawString("Health = " + Integer.toString(attributes.getHealth()), 2, 10);
 		//add(l);
 		for(Item t : attributes.getItems())
-			t.draw(g, attributes.getItems().indexOf(t)*20 + 10, 5);
+			t.draw(g, attributes.getItems().indexOf(t)*20 + 10, GamePanel.HEIGHT);
 	}
 
 	public void update(boolean abovePassable, boolean belowPassable, boolean leftPassable, boolean rightPassable) {
