@@ -75,13 +75,6 @@ public class Tilemap {
 	public void draw(Graphics2D g, Vec2 playerPos, Tile outOfBoundsTile) {
 		// (GamePanel.HEIGHT / GameManager.TILESIZE)/2;
 		
-		for(java.util.Map.Entry<Vec2, Resource> entry : resources.entrySet()) {
-			Vec2 pos = entry.getKey();
-			Resource r = entry.getValue();
-			
-			g.drawImage(r.getImg(), playerPos.x-pos.x+(GamePanel.WIDTH / GameManager.TILESIZE)/2, playerPos.y-pos.y+(GamePanel.HEIGHT / GameManager.TILESIZE)/2, null);
-		}
-		
 		System.out.println("TILEMAP DRAWN");
 		
 		for(int row=0; row < (GamePanel.HEIGHT / GameManager.TILESIZE)+1; row++) {
@@ -98,6 +91,13 @@ public class Tilemap {
 //					g.drawImage(outOfBoundsTile.getImg(), row*GameManager.TILESIZE-GameManager.TILESIZE/2, col*GameManager.TILESIZE-GameManager.TILESIZE/2, null);
 //				}
 			}
+		}
+		
+		for(java.util.Map.Entry<Vec2, Resource> entry : resources.entrySet()) {
+			Vec2 pos = entry.getKey();
+			Resource r = entry.getValue();
+			
+			g.drawImage(r.getImg(), (pos.x-playerPos.x+(GamePanel.WIDTH / GameManager.TILESIZE)/2)*GameManager.TILESIZE-GameManager.TILESIZE/2+1, (pos.y-playerPos.y+(GamePanel.HEIGHT / GameManager.TILESIZE)/2)*GameManager.TILESIZE-GameManager.TILESIZE/2+1, null);
 		}
 	}
 
