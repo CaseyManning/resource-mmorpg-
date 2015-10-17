@@ -21,7 +21,6 @@ public class Wizard {
 		int x = 7;
 		while(x < 8) {
 			System.out.println("I am the Wizard! What can I do for you?");
-
 			String str = scan.nextLine();
 			switch(str) {
 			case "gimme a sword": {

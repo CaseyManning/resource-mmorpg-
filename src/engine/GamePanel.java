@@ -20,7 +20,7 @@ import engine.Keys;
 
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel implements Runnable, KeyListener {
-
+	
 	// dimensions
 	// HEIGHT is the playing area size
 	// HEIGHT2 includes the bottom window
@@ -28,32 +28,27 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	public static final int HEIGHT = 128;
 	public static final int HEIGHT2 = HEIGHT + 16;
 	public static final int SCALE = 4;
-
+	
 	// game loop stuff
 	private Thread thread;
 	private boolean running;
 	private final int FPS = 30;
 	private final int TARGET_TIME = 1000 / FPS;
-
+	
 	// drawing stuff
 	private BufferedImage image;
 	public Graphics2D g;
-
-	//inventory stuf
-	Inventory inv;
-	boolean isInvOpen = false;
-
-
+	
 	// game state manager
 	private GameManager gm;
-
+	
 	// constructor
 	public GamePanel() {
 		setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT2 * SCALE));
 		setFocusable(true);
 		requestFocus();
 	}
-
+	
 	// ready to display
 	public void addNotify() {
 		super.addNotify();
@@ -63,7 +58,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 			thread.start();
 		}
 	}
-
+	
 	public void action() {
 		new Thread(new Runnable() {
 			public void run() {
@@ -74,103 +69,87 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 			}
 		}).start();
 	}
-
+	
 	// run new thread
 	public void run() {
-
+		
 		init();
-
+		
 		long start;
 		long elapsed;
 		long wait;
-
+		
 		// game loop
 		while(running) {
-
+			
 			start = System.nanoTime();
-
+			
 			update(TARGET_TIME);
 			draw();
 			drawToScreen();
-
+			
 			elapsed = System.nanoTime() - start;
-
+			
 			action();
-
+			
 			wait = TARGET_TIME - elapsed / 1000000;
 			if(wait < 0) wait = TARGET_TIME;
-
+			
 			try {
 				Thread.sleep(wait);
 			}
 			catch(Exception e) {
 				e.printStackTrace();
 			}
-
+			
 		}
-
+		
 	}
-
+	
 	// initializes fields
 	private void init() {
 		running = true;
 		image = new BufferedImage(WIDTH, HEIGHT2, 1);
 		g = (Graphics2D) image.getGraphics();
 		gm = new GameManager();
-		inv  = new Inventory(gm.player.attributes);
-
+		
 	}
-
+	
 	// updates game
 	private void update(int elapsed) {
 		gm.update(elapsed);
-
-
-		Keys.update();
-		if(Keys.invbool && isInvOpen == false) {
-			add(inv);
-			Keys.invbool = false;
-			inv.draw();
-			isInvOpen = true;
 		
-		}/* else if(Keys.invbool && isInvOpen == true) {
-			remove(inv);
-			Keys.invbool = false;
-		}*/
-		if(isInvOpen) {
-			inv.draw();
-		}
+		Keys.update();
 	}
-
-
+	
 	// draws game
 	private void draw() {
 		g.setStroke(new BasicStroke(0));
 		g.fill(new Rectangle(0, HEIGHT, WIDTH, HEIGHT2 - HEIGHT));
 		gm.draw(g);
 		//g.setColor(new Color(255, 255, 255));
-
+		
 	}
-
+	
 	// copy buffer to screen
 	private void drawToScreen() {
 		Graphics g2 = getGraphics();
 		g2.drawImage(image, 0, 0, WIDTH * SCALE, HEIGHT2 * SCALE, null);
 		g2.dispose();
 	}
-
+	
 	// key event
 	public void keyTyped(KeyEvent key) {
-
+		
 	}
-
+	
 	public void keyPressed(KeyEvent key) {
 		Keys.keySet(key.getKeyCode(), true);
 	}
 	public void keyReleased(KeyEvent key) {
 		Keys.keySet(key.getKeyCode(), false);
 	}
-
+	
 }
 
 //class AttributesPanel extends JPanel {

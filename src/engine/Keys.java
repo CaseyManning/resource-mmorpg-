@@ -1,7 +1,6 @@
 package engine;
 
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 
 public class Keys {
 
@@ -14,9 +13,6 @@ public class Keys {
 	public static final int PICKUP = 4;
 	public static final int WIZARD = 5;
 
-	public static boolean invbool;
-	public static ArrayList<Item> get;
-	static Wizard w = new Wizard();
 	
 	public static final int NUM_KEYS = 6;
 	
@@ -26,12 +22,10 @@ public class Keys {
 	public static void keySet(int key, boolean b) {
 		switch(key) {
 
-		case KeyEvent.VK_W: keyState[UP]    = b; break;
-		case KeyEvent.VK_A: keyState[LEFT]  = b; break;
-		case KeyEvent.VK_S: keyState[DOWN]  = b; break;
-		case KeyEvent.VK_D: keyState[RIGHT] = b; break;
-		case KeyEvent.VK_F: get = w.startWizard(); break;
-		case KeyEvent.VK_I: invbool = true;
+		case KeyEvent.VK_W: keyState[UP]     = b; break;
+		case KeyEvent.VK_A: keyState[LEFT]   = b; break;
+		case KeyEvent.VK_S: keyState[DOWN]   = b; break;
+		case KeyEvent.VK_D: keyState[RIGHT]  = b; break;
 		case KeyEvent.VK_Q: keyState[PICKUP] = b; break;
 		case KeyEvent.VK_E: keyState[WIZARD] = b; break;
 
