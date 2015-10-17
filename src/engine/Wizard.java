@@ -25,23 +25,25 @@ public class Wizard {
 		int x = 7;
 		while(x < 8) {
 			System.out.println("I am the Wizard! What can I do for you?");
-			String str = scan.nextLine();
-			switch(str) {
-			case "gimme a sword": {
-				try {
-					ret.add(new Item("Sword", ImageIO.read(this.getClass().getResourceAsStream("/assets/wood.png"))));
-				} catch (IOException e) { e.printStackTrace(); }
+			if(scan.hasNext()){
+				String str = scan.nextLine();
+				switch(str) {
+				case "gimme a sword": {
+					try {
+						ret.add(new Item("Sword", ImageIO.read(this.getClass().getResourceAsStream("/assets/Sword-Knife.png"))));
+					} catch (IOException e) { e.printStackTrace(); }
 
-			}
-			case "gimme a good sword": {
-				try {
-					ret.add(new Item("Good Sword", ImageIO.read(this.getClass().getResourceAsStream("/assets/playerup.png"))));
-				} catch (IOException e) { e.printStackTrace(); }
-			}
-			case "I'm done": {
-				scan.close();
-				return ret;
-			}
+				}
+				case "gimme a good sword": {
+					try {
+						ret.add(new Item("Good Sword", ImageIO.read(this.getClass().getResourceAsStream("/assets/tree.png"))));
+					} catch (IOException e) { e.printStackTrace(); }
+				}
+				case "I'm done": {
+					scan.close();
+					return ret;
+				}
+				}
 			}
 		}
 		scan.close();

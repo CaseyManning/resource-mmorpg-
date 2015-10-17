@@ -24,7 +24,7 @@ public class PlayerAttributes {
 		items = new ArrayList<Item>();
 		attack = 1;
 		try {
-			items.add(new Item("Test",ImageIO.read(this.getClass().getResourceAsStream("/assets/wood.png"))));
+			items.add(new Item("Test",ImageIO.read(this.getClass().getResourceAsStream("/assets/Sword-Knife.png"))));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -16,13 +16,13 @@ import engine.Vec2;
 public class Player {
 
 	Vec2 pos;
-	PlayerAttributes attributes;
+	public PlayerAttributes attributes;
 	BufferedImage img;
 	BufferedImage upImg;
 	BufferedImage downImg;
 	BufferedImage leftImg;
 	BufferedImage rightImg;
-	
+
 	Direction dir;
 
 	public Player(Vec2 pos) {
@@ -43,7 +43,7 @@ public class Player {
 		try {
 			rightImg = ImageIO.read(this.getClass().getResourceAsStream("/assets/playerright.png"));
 		} catch (IOException e) {  }
-		
+
 		dir = Direction.NULL;
 	}
 
@@ -65,7 +65,6 @@ public class Player {
 
 		g.drawImage(img, GamePanel.WIDTH/2-img.getWidth()/2, GamePanel.HEIGHT/2-img.getHeight()/2, null);
 
-		System.out.println("PLAYER DRAWN");
 		// g.drawImage(img, GamePanel.WIDTH/2-img.getWidth()/2, GamePanel.HEIGHT/2-img.getHeight()/2, null);
 		BufferedImage drawImg = img;
 		switch (dir) {
@@ -86,20 +85,23 @@ public class Player {
 		}
 		g.drawImage(drawImg, GamePanel.WIDTH/2-img.getWidth()/2, GamePanel.HEIGHT/2-img.getHeight()/2, null);
 
-		
+
 		g.setColor(Color.WHITE);
 		g.setFont(g.getFont().deriveFont(8.0f));
 		g.drawString("Health = " + Integer.toString(attributes.getHealth()), 2, 10);
 		//add(l);
-		for(Item t : attributes.getItems())
+		for(Item t : attributes.getItems()) {
 			t.draw(g, attributes.getItems().indexOf(t)*20 + 10, GamePanel.HEIGHT);
+		}
+		Keys.get.clear();
+		
 	}
 
 	public void update(boolean abovePassable, boolean belowPassable, boolean leftPassable, boolean rightPassable, Resource aboveResource, Resource belowResource, Resource leftResource, Resource rightResource) {
 		if(Keys.isDown(Keys.UP)) {
 			if(abovePassable) pos.y--; else attributes.removeHealth(2);
 			dir = Direction.UP;
-		//} else if(Keys.isDown(Keys.LEFT) && !(Keys.isDown(Keys.UP) || Keys.isDown(Keys.DOWN) || Keys.isDown(Keys.RIGHT))) {
+			//} else if(Keys.isDown(Keys.LEFT) && !(Keys.isDown(Keys.UP) || Keys.isDown(Keys.DOWN) || Keys.isDown(Keys.RIGHT))) {
 		} else if(Keys.isDown(Keys.LEFT)) {
 			if(leftPassable) pos.x--; else attributes.removeHealth(2);
 			dir = Direction.LEFT;
@@ -111,13 +113,9 @@ public class Player {
 			dir = Direction.RIGHT;
 		}
 
-//		if(Keys.sword == true) {
-//			try {
-//				attributes.addItem(new Item("Sword", ImageIO.read(this.getClass().getResourceAsStream("/assets/player.png"))));
-//			} catch (IOException e) { e.printStackTrace();	}
-//			System.out.println("I have a sword! :D");
-//		}
-
+		for(Item i : Keys.get) {
+			attributes.addItem(i);
+		}
 		if (Keys.isDown(Keys.PICKUP)) {
 			switch(dir) {
 			case UP:
@@ -141,14 +139,14 @@ public class Player {
 					attributes.addItem(rightItem);
 				break;
 			default:
+
 				break;
 			}
 		}
-		
-		System.out.println(pos.x + ", " + pos.y);
+
 
 	}
-	
+
 	public Direction getDir() {
 		return dir;
 	}

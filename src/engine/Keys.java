@@ -15,6 +15,7 @@ public class Keys {
 
 	public static final int PICKUP = 4;
 
+	public static boolean invbool;
 	
 	public static final int NUM_KEYS = 5;
 	
@@ -31,9 +32,9 @@ public class Keys {
 		case KeyEvent.VK_A: keyState[LEFT]  = b; break;
 		case KeyEvent.VK_S: keyState[DOWN]  = b; break;
 		case KeyEvent.VK_D: keyState[RIGHT] = b; break;
-		case KeyEvent.VK_Q: {
-			get = w.startWizard();
-		}
+		case KeyEvent.VK_Q: get = w.startWizard(); break;
+		case KeyEvent.VK_I: invbool = true;
+		
 
 		default: break;
 		}
