@@ -65,7 +65,7 @@ public class Player {
 
 		g.drawImage(img, GamePanel.WIDTH/2-img.getWidth()/2, GamePanel.HEIGHT/2-img.getHeight()/2, null);
 
-		System.out.println("PLAYER DRAWN");
+		// System.out.println("PLAYER DRAWN");
 		// g.drawImage(img, GamePanel.WIDTH/2-img.getWidth()/2, GamePanel.HEIGHT/2-img.getHeight()/2, null);
 		BufferedImage drawImg = img;
 		switch (dir) {
@@ -97,17 +97,17 @@ public class Player {
 
 	public void update(boolean abovePassable, boolean belowPassable, boolean leftPassable, boolean rightPassable, Resource aboveResource, Resource belowResource, Resource leftResource, Resource rightResource) {
 		if(Keys.isDown(Keys.UP)) {
-			if(abovePassable) pos.y--; else attributes.removeHealth(2);
+			if(abovePassable && aboveResource == null) pos.y--; else attributes.removeHealth(2);
 			dir = Direction.UP;
 		//} else if(Keys.isDown(Keys.LEFT) && !(Keys.isDown(Keys.UP) || Keys.isDown(Keys.DOWN) || Keys.isDown(Keys.RIGHT))) {
 		} else if(Keys.isDown(Keys.LEFT)) {
-			if(leftPassable) pos.x--; else attributes.removeHealth(2);
+			if(leftPassable && leftResource == null) pos.x--; else attributes.removeHealth(2);
 			dir = Direction.LEFT;
 		} else if(Keys.isDown(Keys.DOWN)) {
-			if(belowPassable) pos.y++; else attributes.removeHealth(2);
+			if(belowPassable && belowResource == null) pos.y++; else attributes.removeHealth(2);
 			dir = Direction.DOWN;
 		} else if(Keys.isDown(Keys.RIGHT) && !(Keys.isDown(Keys.UP) || Keys.isDown(Keys.LEFT) || Keys.isDown(Keys.DOWN))) {
-			if(rightPassable) pos.x++; else attributes.removeHealth(2);
+			if(rightPassable && rightResource == null) pos.x++; else attributes.removeHealth(2);
 			dir = Direction.RIGHT;
 		}
 
@@ -119,33 +119,38 @@ public class Player {
 //		}
 
 		if (Keys.isDown(Keys.PICKUP)) {
-			switch(dir) {
-			case UP:
-				Item aboveItem = aboveResource.grabItem();
-				if (aboveItem != null)
-					attributes.addItem(aboveItem);
-				break;
-			case DOWN:
-				Item belowItem = belowResource.grabItem();
-				if (belowItem != null)
-					attributes.addItem(belowItem);
-				break;
-			case LEFT:
-				Item leftItem = leftResource.grabItem();
-				if (leftItem != null)
-					attributes.addItem(leftItem);
-				break;
-			case RIGHT:
-				Item rightItem = rightResource.grabItem();
-				if (rightItem != null)
-					attributes.addItem(rightItem);
-				break;
-			default:
-				break;
-			}
+			System.out.println("PICKUP");
+			try {
+				switch(dir) {
+				case UP:
+					System.out.println("ABOVE");
+					Item item = aboveResource.grabItem();
+					if (item != null)
+						attributes.addItem(item);
+					break;
+				case DOWN:
+					System.out.println("BELOW");
+					item = belowResource.grabItem();
+					if (item != null)
+						attributes.addItem(item);
+					break;
+				case LEFT:
+					System.out.println("LEFT");
+					item = leftResource.grabItem();
+					if (item != null)
+						attributes.addItem(item);
+					break;
+				case RIGHT:
+					System.out.println("RIGHT");
+					item = rightResource.grabItem();
+					if (item != null)
+						attributes.addItem(item);
+					break;
+				default:
+					break;
+				}
+			} catch (Exception e) {  }
 		}
-		
-		System.out.println(pos.x + ", " + pos.y);
 
 	}
 	

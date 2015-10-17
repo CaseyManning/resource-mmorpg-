@@ -17,10 +17,12 @@ public class GameManager {
 	Tile grass;
 	Resource woodR;
 	Item woodI;
+	Wizard w;
 	
 	public static final int TILESIZE = 8;
 	
 	public GameManager() {
+		w = new Wizard();
 		player = new Player(new Vec2(0, 0));
 		HashMap<Character, Tile> tileChars = new HashMap<Character, Tile>();
 		tree = null;
@@ -51,8 +53,7 @@ public class GameManager {
 			e.printStackTrace();
 		}
 		
-		
-		HashMap<Vec2, Resource> resources = new HashMap<>();
+		HashMap<Vec2, Resource> resources = new HashMap<Vec2, Resource>();
 		resources.put(new Vec2(1, 1), woodR);
 		
 		map = new Tilemap(tileChars, this.getClass().getResourceAsStream("testMap.txt"), Charset.forName("UTF8"), resources);
@@ -68,39 +69,30 @@ public class GameManager {
 	}
 	
 	public void update(int elapsed) {
+		if (Keys.isDown(Keys.WIZARD)) {
+			w.startWizard();
+		}
 		Vec2 current = player.getPos();
 		
 		boolean abovePassable = false;
 		try {
 			abovePassable = map.getTile(current.x, current.y-1).isPassable();
 		} catch(Exception e) {  }
-		if (map.resourceAt(current.x, current.y-1) != null) {
-			abovePassable=false;
-		}
 		
 		boolean belowPassable = false;
 		try {
 			belowPassable = map.getTile(current.x, current.y+1).isPassable();
 		} catch(Exception e) {  }
-		if (map.resourceAt(current.x, current.y+1) != null) {
-			belowPassable=false;
-		}
 
 		boolean leftPassable = false;
 		try {
 			leftPassable = map.getTile(current.x-1, current.y).isPassable();
 		} catch(Exception e) {  }
-		if (map.resourceAt(current.x-1, current.y) != null) {
-			leftPassable=false;
-		}
 
 		boolean rightPassable = false;
 		try {
 			rightPassable = map.getTile(current.x+1, current.y).isPassable();
 		} catch(Exception e) {  }
-		if (map.resourceAt(current.x+1, current.y) != null) {
-			rightPassable=false;
-		}
 		
 		
 		player.update(
