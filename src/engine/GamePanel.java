@@ -128,6 +128,42 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//
+	//Bug: Resources on map appear on top of menu bar
+	//
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// draws game
 	private void draw() {
 		g.setStroke(new BasicStroke(0));

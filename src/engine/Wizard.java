@@ -26,13 +26,13 @@ public class Wizard {
 			case "gimme a sword": {
 				System.out.println("Take this sword");
 				try {
-					ret.add(new Item("Sword", ImageIO.read(this.getClass().getResourceAsStream("/assets/wood.png"))));
+					ret.add(new Item("Sword", ImageIO.read(this.getClass().getResourceAsStream("/assets/Sword-Knife.png"))));
 				} catch (IOException e) { e.printStackTrace(); }
 				break;
 			}
 			case "gimme a good sword": {
 				try {
-					ret.add(new Item("Good Sword", ImageIO.read(this.getClass().getResourceAsStream("/assets/playerup.png"))));
+					ret.add(new Item("Good Sword", ImageIO.read(this.getClass().getResourceAsStream("/assets/Sword-Knife.png"))));
 				} catch (IOException e) { e.printStackTrace(); }
 				break;
 			}
