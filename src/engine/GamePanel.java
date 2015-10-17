@@ -120,6 +120,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		gm.update(elapsed);
 		
 		Keys.update();
+
 	}
 	
 	// draws game
