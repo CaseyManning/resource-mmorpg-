@@ -62,9 +62,9 @@ public class Player {
 	}
 
 	public void draw(Graphics2D g) {
-<<<<<<< HEAD
+
 		g.drawImage(img, GamePanel.WIDTH/2-img.getWidth()/2, GamePanel.HEIGHT/2-img.getHeight()/2, null);
-=======
+
 		System.out.println("PLAYER DRAWN");
 		// g.drawImage(img, GamePanel.WIDTH/2-img.getWidth()/2, GamePanel.HEIGHT/2-img.getHeight()/2, null);
 		BufferedImage drawImg = img;
@@ -85,7 +85,7 @@ public class Player {
 			break;
 		}
 		g.drawImage(drawImg, GamePanel.WIDTH/2-img.getWidth()/2, GamePanel.HEIGHT/2-img.getHeight()/2, null);
->>>>>>> origin/master
+
 		
 		g.setColor(Color.WHITE);
 		g.setFont(g.getFont().deriveFont(8.0f));
@@ -110,15 +110,14 @@ public class Player {
 			if(rightPassable) pos.x++; else attributes.removeHealth(2);
 			dir = Direction.RIGHT;
 		}
-		
-<<<<<<< HEAD
+
 		if(Keys.sword == true) {
 			try {
 				attributes.addItem(new Item("Sword", ImageIO.read(this.getClass().getResourceAsStream("/assets/player.png"))));
 			} catch (IOException e) { e.printStackTrace();	}
 			System.out.println("I have a sword! :D");
 		}
-=======
+
 		if (Keys.isDown(Keys.PICKUP)) {
 			switch(dir) {
 			case UP:
@@ -147,7 +146,7 @@ public class Player {
 		}
 		
 		System.out.println(pos.x + ", " + pos.y);
->>>>>>> origin/master
+
 	}
 	
 	public Direction getDir() {
