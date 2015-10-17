@@ -129,7 +129,6 @@ public class Player {
 			attributes.addItem(i);
 		}
 		if (Keys.isDown(Keys.PICKUP)) {
-<<<<<<< HEAD
 			switch(dir) {
 			case UP:
 				Item aboveItem = aboveResource.grabItem();
@@ -159,8 +158,6 @@ public class Player {
 
 
 	}
-
-=======
 			try {
 				switch(dir) {
 				case UP:
@@ -195,7 +192,6 @@ public class Player {
 		this.attributes.addItem(i);
 	}
 	
->>>>>>> origin/master
 	public Direction getDir() {
 		return dir;
 	}
