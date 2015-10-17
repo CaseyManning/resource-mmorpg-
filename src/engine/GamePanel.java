@@ -118,6 +118,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	// updates game
 	private void update(int elapsed) {
 		gm.update(elapsed);
+		
 		Keys.update();
 	}
 	
@@ -163,7 +164,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 //		l.setFont(l.getFont().deriveFont(18.0f));
 //		l.setOpaque(true);
 //	}
-//	
+//
 //
 //	public void draw(Graphics g) {
 //		l.setOpaque(false);

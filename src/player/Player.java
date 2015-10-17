@@ -43,7 +43,6 @@ public class Player {
 	}
 
 	public void draw(Graphics2D g) {
-		System.out.println("PLAYER DRAWN");
 		g.drawImage(img, GamePanel.WIDTH/2-img.getWidth()/2, GamePanel.HEIGHT/2-img.getHeight()/2, null);
 		
 		g.setColor(Color.WHITE);
@@ -69,7 +68,13 @@ public class Player {
 		} else if(Keys.isDown(Keys.RIGHT) && !(Keys.isDown(Keys.UP) || Keys.isDown(Keys.LEFT) || Keys.isDown(Keys.DOWN))) {
 			if(rightPassable) pos.x++;
 		}
-		System.out.println(pos.x + ", " + pos.y);
+		
+		if(Keys.sword == true) {
+			try {
+				attributes.addItem(new Item("Sword", ImageIO.read(this.getClass().getResourceAsStream("/assets/player.png"))));
+			} catch (IOException e) { e.printStackTrace();	}
+			System.out.println("I have a sword! :D");
+		}
 	}
 }
 

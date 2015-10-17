@@ -1,6 +1,7 @@
 package engine;
 
 import java.awt.event.KeyEvent;
+import java.util.Scanner;
 
 public class Keys {
 
@@ -8,11 +9,14 @@ public class Keys {
 	public static final int LEFT  = 1;
 	public static final int DOWN  = 2;
 	public static final int RIGHT = 3;
+	public static boolean sword = false;
 	
 	public static final int NUM_KEYS = 4;
 	
 	public static boolean keyState[]     = new boolean[NUM_KEYS];
 	public static boolean prevKeyState[] = new boolean[NUM_KEYS];
+	
+	static Wizard w = new Wizard();
 	
 	public static void keySet(int key, boolean b) {
 		System.out.println("keySet(" + Integer.toString(key) + ", " + ((b)?"true":"false") + ")");
@@ -21,6 +25,9 @@ public class Keys {
 		case KeyEvent.VK_A: keyState[LEFT]  = b; break;
 		case KeyEvent.VK_S: keyState[DOWN]  = b; break;
 		case KeyEvent.VK_D: keyState[RIGHT] = b; break;
+		case KeyEvent.VK_Q: {
+			w.startWizard();
+		}
 		default: break;
 		}
 	}
