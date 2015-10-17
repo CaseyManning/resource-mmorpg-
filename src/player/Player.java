@@ -65,6 +65,10 @@ public class Player {
 
 		g.drawImage(img, GamePanel.WIDTH/2-img.getWidth()/2, GamePanel.HEIGHT/2-img.getHeight()/2, null);
 
+<<<<<<< HEAD
+=======
+		// System.out.println("PLAYER DRAWN");
+>>>>>>> origin/master
 		// g.drawImage(img, GamePanel.WIDTH/2-img.getWidth()/2, GamePanel.HEIGHT/2-img.getHeight()/2, null);
 		BufferedImage drawImg = img;
 		switch (dir) {
@@ -90,26 +94,34 @@ public class Player {
 		g.setFont(g.getFont().deriveFont(8.0f));
 		g.drawString("Health = " + Integer.toString(attributes.getHealth()), 2, 10);
 		//add(l);
+<<<<<<< HEAD
 		for(Item t : attributes.getItems()) {
 			t.draw(g, attributes.getItems().indexOf(t)*20 + 10, GamePanel.HEIGHT);
 		}
 		Keys.get.clear();
 		
+=======
+		int i=0;
+		for(Item t : attributes.getItems()) {
+			t.draw(g, i*20 + 10, GamePanel.HEIGHT);
+			i++;
+		}
+>>>>>>> origin/master
 	}
-
+	
 	public void update(boolean abovePassable, boolean belowPassable, boolean leftPassable, boolean rightPassable, Resource aboveResource, Resource belowResource, Resource leftResource, Resource rightResource) {
 		if(Keys.isDown(Keys.UP)) {
-			if(abovePassable) pos.y--; else attributes.removeHealth(2);
+			if(abovePassable && aboveResource == null) pos.y--; else attributes.removeHealth(2);
 			dir = Direction.UP;
 			//} else if(Keys.isDown(Keys.LEFT) && !(Keys.isDown(Keys.UP) || Keys.isDown(Keys.DOWN) || Keys.isDown(Keys.RIGHT))) {
 		} else if(Keys.isDown(Keys.LEFT)) {
-			if(leftPassable) pos.x--; else attributes.removeHealth(2);
+			if(leftPassable && leftResource == null) pos.x--; else attributes.removeHealth(2);
 			dir = Direction.LEFT;
 		} else if(Keys.isDown(Keys.DOWN)) {
-			if(belowPassable) pos.y++; else attributes.removeHealth(2);
+			if(belowPassable && belowResource == null) pos.y++; else attributes.removeHealth(2);
 			dir = Direction.DOWN;
 		} else if(Keys.isDown(Keys.RIGHT) && !(Keys.isDown(Keys.UP) || Keys.isDown(Keys.LEFT) || Keys.isDown(Keys.DOWN))) {
-			if(rightPassable) pos.x++; else attributes.removeHealth(2);
+			if(rightPassable && rightResource == null) pos.x++; else attributes.removeHealth(2);
 			dir = Direction.RIGHT;
 		}
 
@@ -117,6 +129,7 @@ public class Player {
 			attributes.addItem(i);
 		}
 		if (Keys.isDown(Keys.PICKUP)) {
+<<<<<<< HEAD
 			switch(dir) {
 			case UP:
 				Item aboveItem = aboveResource.grabItem();
@@ -147,6 +160,42 @@ public class Player {
 
 	}
 
+=======
+			try {
+				switch(dir) {
+				case UP:
+					Item item = aboveResource.grabItem();
+					if (item != null)
+						attributes.addItem(item);
+					break;
+				case DOWN:
+					item = belowResource.grabItem();
+					if (item != null)
+						attributes.addItem(item);
+					break;
+				case LEFT:
+					item = leftResource.grabItem();
+					if (item != null)
+						attributes.addItem(item);
+					break;
+				case RIGHT:
+					item = rightResource.grabItem();
+					if (item != null)
+						attributes.addItem(item);
+					break;
+				default:
+					break;
+				}
+			} catch (Exception e) {  }
+		}
+
+	}
+	
+	public void addItem(Item i) {
+		this.attributes.addItem(i);
+	}
+	
+>>>>>>> origin/master
 	public Direction getDir() {
 		return dir;
 	}

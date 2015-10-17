@@ -31,5 +31,6 @@ Within the map, there are different areas with different resources.
 TODO
 ----
 
-* Recources and Items
+* More Resource Stuff
 * Inventory
+* Wizard

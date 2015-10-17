@@ -38,7 +38,7 @@ public class Resource {
 	
 	public void update(int elapsed) {
 		waitTimeLeft -= elapsed;
-		if (waitTime < 0) {
+		if (waitTimeLeft < 0) {
 			waitTimeLeft = 0;
 		}
 	}

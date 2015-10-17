@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.HashMap;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -17,10 +18,12 @@ public class GameManager {
 	Tile grass;
 	Resource woodR;
 	Item woodI;
+	Wizard w;
 	
 	public static final int TILESIZE = 8;
 	
 	public GameManager() {
+		w = new Wizard();
 		player = new Player(new Vec2(0, 0));
 		HashMap<Character, Tile> tileChars = new HashMap<Character, Tile>();
 		tree = null;
@@ -46,16 +49,23 @@ public class GameManager {
 		}
 		woodR = null;
 		try {
-			woodR = new Resource("Wood", ImageIO.read(this.getClass().getResourceAsStream("/assets/wood.png")), 1000, 5, woodI);
+			woodR = new Resource("Wood", ImageIO.read(this.getClass().getResourceAsStream("/assets/wood.png")), 500, 5, woodI);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
 		
-		HashMap<Vec2, Resource> resources = new HashMap<>();
-		resources.put(new Vec2(1, 1), woodR);
+		map = new Tilemap(tileChars, this.getClass().getResourceAsStream("testMap.txt"), Charset.forName("UTF8"), new HashMap<Vec2, Resource>());
 		
-		map = new Tilemap(tileChars, this.getClass().getResourceAsStream("testMap.txt"), Charset.forName("UTF8"), resources);
+		Random r=new Random();
+		for(int i=0; i<5; i++) {
+			Vec2 pos = new Vec2(r.nextInt(map.getSize().x), r.nextInt(map.getSize().y));
+			while (!(map.resourceAt(pos) == null && map.getTile(pos) == grass)) {
+				pos = new Vec2(r.nextInt(map.getSize().x), r.nextInt(map.getSize().y));
+			}
+			map.addResource(pos, woodR);
+		}
+		
 	}
 	
 	public void draw(Graphics2D g) {
@@ -68,39 +78,34 @@ public class GameManager {
 	}
 	
 	public void update(int elapsed) {
+		map.update(elapsed);
+		if (Keys.isDown(Keys.WIZARD)) {
+			Object[] items = w.startWizard().toArray();
+			for (Object item : items) {
+				player.addItem((Item) item);
+			}
+		}
 		Vec2 current = player.getPos();
 		
 		boolean abovePassable = false;
 		try {
 			abovePassable = map.getTile(current.x, current.y-1).isPassable();
 		} catch(Exception e) {  }
-		if (map.resourceAt(current.x, current.y-1) != null) {
-			abovePassable=false;
-		}
 		
 		boolean belowPassable = false;
 		try {
 			belowPassable = map.getTile(current.x, current.y+1).isPassable();
 		} catch(Exception e) {  }
-		if (map.resourceAt(current.x, current.y+1) != null) {
-			belowPassable=false;
-		}
 
 		boolean leftPassable = false;
 		try {
 			leftPassable = map.getTile(current.x-1, current.y).isPassable();
 		} catch(Exception e) {  }
-		if (map.resourceAt(current.x-1, current.y) != null) {
-			leftPassable=false;
-		}
 
 		boolean rightPassable = false;
 		try {
 			rightPassable = map.getTile(current.x+1, current.y).isPassable();
 		} catch(Exception e) {  }
-		if (map.resourceAt(current.x+1, current.y) != null) {
-			rightPassable=false;
-		}
 		
 		
 		player.update(

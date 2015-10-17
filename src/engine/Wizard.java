@@ -1,14 +1,10 @@
 package engine;
 
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
-
-import player.PlayerAttributes;
 
 public class Wizard {
 
@@ -25,25 +21,26 @@ public class Wizard {
 		int x = 7;
 		while(x < 8) {
 			System.out.println("I am the Wizard! What can I do for you?");
-			if(scan.hasNext()){
-				String str = scan.nextLine();
-				switch(str) {
-				case "gimme a sword": {
-					try {
-						ret.add(new Item("Sword", ImageIO.read(this.getClass().getResourceAsStream("/assets/Sword-Knife.png"))));
-					} catch (IOException e) { e.printStackTrace(); }
 
-				}
-				case "gimme a good sword": {
-					try {
-						ret.add(new Item("Good Sword", ImageIO.read(this.getClass().getResourceAsStream("/assets/tree.png"))));
-					} catch (IOException e) { e.printStackTrace(); }
-				}
-				case "I'm done": {
-					scan.close();
-					return ret;
-				}
-				}
+			String str = scan.nextLine();
+			switch(str) {
+			case "gimme a sword": {
+				try {
+					ret.add(new Item("Sword", ImageIO.read(this.getClass().getResourceAsStream("/assets/wood.png"))));
+				} catch (IOException e) { e.printStackTrace(); }
+				break;
+			}
+			case "gimme a good sword": {
+				try {
+					ret.add(new Item("Good Sword", ImageIO.read(this.getClass().getResourceAsStream("/assets/playerup.png"))));
+				} catch (IOException e) { e.printStackTrace(); }
+				break;
+			}
+			case "I'm done": {
+				scan.close();
+				System.out.println("Thank you.");
+				return ret;
+			}
 			}
 		}
 		scan.close();
