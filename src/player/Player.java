@@ -119,29 +119,24 @@ public class Player {
 //		}
 
 		if (Keys.isDown(Keys.PICKUP)) {
-			System.out.println("PICKUP");
 			try {
 				switch(dir) {
 				case UP:
-					System.out.println("ABOVE");
 					Item item = aboveResource.grabItem();
 					if (item != null)
 						attributes.addItem(item);
 					break;
 				case DOWN:
-					System.out.println("BELOW");
 					item = belowResource.grabItem();
 					if (item != null)
 						attributes.addItem(item);
 					break;
 				case LEFT:
-					System.out.println("LEFT");
 					item = leftResource.grabItem();
 					if (item != null)
 						attributes.addItem(item);
 					break;
 				case RIGHT:
-					System.out.println("RIGHT");
 					item = rightResource.grabItem();
 					if (item != null)
 						attributes.addItem(item);

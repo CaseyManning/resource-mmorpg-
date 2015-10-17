@@ -20,7 +20,6 @@ public class Keys {
 	public static boolean prevKeyState[] = new boolean[NUM_KEYS];
 	
 	public static void keySet(int key, boolean b) {
-		System.out.println("keySet(" + Integer.toString(key) + ", " + ((b)?"true":"false") + ")");
 		switch(key) {
 
 		case KeyEvent.VK_W: keyState[UP]     = b; break;
