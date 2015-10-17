@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class Tilemap {
 
@@ -66,14 +67,49 @@ public class Tilemap {
 		return getTile(v.x, v.y);
 	}
 	
+	public Resource addResource(Vec2 pos, Resource r) {
+		resources.put(pos, r);
+		
+		return r;
+	}
+	
+	public Vec2 getSize() {
+		return new Vec2(this.data[0].length, this.data.length);
+	}
+	
 	public void update(int elapsed) {
-		for(java.util.Map.Entry<Vec2, Resource> entry : resources.entrySet()) {
-			if (resources.get(entry.getKey()).shouldDelete()) {
-				resources.remove(entry.getKey());
-			} else {
-				resources.get(entry.getKey()).update(elapsed);
-			}
+		System.out.println("====================");
+		Iterator<Vec2> it = resources.keySet().iterator();
+		while(it.hasNext()) {
+			Vec2 current = it.next();
+			System.out.println(resources.get(current).shouldDelete());
 		}
+		resources.entrySet().removeIf(entry -> entry.getValue().shouldDelete());
+		
+		/*Iterator<Vec2> */it = resources.keySet().iterator();
+		while(it.hasNext()) {
+			Vec2 current = it.next();
+			resources.get(current).update(elapsed);
+		}
+		
+//		for(Iterator<Map.Entry<Vec2, Resource>> it = resources.entrySet().iterator(); it.hasNext(); ) {
+//			Map.Entry<Vec2, Resource> entry = it.next();
+//			if(resources.get(entry.getKey()).shouldDelete()) {
+//				it.remove();
+//			} else {
+//				resources.get(entry.getKey()).update(elapsed);
+//			}
+//		}
+//		
+//		Iterator<Vec2> it = resources.keySet().iterator();
+//		while(it.hasNext()) {
+//			Vec2 current = it.next();
+//			if(resources.get(current).shouldDelete()) {
+//				it.remove();
+//			} else {
+//				resources.get(current).update(elapsed);
+//			}
+//		}
 	}
 	
 	public void draw(Graphics2D g, Vec2 playerPos, Tile outOfBoundsTile) {

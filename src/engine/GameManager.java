@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.HashMap;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -48,15 +49,23 @@ public class GameManager {
 		}
 		woodR = null;
 		try {
-			woodR = new Resource("Wood", ImageIO.read(this.getClass().getResourceAsStream("/assets/wood.png")), 10, 5, woodI);
+			woodR = new Resource("Wood", ImageIO.read(this.getClass().getResourceAsStream("/assets/wood.png")), 500, 5, woodI);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		HashMap<Vec2, Resource> resources = new HashMap<Vec2, Resource>();
-		resources.put(new Vec2(1, 1), woodR);
 		
-		map = new Tilemap(tileChars, this.getClass().getResourceAsStream("testMap.txt"), Charset.forName("UTF8"), resources);
+		map = new Tilemap(tileChars, this.getClass().getResourceAsStream("testMap.txt"), Charset.forName("UTF8"), new HashMap<Vec2, Resource>());
+		
+		Random r=new Random();
+		for(int i=0; i<5; i++) {
+			Vec2 pos = new Vec2(r.nextInt(map.getSize().x), r.nextInt(map.getSize().y));
+			while (!(map.resourceAt(pos) == null && map.getTile(pos) == grass)) {
+				pos = new Vec2(r.nextInt(map.getSize().x), r.nextInt(map.getSize().y));
+			}
+			map.addResource(pos, woodR);
+		}
+		
 	}
 	
 	public void draw(Graphics2D g) {

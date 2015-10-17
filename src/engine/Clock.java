@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
+@SuppressWarnings("serial")
 public class Clock extends JFrame {
 
 	public Clock() {
@@ -27,6 +28,7 @@ public class Clock extends JFrame {
 	}
 
 }
+@SuppressWarnings("serial")
 class ClockLabel extends JLabel implements ActionListener {
 
 	public ClockLabel() {
