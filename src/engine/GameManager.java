@@ -48,7 +48,7 @@ public class GameManager {
 		}
 		woodR = null;
 		try {
-			woodR = new Resource("Wood", ImageIO.read(this.getClass().getResourceAsStream("/assets/wood.png")), 1000, 5, woodI);
+			woodR = new Resource("Wood", ImageIO.read(this.getClass().getResourceAsStream("/assets/wood.png")), 10, 5, woodI);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -69,6 +69,7 @@ public class GameManager {
 	}
 	
 	public void update(int elapsed) {
+		map.update(elapsed);
 		if (Keys.isDown(Keys.WIZARD)) {
 			w.startWizard();
 		}

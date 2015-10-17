@@ -75,7 +75,6 @@ public class Tilemap {
 	public void draw(Graphics2D g, Vec2 playerPos, Tile outOfBoundsTile) {
 		// (GamePanel.HEIGHT / GameManager.TILESIZE)/2;
 		
-		
 		for(int row=0; row < (GamePanel.HEIGHT / GameManager.TILESIZE)+1; row++) {
 			for(int col=0; col < (GamePanel.WIDTH / GameManager.TILESIZE)+1; col++) {
 				try {
