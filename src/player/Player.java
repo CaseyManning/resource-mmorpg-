@@ -111,12 +111,12 @@ public class Player {
 			dir = Direction.RIGHT;
 		}
 
-		if(Keys.sword == true) {
-			try {
-				attributes.addItem(new Item("Sword", ImageIO.read(this.getClass().getResourceAsStream("/assets/player.png"))));
-			} catch (IOException e) { e.printStackTrace();	}
-			System.out.println("I have a sword! :D");
-		}
+//		if(Keys.sword == true) {
+//			try {
+//				attributes.addItem(new Item("Sword", ImageIO.read(this.getClass().getResourceAsStream("/assets/player.png"))));
+//			} catch (IOException e) { e.printStackTrace();	}
+//			System.out.println("I have a sword! :D");
+//		}
 
 		if (Keys.isDown(Keys.PICKUP)) {
 			switch(dir) {
