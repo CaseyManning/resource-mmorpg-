@@ -71,7 +71,10 @@ public class GameManager {
 	public void update(int elapsed) {
 		map.update(elapsed);
 		if (Keys.isDown(Keys.WIZARD)) {
-			w.startWizard();
+			Object[] items = w.startWizard().toArray();
+			for (Object item : items) {
+				player.addItem((Item) item);
+			}
 		}
 		Vec2 current = player.getPos();
 		

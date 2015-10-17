@@ -149,6 +149,10 @@ public class Player {
 
 	}
 	
+	public void addItem(Item i) {
+		this.attributes.addItem(i);
+	}
+	
 	public Direction getDir() {
 		return dir;
 	}

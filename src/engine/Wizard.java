@@ -27,15 +27,17 @@ public class Wizard {
 				try {
 					ret.add(new Item("Sword", ImageIO.read(this.getClass().getResourceAsStream("/assets/wood.png"))));
 				} catch (IOException e) { e.printStackTrace(); }
-
+				break;
 			}
 			case "gimme a good sword": {
 				try {
 					ret.add(new Item("Good Sword", ImageIO.read(this.getClass().getResourceAsStream("/assets/playerup.png"))));
 				} catch (IOException e) { e.printStackTrace(); }
+				break;
 			}
 			case "I'm done": {
 				scan.close();
+				System.out.println("Thank you.");
 				return ret;
 			}
 			}
