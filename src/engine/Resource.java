@@ -29,6 +29,13 @@ public class Resource {
 		return null;
 	}
 	
+	public boolean shouldDelete() {
+		if (amount <= 0) {
+			return true;
+		}
+		return false;
+	}
+	
 	public void update(int elapsed) {
 		waitTimeLeft -= elapsed;
 		if (waitTime < 0) {

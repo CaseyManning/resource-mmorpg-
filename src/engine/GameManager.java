@@ -107,7 +107,11 @@ public class GameManager {
 			abovePassable,
 			belowPassable,
 			leftPassable,
-			rightPassable);
+			rightPassable,
+			map.resourceAt(current.x, current.y-1),
+			map.resourceAt(current.x, current.y+1),
+			map.resourceAt(current.x-1, current.y),
+			map.resourceAt(current.x+1, current.y));
 	}
 
 }
