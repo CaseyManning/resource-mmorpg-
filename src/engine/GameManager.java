@@ -85,6 +85,7 @@ public class GameManager {
 				player.addItem((Item) item);
 			}
 		}
+		
 		Vec2 current = player.getPos();
 		
 		boolean abovePassable = false;

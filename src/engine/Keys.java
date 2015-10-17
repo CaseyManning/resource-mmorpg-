@@ -12,9 +12,10 @@ public class Keys {
 
 	public static final int PICKUP = 4;
 	public static final int WIZARD = 5;
+	public static final int INVENTORY = 6;
 
 	
-	public static final int NUM_KEYS = 6;
+	public static final int NUM_KEYS = 7;
 	
 	public static boolean keyState[]     = new boolean[NUM_KEYS];
 	public static boolean prevKeyState[] = new boolean[NUM_KEYS];
@@ -28,6 +29,7 @@ public class Keys {
 		case KeyEvent.VK_D: keyState[RIGHT]  = b; break;
 		case KeyEvent.VK_Q: keyState[PICKUP] = b; break;
 		case KeyEvent.VK_E: keyState[WIZARD] = b; break;
+		case KeyEvent.VK_I: keyState[INVENTORY] = b; break;
 
 		default: break;
 		}

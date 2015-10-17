@@ -39,6 +39,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	private BufferedImage image;
 	public Graphics2D g;
 	
+	//Don't delete my inventory work
+	Inventory inv;
+	
 	// game state manager
 	private GameManager gm;
 	
@@ -121,6 +124,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		
 		Keys.update();
 
+		
 	}
 	
 	// draws game
@@ -129,7 +133,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		g.fill(new Rectangle(0, HEIGHT, WIDTH, HEIGHT2 - HEIGHT));
 		gm.draw(g);
 		//g.setColor(new Color(255, 255, 255));
-		
+		if (Keys.isDown(Keys.INVENTORY)) {
+			inv.draw();
+		}
 	}
 	
 	// copy buffer to screen
