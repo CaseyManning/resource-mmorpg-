@@ -24,6 +24,7 @@ public class Wizard {
 			String str = scan.nextLine();
 			switch(str) {
 			case "gimme a sword": {
+				System.out.println("Take this sword");
 				try {
 					ret.add(new Item("Sword", ImageIO.read(this.getClass().getResourceAsStream("/assets/wood.png"))));
 				} catch (IOException e) { e.printStackTrace(); }

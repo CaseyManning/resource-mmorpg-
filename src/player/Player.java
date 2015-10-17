@@ -16,7 +16,7 @@ import engine.Vec2;
 public class Player {
 
 	Vec2 pos;
-	PlayerAttributes attributes;
+	public PlayerAttributes attributes;
 	BufferedImage img;
 	BufferedImage upImg;
 	BufferedImage downImg;

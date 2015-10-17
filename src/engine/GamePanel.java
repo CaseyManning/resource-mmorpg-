@@ -115,6 +115,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		image = new BufferedImage(WIDTH, HEIGHT2, 1);
 		g = (Graphics2D) image.getGraphics();
 		gm = new GameManager();
+		inv = new Inventory(gm.player.attributes);
 		
 	}
 	
@@ -134,6 +135,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		gm.draw(g);
 		//g.setColor(new Color(255, 255, 255));
 		if (Keys.isDown(Keys.INVENTORY)) {
+			add(inv);
 			inv.draw();
 		}
 	}
