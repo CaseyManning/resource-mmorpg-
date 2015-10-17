@@ -68,7 +68,11 @@ public class Tilemap {
 	
 	public void update(int elapsed) {
 		for(java.util.Map.Entry<Vec2, Resource> entry : resources.entrySet()) {
-			resources.get(entry.getKey()).update(elapsed);
+			if (resources.get(entry.getKey()).shouldDelete()) {
+				resources.remove(entry.getKey());
+			} else {
+				resources.get(entry.getKey()).update(elapsed);
+			}
 		}
 	}
 	

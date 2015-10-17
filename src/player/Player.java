@@ -91,10 +91,13 @@ public class Player {
 		g.setFont(g.getFont().deriveFont(8.0f));
 		g.drawString("Health = " + Integer.toString(attributes.getHealth()), 2, 10);
 		//add(l);
-		for(Item t : attributes.getItems())
-			t.draw(g, attributes.getItems().indexOf(t)*20 + 10, GamePanel.HEIGHT);
+		int i=0;
+		for(Item t : attributes.getItems()) {
+			t.draw(g, i*20 + 10, GamePanel.HEIGHT);
+			i++;
+		}
 	}
-
+	
 	public void update(boolean abovePassable, boolean belowPassable, boolean leftPassable, boolean rightPassable, Resource aboveResource, Resource belowResource, Resource leftResource, Resource rightResource) {
 		if(Keys.isDown(Keys.UP)) {
 			if(abovePassable && aboveResource == null) pos.y--; else attributes.removeHealth(2);
