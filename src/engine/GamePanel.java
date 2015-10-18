@@ -146,6 +146,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	//
 	//Bug: Resources on map appear on top of menu bar
 	//
+	//All resources disappear once you have used one up
 	
 	
 	
