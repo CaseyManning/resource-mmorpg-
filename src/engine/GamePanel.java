@@ -41,6 +41,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	
 	//Don't delete my inventory work
 	Inventory inv;
+	boolean invOpen = false;
 	
 	// game state manager
 	private GameManager gm;
@@ -172,6 +173,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		//g.setColor(new Color(255, 255, 255));
 		if (Keys.isDown(Keys.INVENTORY)) {
 			add(inv);
+			inv.draw();
+			invOpen = true;
+		}
+		if(invOpen) {
 			inv.draw();
 		}
 	}
