@@ -78,7 +78,6 @@ public class Tilemap {
 	}
 	
 	public void update(int elapsed) {
-		System.out.println("====================");
 		Iterator<Vec2> it = resources.keySet().iterator();
 		while(it.hasNext()) {
 			Vec2 current = it.next();
