@@ -127,10 +127,14 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		Keys.update();
 		
 		if (Keys.isDown(Keys.INVENTORY) && invOpen == false) {
-			add(inv);
-			this.revalidate();
+			//add(inv);
+			//this.revalidate();
 			invOpen = true;
+			Keys.keySet(Keys.INVENTORY, false);
+		} else if (Keys.isDown(Keys.INVENTORY) && invOpen == true) {
+			invOpen = false;
 		}
+		
 
 		
 	}
@@ -180,13 +184,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		//g.setColor(new Color(255, 255, 255));
 		
 		if(invOpen) {
-			inv.draw();
+			inv.draw(g);
 		}
-//		if (Keys.isDown(Keys.INVENTORY) && invOpen == true) {
-//			remove(inv);
-//			invOpen = false;
-//		}
-	}
+		
+	}  
 	
 	// copy buffer to screen
 	private void drawToScreen() {

@@ -2,6 +2,7 @@ package engine;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -10,7 +11,7 @@ import javax.swing.JPanel;
 
 import player.PlayerAttributes;
 
-public class Inventory extends JPanel {
+public class Inventory {
 
 	BufferedImage background;
 	PlayerAttributes attributes;
@@ -26,11 +27,10 @@ public class Inventory extends JPanel {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		this.setSize(new Dimension(background.getWidth(), background.getHeight()));
 	}
 
-	public void draw() {
-		Graphics g = getGraphics();
+	public void draw(Graphics2D g) {
+		//Graphics g = getGraphics();
 		g.drawImage(background, 0, 0, background.getWidth(), background.getHeight(), null);
 		
 		System.out.println("drawing Inventory");
