@@ -125,6 +125,12 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		gm.update(elapsed);
 		
 		Keys.update();
+		
+		if (Keys.isDown(Keys.INVENTORY) && invOpen == false) {
+			add(inv);
+			this.revalidate();
+			invOpen = true;
+		}
 
 		
 	}
@@ -172,14 +178,14 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		g.fill(new Rectangle(0, HEIGHT, WIDTH, HEIGHT2 - HEIGHT));
 		gm.draw(g);
 		//g.setColor(new Color(255, 255, 255));
-		if (Keys.isDown(Keys.INVENTORY)) {
-			add(inv);
-			inv.draw();
-			invOpen = true;
-		}
+		
 		if(invOpen) {
 			inv.draw();
 		}
+//		if (Keys.isDown(Keys.INVENTORY) && invOpen == true) {
+//			remove(inv);
+//			invOpen = false;
+//		}
 	}
 	
 	// copy buffer to screen

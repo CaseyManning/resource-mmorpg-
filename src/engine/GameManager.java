@@ -88,7 +88,7 @@ public class GameManager {
 	public void update(int elapsed) {
 		map.update(elapsed);
 		if (Keys.isDown(Keys.WIZARD)) {
-			Object[] items = w.startWizard().toArray();
+			Object[] items = w.startWizard(player.attributes).toArray();
 			for (Object item : items) {
 				player.addItem((Item) item);
 			}

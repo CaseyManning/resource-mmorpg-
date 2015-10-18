@@ -1,5 +1,6 @@
 package engine;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -17,6 +18,7 @@ public class Inventory extends JPanel {
 	public Inventory(PlayerAttributes attributes) {
 		super();
 
+		
 		this.attributes = attributes;
 
 		try {
@@ -24,17 +26,18 @@ public class Inventory extends JPanel {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		this.setSize(new Dimension(background.getWidth(), background.getHeight()));
 	}
 
 	public void draw() {
 		Graphics g = getGraphics();
-		g.drawImage(background, 0, 0, WIDTH, HEIGHT, null);
+		g.drawImage(background, 0, 0, background.getWidth(), background.getHeight(), null);
 		
 		System.out.println("drawing Inventory");
 
 		for(int i = 0; i < attributes.getItems().size(); i++) {
 			Item item = attributes.getItems().get(i);
-			g.drawImage(item.getIcon(), i*20, 10, WIDTH, HEIGHT, null);
+			g.drawImage(item.getIcon(), i*20, 10, item.getIcon().getWidth(), item.getIcon().getHeight(), null);
 		}
 	}
 }

@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 
+import player.PlayerAttributes;
+
 public class Wizard {
 
 	ArrayList<String> responses = new ArrayList<String>();
@@ -15,7 +17,7 @@ public class Wizard {
 
 	}
 
-	public ArrayList<Item> startWizard() {
+	public ArrayList<Item> startWizard(PlayerAttributes attributes) {
 		ArrayList<Item> ret = new ArrayList<Item>();
 		Scanner scan = new Scanner(System.in);
 		int x = 7;
@@ -24,10 +26,12 @@ public class Wizard {
 			String str = scan.nextLine();
 			switch(str) {
 			case "gimme a sword": {
-				System.out.println("Take this sword");
-				try {
-					ret.add(new Item("Sword", ImageIO.read(this.getClass().getResourceAsStream("/assets/Sword-Knife.png"))));
-				} catch (IOException e) { e.printStackTrace(); }
+				if(attributes.getItems().contains(new Item("wood", null))) {
+					System.out.println("Take this sword");
+					try {
+						ret.add(new Item("Sword", ImageIO.read(this.getClass().getResourceAsStream("/assets/Sword-Knife.png"))));
+					} catch (IOException e) { e.printStackTrace(); }
+				}
 				break;
 			}
 			case "gimme a good sword": {
