@@ -81,7 +81,7 @@ public class Tilemap {
 		Iterator<Vec2> it = resources.keySet().iterator();
 		while(it.hasNext()) {
 			Vec2 current = it.next();
-			System.out.println(resources.get(current).shouldDelete());
+			//System.out.println(resources.get(current).shouldDelete());
 		}
 		resources.entrySet().removeIf(entry -> entry.getValue().shouldDelete());
 		

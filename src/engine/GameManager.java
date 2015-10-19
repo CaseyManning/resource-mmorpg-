@@ -16,6 +16,7 @@ public class GameManager {
 	Tilemap map;
 	Tile tree;
 	Tile grass;
+	Tile water;
 	Resource woodR;
 	Item woodI;
 	Wizard w;
@@ -33,6 +34,13 @@ public class GameManager {
 			e.printStackTrace();
 		}
 		tileChars.put('#', tree);
+		water = null;
+		try {
+			water = new Tile(ImageIO.read(this.getClass().getResourceAsStream("/assets/water.png")), false);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		tileChars.put('~', water);
 		grass = null;
 		try {
 			grass = new Tile(ImageIO.read(this.getClass().getResourceAsStream("/assets/grass.png")), true);
@@ -79,7 +87,7 @@ public class GameManager {
 	public void update(int elapsed) {
 		map.update(elapsed);
 		if (Keys.isDown(Keys.WIZARD)) {
-			Object[] items = w.startWizard().toArray();
+			Object[] items = w.startWizard(player.attributes).toArray();
 			for (Object item : items) {
 				player.addItem((Item) item);
 			}

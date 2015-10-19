@@ -125,6 +125,16 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		gm.update(elapsed);
 		
 		Keys.update();
+		
+		if (Keys.isDown(Keys.INVENTORY) && invOpen == false) {
+			//add(inv);
+			//this.revalidate();
+			invOpen = true;
+			Keys.keySet(Keys.INVENTORY, false);
+		} else if (Keys.isDown(Keys.INVENTORY) && invOpen == true) {
+			invOpen = false;
+		}
+		
 
 		
 	}
@@ -146,6 +156,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	//
 	//Bug: Resources on map appear on top of menu bar
 	//
+	//All resources disappear once you have used one up
 	
 	
 	
@@ -171,15 +182,12 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		g.fill(new Rectangle(0, HEIGHT, WIDTH, HEIGHT2 - HEIGHT));
 		gm.draw(g);
 		//g.setColor(new Color(255, 255, 255));
-		if (Keys.isDown(Keys.INVENTORY)) {
-			add(inv);
-			inv.draw();
-			invOpen = true;
-		}
+		
 		if(invOpen) {
-			inv.draw();
+			inv.draw(g);
 		}
-	}
+		
+	}  
 	
 	// copy buffer to screen
 	private void drawToScreen() {
