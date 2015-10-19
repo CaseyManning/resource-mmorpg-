@@ -19,7 +19,7 @@ public class Inventory {
 	public Inventory(PlayerAttributes attributes) {
 		super();
 
-		
+
 		this.attributes = attributes;
 
 		try {
@@ -31,13 +31,40 @@ public class Inventory {
 
 	public void draw(Graphics2D g) {
 		//Graphics g = getGraphics();
-		g.drawImage(background, 0, 0, background.getWidth(), background.getHeight(), null);
-		
-		System.out.println("drawing Inventory");
+		g.drawImage(background, 0, 10, background.getWidth(), background.getHeight(), null);
 
-		for(int i = 0; i < attributes.getItems().size(); i++) {
-			Item item = attributes.getItems().get(i);
-			g.drawImage(item.getIcon(), i*20, 10, item.getIcon().getWidth(), item.getIcon().getHeight(), null);
+		System.out.println("drawing Inventory");
+		if(attributes.getItems().size() > 5) {
+			for(int i = 0; i < 4; i++) {
+				Item item = attributes.getItems().get(i);
+
+				g.drawImage(item.getIcon(), i*10 + 3, 25, item.getIcon().getWidth(), item.getIcon().getHeight(), null);
+
+			}
+			if(attributes.getItems().size() < 9) {
+				for(int i = 5; i < attributes.getItems().size(); i++) {
+					Item item = attributes.getItems().get(i);
+
+					g.drawImage(item.getIcon(), i*10 + 3 - 50, 35, item.getIcon().getWidth(), item.getIcon().getHeight(), null);
+				}
+			} else {
+				for(int i = 5; i < 8; i++) {
+					Item item = attributes.getItems().get(i);
+
+					g.drawImage(item.getIcon(), i*10 + 3 - 50, 35, item.getIcon().getWidth(), item.getIcon().getHeight(), null);
+				}
+				for(int i = 8; i < attributes.getItems().size(); i++) {
+					Item item = attributes.getItems().get(i);
+
+					g.drawImage(item.getIcon(), i*10 + 3, 45, item.getIcon().getWidth(), item.getIcon().getHeight(), null);
+				}
+			}
+		} else {
+			for(int i = 0; i < attributes.getItems().size(); i++) {
+				Item item = attributes.getItems().get(i);
+
+				g.drawImage(item.getIcon(), i*10 + 3, 25, item.getIcon().getWidth(), item.getIcon().getHeight(), null);
+			}
 		}
 	}
 }

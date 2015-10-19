@@ -17,6 +17,7 @@ public class GameManager {
 	Tile tree;
 	Tile grass;
 	Tile water;
+	Tile wizard;
 	Resource woodR;
 	Item woodI;
 	Wizard w;
@@ -41,6 +42,13 @@ public class GameManager {
 			e.printStackTrace();
 		}
 		tileChars.put('~', water);
+		wizard = null;
+		try {
+			wizard = new Tile(ImageIO.read(this.getClass().getResourceAsStream("/assets/wizard2.png")), false);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		tileChars.put('W', wizard);
 		grass = null;
 		try {
 			grass = new Tile(ImageIO.read(this.getClass().getResourceAsStream("/assets/grass.png")), true);

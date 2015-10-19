@@ -45,6 +45,11 @@ public class Wizard {
 				System.out.println("Thank you.");
 				return ret;
 			}
+			case "nothing": {
+				scan.close();
+				System.out.println("Thank you.");
+				return ret;
+			}
 			}
 		}
 		scan.close();
