@@ -100,17 +100,17 @@ public class Player {
 	
 	public void update(boolean abovePassable, boolean belowPassable, boolean leftPassable, boolean rightPassable, Resource aboveResource, Resource belowResource, Resource leftResource, Resource rightResource) {
 		if(Keys.isDown(Keys.UP)) {
-			if(abovePassable && aboveResource == null) pos.y--; else attributes.removeHealth(2);
+			if(abovePassable && aboveResource == null) pos.y--; else attributes.removeHealth(1);
 			dir = Direction.UP;
 		//} else if(Keys.isDown(Keys.LEFT) && !(Keys.isDown(Keys.UP) || Keys.isDown(Keys.DOWN) || Keys.isDown(Keys.RIGHT))) {
 		} else if(Keys.isDown(Keys.LEFT)) {
-			if(leftPassable && leftResource == null) pos.x--; else attributes.removeHealth(2);
+			if(leftPassable && leftResource == null) pos.x--; else attributes.removeHealth(1);
 			dir = Direction.LEFT;
 		} else if(Keys.isDown(Keys.DOWN)) {
-			if(belowPassable && belowResource == null) pos.y++; else attributes.removeHealth(2);
+			if(belowPassable && belowResource == null) pos.y++; else attributes.removeHealth(1);
 			dir = Direction.DOWN;
 		} else if(Keys.isDown(Keys.RIGHT) && !(Keys.isDown(Keys.UP) || Keys.isDown(Keys.LEFT) || Keys.isDown(Keys.DOWN))) {
-			if(rightPassable && rightResource == null) pos.x++; else attributes.removeHealth(2);
+			if(rightPassable && rightResource == null) pos.x++; else attributes.removeHealth(1);
 			dir = Direction.RIGHT;
 		}
 

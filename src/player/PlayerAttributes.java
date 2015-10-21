@@ -71,4 +71,16 @@ public class PlayerAttributes {
 		items.add(item);
 		return item;
 	}
+	
+	public Item getItemWithName(String name) {
+		for(Item i : items) {
+			if(i.getName().equalsIgnoreCase(name)) {
+				return i;
+			}
+		}
+		return null;
+	}
+	public void removeItem(Item i) {
+		items.remove(items.indexOf(i));
+	}
 }

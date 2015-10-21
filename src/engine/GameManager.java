@@ -22,7 +22,7 @@ public class GameManager {
 	Item woodI;
 	Wizard w;
 	
-	public static final int TILESIZE = 8;
+	public static final int TILESIZE = 16;
 	
 	public GameManager() {
 		w = new Wizard();
@@ -30,14 +30,14 @@ public class GameManager {
 		HashMap<Character, Tile> tileChars = new HashMap<Character, Tile>();
 		tree = null;
 		try {
-			tree = new Tile(ImageIO.read(this.getClass().getResourceAsStream("/assets/tree.png")), false);
+			tree = new Tile(ImageIO.read(this.getClass().getResourceAsStream("/assets/tree2.png")), false);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		tileChars.put('#', tree);
 		water = null;
 		try {
-			water = new Tile(ImageIO.read(this.getClass().getResourceAsStream("/assets/water.png")), false);
+			water = new Tile(ImageIO.read(this.getClass().getResourceAsStream("/assets/water2.png")), false);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -51,7 +51,7 @@ public class GameManager {
 		tileChars.put('W', wizard);
 		grass = null;
 		try {
-			grass = new Tile(ImageIO.read(this.getClass().getResourceAsStream("/assets/grass.png")), true);
+			grass = new Tile(ImageIO.read(this.getClass().getResourceAsStream("/assets/grass2.png")), true);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

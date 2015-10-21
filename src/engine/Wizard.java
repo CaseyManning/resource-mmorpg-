@@ -26,12 +26,16 @@ public class Wizard {
 			String str = scan.nextLine();
 			switch(str) {
 			case "gimme a sword": {
-				if(attributes.getItems().contains(new Item("wood", null))) {
+
+				Item i = attributes.getItemWithName("wood");
+				if(i != null) {
+					attributes.removeItem(i);
 					System.out.println("Take this sword");
 					try {
 						ret.add(new Item("Sword", ImageIO.read(this.getClass().getResourceAsStream("/assets/Sword-Knife.png"))));
 					} catch (IOException e) { e.printStackTrace(); }
 				}
+
 				break;
 			}
 			case "gimme a good sword": {
