@@ -18,45 +18,26 @@ public class GameManager {
 	Tile grass;
 	Tile water;
 	Tile wizard;
+	Tile cliffTop;
 	Resource woodR;
 	Item woodI;
 	Wizard w;
+	
+	HashMap<Character, Tile> tileChars = new HashMap<Character, Tile>();
 	
 	public static final int TILESIZE = 16;
 	
 	public GameManager() {
 		w = new Wizard();
 		player = new Player(new Vec2(0, 0));
-		HashMap<Character, Tile> tileChars = new HashMap<Character, Tile>();
-		tree = null;
-		try {
-			tree = new Tile(ImageIO.read(this.getClass().getResourceAsStream("/assets/tree2.png")), false);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		tileChars.put('#', tree);
-		water = null;
-		try {
-			water = new Tile(ImageIO.read(this.getClass().getResourceAsStream("/assets/water2.png")), false);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		tileChars.put('~', water);
-		wizard = null;
-		try {
-			wizard = new Tile(ImageIO.read(this.getClass().getResourceAsStream("/assets/wizard2.png")), false);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		tileChars.put('W', wizard);
-		grass = null;
-		try {
-			grass = new Tile(ImageIO.read(this.getClass().getResourceAsStream("/assets/grass2.png")), true);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		tileChars.put('.', grass);
-
+		
+		
+		tree = addTile(tree, "/assets/tree2.png", false, '#');
+		water = addTile(water, "/assets/water2.png", false, '~');
+		grass = addTile(grass, "/assets/grass2.png", true, '.');
+		wizard = addTile(wizard, "/assets/wizard2.png", false, 'W');
+		cliffTop = addTile(cliffTop, "/assets/cliff-top.png", false, '|');
+		
 		woodI = null;
 		try {
 			woodI = new Item("Wood", ImageIO.read(this.getClass().getResourceAsStream("/assets/wood.png")));
@@ -133,6 +114,16 @@ public class GameManager {
 			map.resourceAt(current.x, current.y+1),
 			map.resourceAt(current.x-1, current.y),
 			map.resourceAt(current.x+1, current.y));
+	}
+	
+	public Tile addTile(Tile t, String img, boolean passable, char c) {
+		try {
+			t = new Tile(ImageIO.read(this.getClass().getResourceAsStream(img)), passable);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		tileChars.put(c, t);
+		return t;
 	}
 
 }

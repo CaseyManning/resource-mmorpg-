@@ -7,11 +7,15 @@ public class Tile {
 
 	protected BufferedImage img;
 	protected boolean passable;
+	public int tileWidth;
+	public int tileHeight;
 	
 	
 	public Tile(BufferedImage img, boolean passable) {
 		this.img = img;
 		this.passable = passable;
+		tileWidth = img.getWidth();
+		tileHeight = img.getHeight();
 	}
 	
 	public boolean isPassable() {
@@ -23,7 +27,7 @@ public class Tile {
 	}
 	
 	public void draw(Graphics2D g, int x, int y) {
-		g.drawImage(img, x*GameManager.TILESIZE-GameManager.TILESIZE/2, y*GameManager.TILESIZE-GameManager.TILESIZE/2, null);
+		g.drawImage(img, x*tileWidth-tileWidth/2, y*tileHeight-tileHeight/2, null);
 	}
 
 }
