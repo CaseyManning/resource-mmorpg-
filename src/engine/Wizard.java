@@ -27,7 +27,7 @@ public class Wizard {
 			switch(str) {
 			case "gimme a sword": {
 
-				Item i = attributes.getItemWithName("wood");
+				Item i = attributes.getItemWithName("Wood");
 				if(i != null) {
 					attributes.removeItem(i);
 					System.out.println("Take this sword");
