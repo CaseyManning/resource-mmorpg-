@@ -23,12 +23,12 @@ public class Keys {
 	public static void keySet(int key, boolean b) {
 		switch(key) {
 
-		case KeyEvent.VK_W: keyState[UP]     = b; break;
-		case KeyEvent.VK_A: keyState[LEFT]   = b; break;
-		case KeyEvent.VK_S: keyState[DOWN]   = b; break;
-		case KeyEvent.VK_D: keyState[RIGHT]  = b; break;
-		case KeyEvent.VK_Q: keyState[PICKUP] = b; break;
-		case KeyEvent.VK_E: keyState[WIZARD] = b; break;
+		case KeyEvent.VK_W: keyState[UP]        = b; break;
+		case KeyEvent.VK_A: keyState[LEFT]      = b; break;
+		case KeyEvent.VK_S: keyState[DOWN]      = b; break;
+		case KeyEvent.VK_D: keyState[RIGHT]     = b; break;
+		case KeyEvent.VK_Q: keyState[PICKUP]    = b; break;
+		case KeyEvent.VK_E: keyState[WIZARD]    = b; break;
 		case KeyEvent.VK_I: keyState[INVENTORY] = b; break;
 
 		default: break;
