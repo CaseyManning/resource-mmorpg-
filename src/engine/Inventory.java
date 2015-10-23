@@ -34,37 +34,17 @@ public class Inventory {
 		g.drawImage(background, 0, 10, background.getWidth(), background.getHeight(), null);
 
 		System.out.println("drawing Inventory");
-		if(attributes.getItems().size() > 5) {
-			for(int i = 0; i < 4; i++) {
-				Item item = attributes.getItems().get(i);
 
-				g.drawImage(item.getIcon(), i*10 + 3, 25, item.getIcon().getWidth(), item.getIcon().getHeight(), null);
+		int b = 0;
+		for(int i = 0; i < attributes.getItems().size(); i++) {
 
+			if(i%3 == 0) {
+				b++;
 			}
-			if(attributes.getItems().size() < 9) {
-				for(int i = 5; i < attributes.getItems().size(); i++) {
-					Item item = attributes.getItems().get(i);
 
-					g.drawImage(item.getIcon(), i*10 + 3 - 50, 35, item.getIcon().getWidth(), item.getIcon().getHeight(), null);
-				}
-			} else {
-				for(int i = 5; i < 8; i++) {
-					Item item = attributes.getItems().get(i);
-
-					g.drawImage(item.getIcon(), i*10 + 3 - 50, 35, item.getIcon().getWidth(), item.getIcon().getHeight(), null);
-				}
-				for(int i = 8; i < attributes.getItems().size(); i++) {
-					Item item = attributes.getItems().get(i);
-
-					g.drawImage(item.getIcon(), i*10 + 3, 45, item.getIcon().getWidth(), item.getIcon().getHeight(), null);
-				}
-			}
-		} else {
-			for(int i = 0; i < attributes.getItems().size(); i++) {
-				Item item = attributes.getItems().get(i);
-
-				g.drawImage(item.getIcon(), i*10 + 3, 25, item.getIcon().getWidth(), item.getIcon().getHeight(), null);
-			}
+			Item item = attributes.getItems().get(i);
+			g.drawImage(item.getIcon(), i*10 + 3, 25 + b*10 - 10, item.getIcon().getWidth(), item.getIcon().getHeight(), null);
 		}
 	}
 }
+
