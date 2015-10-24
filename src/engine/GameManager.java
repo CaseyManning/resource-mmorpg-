@@ -1,5 +1,6 @@
 package engine;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -54,6 +55,8 @@ public class GameManager {
 		
 		map = new Tilemap(tileChars, this.getClass().getResourceAsStream("testMap.txt"), Charset.forName("UTF8"), new HashMap<Vec2, Resource>());
 		
+		int hashCode = 0;
+		
 		Random r=new Random();
 		for(int i=0; i<5; i++) {
 			Vec2 pos = new Vec2(r.nextInt(map.getSize().x), r.nextInt(map.getSize().y));
@@ -61,6 +64,7 @@ public class GameManager {
 				pos = new Vec2(r.nextInt(map.getSize().x), r.nextInt(map.getSize().y));
 			}
 			map.addResource(pos, woodR);
+			hashCode++;
 		}
 		
 	}
@@ -69,6 +73,9 @@ public class GameManager {
 		map.draw(g, player.getPos(), tree);
 		// System.out.println("Relative Rectangle Drawn");
 		// g.drawRect(GamePanel.WIDTH/2-player.getPos().x*TILESIZE-TILESIZE/2, GamePanel.HEIGHT/2-player.getPos().y*TILESIZE-TILESIZE/2, TILESIZE, TILESIZE);
+
+		g.setColor(Color.white);
+		g.fillRect(0, GamePanel.HEIGHT, GamePanel.WIDTH, GamePanel.HEIGHT2-GamePanel.HEIGHT);
 		
 		player.draw(g);
 	}
