@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map.Entry;
 
 public class Tilemap {
 
@@ -78,17 +79,24 @@ public class Tilemap {
 	}
 	
 	public void update(int elapsed) {
+		// resources.entrySet().removeIf(entry -> entry.getValue().shouldDelete());
+		
 		Iterator<Vec2> it = resources.keySet().iterator();
 		while(it.hasNext()) {
 			Vec2 current = it.next();
-			//System.out.println(resources.get(current).shouldDelete());
-		}
-		resources.entrySet().removeIf(entry -> entry.getValue().shouldDelete());
-		
-		/*Iterator<Vec2> */it = resources.keySet().iterator();
-		while(it.hasNext()) {
-			Vec2 current = it.next();
 			resources.get(current).update(elapsed);
+		}
+		
+		Iterator<Entry<Vec2, Resource> > it2 = resources.entrySet().iterator();
+		while(it2.hasNext()) {
+			Entry<Vec2, Resource> current = it2.next();
+			it2.hashCode();
+			if (resources.get(current.getKey()).shouldDelete()) {
+				if(it2.hasNext()) {
+					it2.remove();
+					System.out.println(current.getValue().toString());
+				}
+			}
 		}
 		
 //		for(Iterator<Map.Entry<Vec2, Resource>> it = resources.entrySet().iterator(); it.hasNext(); ) {

@@ -32,7 +32,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	// game loop stuff
 	private Thread thread;
 	private boolean running;
-	private final int FPS = 16;
+	private final int FPS = 8;
 	private final int TARGET_TIME = 1000 / FPS;
 	
 	// drawing stuff
