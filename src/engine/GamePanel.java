@@ -43,6 +43,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	Inventory inv;
 	boolean invOpen = false;
 	
+	Wizard w;
+	
 	// game state manager
 	private GameManager gm;
 	
@@ -113,17 +115,18 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	// initializes fields
 	private void init() {
 		running = true;
+		w = new Wizard();
 		image = new BufferedImage(WIDTH, HEIGHT2, 1);
 		g = (Graphics2D) image.getGraphics();
-		gm = new GameManager();
+		gm = new GameManager(w);
 		inv = new Inventory(gm.player.attributes);
+		add(w);
 		
 	}
 	
 	// updates game
 	private void update(int elapsed) {
 		gm.update(elapsed);
-		
 		Keys.update();
 		
 		if (Keys.isDown(Keys.INVENTORY) && invOpen == false) {
@@ -143,44 +146,12 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	//
-	//Bug: Resources on map appear on top of menu bar
-	//
-	//All resources disappear once you have used one up
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	// draws game
 	private void draw() {
 		g.setStroke(new BasicStroke(0));
 		g.fill(new Rectangle(0, HEIGHT, WIDTH, HEIGHT2 - HEIGHT));
 		gm.draw(g);
+		w.draw();
 		//g.setColor(new Color(255, 255, 255));
 		
 		if(invOpen) {

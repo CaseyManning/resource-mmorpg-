@@ -27,10 +27,9 @@ public class GameManager {
 	
 	public static final int TILESIZE = 16;
 	
-	public GameManager() {
-		w = new Wizard();
+	public GameManager(Wizard w) {
 		player = new Player(new Vec2(0, 0));
-		
+		this.w = w;
 		
 		tree = addTile(tree, "/assets/tree2.png", false, '#');
 		water = addTile(water, "/assets/water2.png", false, '~');
@@ -51,6 +50,7 @@ public class GameManager {
 			e.printStackTrace();
 		}
 		
+		w = new Wizard();
 		
 		map = new Tilemap(tileChars, this.getClass().getResourceAsStream("testMap.txt"), Charset.forName("UTF8"), new HashMap<Vec2, Resource>());
 		
@@ -75,12 +75,12 @@ public class GameManager {
 	
 	public void update(int elapsed) {
 		map.update(elapsed);
-		if (Keys.isDown(Keys.WIZARD)) {
-			Object[] items = w.startWizard(player.attributes).toArray();
-			for (Object item : items) {
-				player.addItem((Item) item);
-			}
-		}
+////		if (Keys.isDown(Keys.WIZARD)) {
+////			Object[] items = w.startWizard(player.attributes).toArray();
+////			for (Object item : items) {
+////				player.addItem((Item) item);
+////			}
+//		}
 		
 		Vec2 current = player.getPos();
 		
