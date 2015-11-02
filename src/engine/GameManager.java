@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -82,12 +83,13 @@ public class GameManager {
 	
 	public void update(int elapsed) {
 		map.update(elapsed);
-////		if (Keys.isDown(Keys.WIZARD)) {
-////			Object[] items = w.startWizard(player.attributes).toArray();
-////			for (Object item : items) {
-////				player.addItem((Item) item);
-////			}
-//		}
+		if (Keys.isDown(Keys.WIZARD)) {
+			ArrayList<String> atboots = player.attributes.asList();
+			w.startWizard(atboots);
+//			for (Object item : items) {
+//				player.addItem((Item) item);
+//			}
+		}
 		
 		Vec2 current = player.getPos();
 		
