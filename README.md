@@ -34,3 +34,4 @@ TODO
 * Work on Game State Machine
 * Synchronize with Game State Machine
 * * (sort into categories)
+* Simplify Code
