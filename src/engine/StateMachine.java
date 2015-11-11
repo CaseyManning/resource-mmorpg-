@@ -88,4 +88,21 @@ public class StateMachine {
 		
 		stack.pop();
 	}
+	
+	public void normalState() {
+		
+	}
+	
+	public void inventory() {
+		
+	}
+	
+	public void talking() {
+		
+	}
+	public void menu() {
+		
+	}
+	
+	
 }
