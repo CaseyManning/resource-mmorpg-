@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 
 import player.Player;
 
@@ -41,7 +42,7 @@ public class GameManager {
 		
 		woodI = null;
 		try {
-			woodI = new Item("Wood", ImageIO.read(this.getClass().getResourceAsStream("/assets/wood.png")));
+			woodI = new Item("wood", ImageIO.read(this.getClass().getResourceAsStream("/assets/wood.png")));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -75,6 +76,7 @@ public class GameManager {
 		player.draw(g);
 	}
 	
+<<<<<<< HEAD
 	public void update(int elapsed) {
 		map.update(elapsed);
 		if (Keys.isDown(Keys.WIZARD)) {
@@ -84,6 +86,12 @@ public class GameManager {
 //				player.addItem((Item) item);
 //			}
 		}
+=======
+
+	public void update(int elapsed, Graphics2D g) {
+		map.update(elapsed, g);
+
+>>>>>>> origin/master
 		
 		Vec2 current = player.getPos();
 		
