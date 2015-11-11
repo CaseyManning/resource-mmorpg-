@@ -76,23 +76,10 @@ public class GameManager {
 		player.draw(g);
 	}
 	
-<<<<<<< HEAD
+
 	public void update(int elapsed) {
 		map.update(elapsed);
-		if (Keys.isDown(Keys.WIZARD)) {
-			ArrayList<String> atboots = player.attributes.asList();
-			w.startWizard(atboots);
-//			for (Object item : items) {
-//				player.addItem((Item) item);
-//			}
-		}
-=======
 
-	public void update(int elapsed, Graphics2D g) {
-		map.update(elapsed, g);
-
->>>>>>> origin/master
-		
 		Vec2 current = player.getPos();
 		
 		boolean abovePassable = false;
