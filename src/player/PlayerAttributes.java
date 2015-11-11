@@ -3,6 +3,7 @@ package player;
 import java.awt.Point;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import javax.imageio.ImageIO;
 
@@ -15,19 +16,19 @@ public class PlayerAttributes {
 	int attack;
 	ArrayList<Item> items;
 	public Point location;
-	
-	
-	
+
+
+
 	public PlayerAttributes() {
 		health = 100;
 		items = new ArrayList<Item>();
 		attack = 1;
 		try {
-			items.add(new Item("Test",ImageIO.read(this.getClass().getResourceAsStream("/assets/wood.png"))));
+			items.add(new Item("wood",ImageIO.read(this.getClass().getResourceAsStream("/assets/wood.png"))));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	public int getHealth() {
@@ -38,12 +39,12 @@ public class PlayerAttributes {
 		this.health = health;
 		return health;
 	}
-	
+
 	public int addHealth(int health) {
 		this.health += health;
 		return this.health;
 	}
-	
+
 	public int removeHealth(int health) {
 		this.health -= health;
 		return this.health;
@@ -66,12 +67,12 @@ public class PlayerAttributes {
 		this.items = items;
 		return items;
 	}
-	
+
 	public Item addItem(Item item) {
 		items.add(item);
 		return item;
 	}
-	
+
 	public Item getItemWithName(String name) {
 		for(Item i : items) {
 			if(i.getName().equalsIgnoreCase(name)) {
@@ -82,5 +83,37 @@ public class PlayerAttributes {
 	}
 	public void removeItem(Item i) {
 		items.remove(items.indexOf(i));
+	}
+	
+	public String toString() {
+		String s = "";
+		for(Item i : items) {
+			s = s + "|" + i.toString();
+		}
+		return s;
+	}
+	
+	public ArrayList<String> asList() {
+		ArrayList<String> ret = new ArrayList<String>();
+		for(Item i : items) {
+			ret.add(i.toString());
+		}
+		return ret;
+		
+	}
+	
+	public PlayerAttributes(String s) {
+		StringTokenizer st = new StringTokenizer(s, "|");
+
+		while(st.hasMoreTokens()) {
+			String nt = st.nextToken();
+			try {
+				Item i = new Item(nt, ImageIO.read(this.getClass().getResourceAsStream("/assets/" + nt + ".png")));
+				addItem(i);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		}
 	}
 }

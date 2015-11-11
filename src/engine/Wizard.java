@@ -23,6 +23,10 @@ public class Wizard extends JPanel implements KeyListener {
 	JTextArea wizText = new JTextArea(5,5);
 	JTextField text = new JTextField(10);
 
+	public static void main(String[] args) {
+		Wizard w = new Wizard();
+	}
+	
 	public Wizard() {
 		setSize(400,400);
 		text.addKeyListener(this);
@@ -33,7 +37,15 @@ public class Wizard extends JPanel implements KeyListener {
 
 	}
 
-	public ArrayList<Item> startWizard(PlayerAttributes attributes) {
+	public ArrayList<Item> startWizard(ArrayList<String> playerattributes) {
+		PlayerAttributes attributes = new PlayerAttributes();
+		for(String s : playerattributes) {
+			try {
+				Item i = new Item(s, ImageIO.read(this.getClass().getResourceAsStream("/assets/" + s + ".png")));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		ArrayList<Item> ret = new ArrayList<Item>();
 		String str = text.getText();
 		switch(str) {
