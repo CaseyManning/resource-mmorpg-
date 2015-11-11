@@ -47,25 +47,19 @@ public class GameManager {
 		}
 		woodR = null;
 		try {
-			woodR = new Resource("Wood", ImageIO.read(this.getClass().getResourceAsStream("/assets/wood.png")), 500, 5, woodI);
+			woodR = new Resource("Wood", ImageIO.read(this.getClass().getResourceAsStream("/assets/wood.png")), 500, 5, woodI, new Vec2(0, 0));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
 		w = new Wizard();
 		
-		map = new Tilemap(tileChars, this.getClass().getResourceAsStream("testMap.txt"), Charset.forName("UTF8"), new HashMap<Vec2, Resource>());
+		map = new Tilemap(tileChars, this.getClass().getResourceAsStream("testMap.txt"), Charset.forName("UTF8"), new ArrayList<Resource>());
 		
-		int hashCode = 0;
-		
-		Random r=new Random();
 		for(int i=0; i<5; i++) {
-			Vec2 pos = new Vec2(r.nextInt(map.getSize().x), r.nextInt(map.getSize().y));
-			while (!(map.resourceAt(pos) == null && map.getTile(pos) == grass)) {
-				pos = new Vec2(r.nextInt(map.getSize().x), r.nextInt(map.getSize().y));
-			}
-			map.addResource(pos, woodR);
-			hashCode++;
+			Resource r = woodR;
+			r.setPos(map.randomEmptyPosition());
+			map.addResource(r);
 		}
 		
 	}
@@ -81,16 +75,6 @@ public class GameManager {
 		player.draw(g);
 	}
 	
-<<<<<<< HEAD
-	public void update(int elapsed, Graphics2D g) {
-		map.update(elapsed, g);
-////		if (Keys.isDown(Keys.WIZARD)) {
-////			Object[] items = w.startWizard(player.attributes).toArray();
-////			for (Object item : items) {
-////				player.addItem((Item) item);
-////			}
-//		}
-=======
 	public void update(int elapsed) {
 		map.update(elapsed);
 		if (Keys.isDown(Keys.WIZARD)) {
@@ -100,7 +84,6 @@ public class GameManager {
 //				player.addItem((Item) item);
 //			}
 		}
->>>>>>> origin/master
 		
 		Vec2 current = player.getPos();
 		

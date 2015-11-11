@@ -4,22 +4,24 @@ import java.awt.Graphics2D;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Random;
 import java.util.Map.Entry;
 
 public class Tilemap {
 
 	protected Tile[][] data;
-	protected HashMap<Vec2, Item> items;
-	protected HashMap<Vec2, Resource> resources;
+	protected ArrayList<Item> items;
+	protected ArrayList<Resource> resources;
 	
-	public Tilemap(Tile[][] data, HashMap<Vec2, Resource> resources) {
+	public Tilemap(Tile[][] data, ArrayList<Resource> resources) {
 		this.resources = resources;
 		this.data = data;
 	}
 	
-	public Tilemap(HashMap<Character, Tile> key, InputStream is, Charset encoding, HashMap<Vec2, Resource> resources) {
+	public Tilemap(HashMap<Character, Tile> key, InputStream is, Charset encoding, ArrayList<Resource> resources) {
 		this.resources = resources;
 		try {
 			byte[] encoded = new byte[4096];
@@ -38,20 +40,11 @@ public class Tilemap {
 		}
 	}
 	
-	public Item itemAt(Vec2 v) {
-		if (items.containsKey(v)) {
-			return items.get(v);
-		}
-		return null;
-	}
-	
-	public Item itemAt(int x, int y) {
-		return itemAt(new Vec2(x, y));
-	}
-	
 	public Resource resourceAt(Vec2 v) {
-		if (resources.containsKey(v)) {
-			return resources.get(v);
+		for(int i=0; i<resources.size(); i++) {
+			if(resources.get(i).getPos() == v) {
+				return resources.get(i);
+			}
 		}
 		return null;
 	}
@@ -68,8 +61,8 @@ public class Tilemap {
 		return getTile(v.x, v.y);
 	}
 	
-	public Resource addResource(Vec2 pos, Resource r) {
-		resources.put(pos, r);
+	public Resource addResource(Resource r) {
+		resources.add(r);
 		
 		return r;
 	}
@@ -78,45 +71,28 @@ public class Tilemap {
 		return new Vec2(this.data[0].length, this.data.length);
 	}
 	
-	public void update(int elapsed, Graphics2D g) {
+	public Vec2 randomEmptyPosition() {
+		Random r=new Random();
+		Vec2 pos = new Vec2(r.nextInt(this.getSize().x), r.nextInt(this.getSize().y));
+		while (!(this.resourceAt(pos) == null && this.getTile(pos).isPassable())) {
+			pos = new Vec2(r.nextInt(this.getSize().x), r.nextInt(this.getSize().y));
+		}
+		return pos;
+	}
+	
+	public void addResourceAtRandomPosition(Resource toBePlaced) {
+		this.addResource(toBePlaced);
+	}
+	
+	public void update(int elapsed) {
 		// resources.entrySet().removeIf(entry -> entry.getValue().shouldDelete());
 		
-		Iterator<Vec2> it = resources.keySet().iterator();
-		while(it.hasNext()) {
-			Vec2 current = it.next();
-			resources.get(current).update(elapsed);
+		for(int i=0; i<resources.size(); i++) {
+			resources.get(i).update(elapsed);
+			if(resources.get(i).shouldDelete()) {
+				resources.remove(i);
+			}
 		}
-		
-//		Iterator<Entry<Vec2, Resource> > it2 = resources.entrySet().iterator();
-//		do {
-//			Entry<Vec2, Resource> current = it2.next();
-//			it2.hashCode();
-//			if (resources.get(current.getKey()).shouldDelete()) {
-//				if(it2.hasNext()) {
-//					it2.remove();
-//					System.out.println(current.getValue().toString());
-//				}
-//			}
-//		} while(it2.hasNext());
-		
-//		for(Iterator<Map.Entry<Vec2, Resource>> it = resources.entrySet().iterator(); it.hasNext(); ) {
-//			Map.Entry<Vec2, Resource> entry = it.next();
-//			if(resources.get(entry.getKey()).shouldDelete()) {
-//				it.remove();
-//			} else {
-//				resources.get(entry.getKey()).update(elapsed);
-//			}
-//		}
-//		
-//		Iterator<Vec2> it = resources.keySet().iterator();
-//		while(it.hasNext()) {
-//			Vec2 current = it.next();
-//			if(resources.get(current).shouldDelete()) {
-//				it.remove();
-//			} else {
-//				resources.get(current).update(elapsed);
-//			}
-//		}
 	}
 	
 	public void draw(Graphics2D g, Vec2 playerPos, Tile outOfBoundsTile) {
@@ -139,22 +115,11 @@ public class Tilemap {
 		}
 		
 		
-		try {
-			int count = 0;
-			for(java.util.Map.Entry<Vec2, Resource> entry : resources.entrySet()) {
-				if(count == 0){
-					Vec2 pos = entry.getKey();
-					Resource r = entry.getValue();
-					
-					if(r != null && r.shouldDelete()) {
-						resources.remove(pos);
-					}
-					
-					g.drawImage(r.getImg(), (pos.x-playerPos.x+(GamePanel.WIDTH / GameManager.TILESIZE)/2)*GameManager.TILESIZE-GameManager.TILESIZE/2+1, (pos.y-playerPos.y+(GamePanel.HEIGHT / GameManager.TILESIZE)/2)*GameManager.TILESIZE-GameManager.TILESIZE/2+1, null);
-					count++;
-				}
-			}
-		} catch (Exception e) {}
+		for(int i=0; i<resources.size(); i++) {
+			Resource r = resources.get(i);
+			
+			g.drawImage(r.getImg(), (r.getPos().x-playerPos.x+(GamePanel.WIDTH / GameManager.TILESIZE)/2)*GameManager.TILESIZE-GameManager.TILESIZE/2+1, (r.getPos().y-playerPos.y+(GamePanel.HEIGHT / GameManager.TILESIZE)/2)*GameManager.TILESIZE-GameManager.TILESIZE/2+1, null);
+		}
 	}
 
 }

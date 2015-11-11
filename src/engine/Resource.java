@@ -10,14 +10,16 @@ public class Resource {
 	int waitTimeLeft;
 	int amount;
 	Item item;
+	Vec2 pos;
 	
-	public Resource(String name, BufferedImage img, int waitTime, int amount, Item item) {
+	public Resource(String name, BufferedImage img, int waitTime, int amount, Item item, Vec2 pos) {
 		this.name = name;
 		this.img = img;
 		this.waitTime = waitTime;
 		this.amount = amount;
 		this.item = item;
 		this.waitTimeLeft = 0;
+		this.pos = pos;
 	}
 	
 	public Item grabItem() {
@@ -49,6 +51,14 @@ public class Resource {
 	
 	public String getName() {
 		return name;
+	}
+	
+	public Vec2 getPos() {
+		return pos;
+	}
+	
+	public Vec2 setPos(Vec2 pos) {
+		return (this.pos = pos);
 	}
 
 }
