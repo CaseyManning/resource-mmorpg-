@@ -80,8 +80,8 @@ public class GameManager {
 		player.draw(g);
 	}
 	
-	public void update(int elapsed) {
-		map.update(elapsed);
+	public void update(int elapsed, Graphics2D g) {
+		map.update(elapsed, g);
 ////		if (Keys.isDown(Keys.WIZARD)) {
 ////			Object[] items = w.startWizard(player.attributes).toArray();
 ////			for (Object item : items) {

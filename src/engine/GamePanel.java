@@ -69,7 +69,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		new Thread(new Runnable() {
 			public void run() {
 				for(int i = 0; i < 1; i++) {
-					gm.update(TARGET_TIME);
+					gm.update(TARGET_TIME, g);
 					gm.draw(g);
 				}
 			}
@@ -126,7 +126,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	
 	// updates game
 	private void update(int elapsed) {
-		gm.update(elapsed);
+		gm.update(elapsed, g);
 		Keys.update();
 		
 		if (Keys.isDown(Keys.INVENTORY) && invOpen == false) {
