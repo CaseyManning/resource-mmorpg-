@@ -9,7 +9,7 @@ public class Game {
 		
 		window.add(new GamePanel());
 		
-		window.setResizable(false);
+		//window.setResizable(false);
 		window.pack();
 
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

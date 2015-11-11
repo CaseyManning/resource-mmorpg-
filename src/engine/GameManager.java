@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 
 import player.Player;
 
@@ -83,13 +84,8 @@ public class GameManager {
 	
 	public void update(int elapsed) {
 		map.update(elapsed);
-		if (Keys.isDown(Keys.WIZARD)) {
-			ArrayList<String> atboots = player.attributes.asList();
-			w.startWizard(atboots);
-//			for (Object item : items) {
-//				player.addItem((Item) item);
-//			}
-		}
+		
+		
 		
 		Vec2 current = player.getPos();
 		
