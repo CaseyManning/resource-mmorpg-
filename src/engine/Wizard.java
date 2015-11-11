@@ -90,7 +90,7 @@ public class Wizard extends JPanel implements KeyListener {
 		}
 		
 		}
-		return null;
+		return ret;
 	}
 
 	public void draw(Graphics g) {

@@ -42,7 +42,7 @@ public class GameManager {
 		
 		woodI = null;
 		try {
-			woodI = new Item("Wood", ImageIO.read(this.getClass().getResourceAsStream("/assets/wood.png")));
+			woodI = new Item("wood", ImageIO.read(this.getClass().getResourceAsStream("/assets/wood.png")));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
