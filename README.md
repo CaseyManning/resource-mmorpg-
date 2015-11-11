@@ -31,6 +31,6 @@ Within the map, there are different areas with different resources.
 TODO
 ----
 
-* More Resource Stuff
-* Inventory
-* Wizard
+* Work on Game State Machine
+* Synchronize with Game State Machine
+* * (sort into categories)
