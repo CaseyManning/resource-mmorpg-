@@ -78,7 +78,7 @@ public class Tilemap {
 		return new Vec2(this.data[0].length, this.data.length);
 	}
 	
-	public void update(int elapsed) {
+	public void update(int elapsed, Graphics2D g) {
 		// resources.entrySet().removeIf(entry -> entry.getValue().shouldDelete());
 		
 		Iterator<Vec2> it = resources.keySet().iterator();
@@ -87,17 +87,17 @@ public class Tilemap {
 			resources.get(current).update(elapsed);
 		}
 		
-		Iterator<Entry<Vec2, Resource> > it2 = resources.entrySet().iterator();
-		while(it2.hasNext()) {
-			Entry<Vec2, Resource> current = it2.next();
-			it2.hashCode();
-			if (resources.get(current.getKey()).shouldDelete()) {
-				if(it2.hasNext()) {
-					it2.remove();
-					System.out.println(current.getValue().toString());
-				}
-			}
-		}
+//		Iterator<Entry<Vec2, Resource> > it2 = resources.entrySet().iterator();
+//		do {
+//			Entry<Vec2, Resource> current = it2.next();
+//			it2.hashCode();
+//			if (resources.get(current.getKey()).shouldDelete()) {
+//				if(it2.hasNext()) {
+//					it2.remove();
+//					System.out.println(current.getValue().toString());
+//				}
+//			}
+//		} while(it2.hasNext());
 		
 //		for(Iterator<Map.Entry<Vec2, Resource>> it = resources.entrySet().iterator(); it.hasNext(); ) {
 //			Map.Entry<Vec2, Resource> entry = it.next();
@@ -138,12 +138,23 @@ public class Tilemap {
 			}
 		}
 		
-		for(java.util.Map.Entry<Vec2, Resource> entry : resources.entrySet()) {
-			Vec2 pos = entry.getKey();
-			Resource r = entry.getValue();
-			
-			g.drawImage(r.getImg(), (pos.x-playerPos.x+(GamePanel.WIDTH / GameManager.TILESIZE)/2)*GameManager.TILESIZE-GameManager.TILESIZE/2+1, (pos.y-playerPos.y+(GamePanel.HEIGHT / GameManager.TILESIZE)/2)*GameManager.TILESIZE-GameManager.TILESIZE/2+1, null);
-		}
+		
+		try {
+			int count = 0;
+			for(java.util.Map.Entry<Vec2, Resource> entry : resources.entrySet()) {
+				if(count == 0){
+					Vec2 pos = entry.getKey();
+					Resource r = entry.getValue();
+					
+					if(r != null && r.shouldDelete()) {
+						resources.remove(pos);
+					}
+					
+					g.drawImage(r.getImg(), (pos.x-playerPos.x+(GamePanel.WIDTH / GameManager.TILESIZE)/2)*GameManager.TILESIZE-GameManager.TILESIZE/2+1, (pos.y-playerPos.y+(GamePanel.HEIGHT / GameManager.TILESIZE)/2)*GameManager.TILESIZE-GameManager.TILESIZE/2+1, null);
+					count++;
+				}
+			}
+		} catch (Exception e) {}
 	}
 
 }

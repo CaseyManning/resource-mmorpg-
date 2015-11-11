@@ -82,10 +82,10 @@ public class GameManager {
 		player.draw(g);
 	}
 	
-	public void update(int elapsed) {
-		map.update(elapsed);
-		
-		
+
+	public void update(int elapsed, Graphics2D g) {
+		map.update(elapsed, g);
+
 		
 		Vec2 current = player.getPos();
 		
