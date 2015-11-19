@@ -12,6 +12,7 @@ import engine.Item;
 import engine.Keys;
 import engine.Resource;
 import engine.Vec2;
+import engine.WizardSprite;
 
 public class Player {
 
@@ -22,12 +23,14 @@ public class Player {
 	BufferedImage downImg;
 	BufferedImage leftImg;
 	BufferedImage rightImg;
+	WizardSprite wizard;
 	
 	Direction dir;
 
-	public Player(Vec2 pos) {
+	public Player(Vec2 pos, WizardSprite wizard) {
 		attributes = new PlayerAttributes();
 		this.pos = pos;
+		this.wizard = wizard;
 		try {
 			img = ImageIO.read(this.getClass().getResourceAsStream("/assets/player.png"));
 		} catch (IOException e) {  }
@@ -52,7 +55,9 @@ public class Player {
 	}
 
 	public Vec2 setPos(Vec2 p) {
+		System.out.println("Mooving player");
 		pos = p;
+		wizard.playerMove(p);
 		return pos;
 	}
 
