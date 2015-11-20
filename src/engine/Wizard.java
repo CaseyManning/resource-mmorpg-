@@ -89,7 +89,7 @@ public class Wizard extends JPanel implements KeyListener {
 
 	public void draw(Graphics g) {
 		//System.out.println("I am the wizard, and I am being told to draw myself");
-		g.drawString("I is Weezard", 29, 52);
+		g.drawString("I is Wizard", 29, 52);
 		g.drawImage(swordimg, 20, 20, 10, 10, this);
 		this.revalidate();
 		this.paintChildren(g);

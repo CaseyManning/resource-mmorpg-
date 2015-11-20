@@ -44,12 +44,12 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 
 	//Don't delete my inventory work
 	Inventory inv;
-	boolean invOpen = false;
+	static boolean invOpen = false;
 
 	Wizard w;
 
 	// game state manager
-	private GameManager gm;
+	private GameAssistant gm;
 
 	// constructor
 	public GamePanel() {
@@ -122,7 +122,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		w = new Wizard();
 		image = new BufferedImage(WIDTH, HEIGHT2, 1);
 		g = (Graphics2D) image.getGraphics();
-		gm = new GameManager(w);
+		gm = new GameAssistant(w);
 		inv = new Inventory(gm.player.attributes);
 		add(w);
 		w.setLocation(100,  1020);
@@ -135,10 +135,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		Keys.update();
 
 		if (Keys.isDown(Keys.INVENTORY) && invOpen == false) {
-			//add(inv);
-			//this.revalidate();
-			invOpen = true;
-			Keys.keySet(Keys.INVENTORY, false);
+			//invOpen = true;
+			//Keys.keySet(Keys.INVENTORY, false);
 		} else if (Keys.isDown(Keys.INVENTORY) && invOpen == true) {
 			invOpen = false;
 		}

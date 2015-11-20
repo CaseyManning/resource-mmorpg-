@@ -3,6 +3,8 @@ package engine;
 import java.util.Arrays;
 
 public class StateMachine {
+	
+	private Frame game;
 
 	private String[] stackArray;
 	private int stackSize;
@@ -87,21 +89,29 @@ public class StateMachine {
 		stack.push("17");
 		
 		stack.pop();
+		
 	}
 	
 	public void normalState() {
 		
+		
 	}
 	
 	public void inventory() {
+		GamePanel.invOpen = true;
+		Keys.keySet(Keys.INVENTORY, false);
+	}
+	
+	public void talkingWithWizard() {
+		//Wizard.startWizard(null, 2,2)
+	}
+	
+	public void menu() {
 		
 	}
 	
-	public void talking() {
-		
-	}
-	public void menu() {
-		
+	public void game() {
+		game = new Frame();
 	}
 	
 	

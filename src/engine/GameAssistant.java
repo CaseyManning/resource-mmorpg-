@@ -11,31 +11,32 @@ import javax.imageio.ImageIO;
 
 import player.Player;
 
-public class GameManager {
+public class GameAssistant {
 
 	Player player;
 	Tilemap map;
 	Tile tree;
 	Tile grass;
 	Tile water;
-	Tile wizard;
 	Tile cliffTop;
 	Resource woodR;
 	Item woodI;
 	Wizard w;
+	WizardSprite wizard;
 	
 	HashMap<Character, Tile> tileChars = new HashMap<Character, Tile>();
 	
 	public static final int TILESIZE = 16;
 	
-	public GameManager(Wizard w) {
+	public GameAssistant(Wizard w) {
+		wizard = new WizardSprite(700, 50);
 		player = new Player(0, 0);
 		this.w = w;
+		
 		
 		tree = addTile(tree, "/assets/tree2.png", false, '#');
 		water = addTile(water, "/assets/water2.png", false, '~');
 		grass = addTile(grass, "/assets/grass2.png", true, '.');
-		wizard = addTile(wizard, "/assets/wizard2.png", false, 'W');
 		cliffTop = addTile(cliffTop, "/assets/cliff-top.png", false, '|');
 		
 		woodI = null;
@@ -70,7 +71,7 @@ public class GameManager {
 
 		g.setColor(Color.white);
 		g.fillRect(0, GamePanel.HEIGHT, GamePanel.WIDTH, GamePanel.HEIGHT2-GamePanel.HEIGHT);
-		
+		g.drawImage(wizard.image, wizard.getX(), wizard.getY(), null);
 		player.draw(g);
 	}
 	

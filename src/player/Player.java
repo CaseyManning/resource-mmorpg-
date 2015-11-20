@@ -8,10 +8,12 @@ import java.awt.event.KeyListener;
 import engine.GamePanel;
 import engine.Item;
 import engine.Sprite;
+import engine.WizardSprite;
 
 public class Player extends Sprite implements KeyListener {
 
 	public PlayerAttributes attributes;
+
 	private int dx;
 	private int dy;
 	
@@ -39,11 +41,6 @@ public class Player extends Sprite implements KeyListener {
 		if (y < 1) {
 			y = 1;
 		}
-	}
-	
-	public void setPos(int x, int y) {
-		this.x = x;
-		this.y = y;
 	}
 
 	public void draw(Graphics2D g) {

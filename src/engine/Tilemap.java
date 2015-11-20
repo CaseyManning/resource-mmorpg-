@@ -96,10 +96,10 @@ public class Tilemap {
 	public void draw(Graphics2D g, int playerX, int playerY, Tile outOfBoundsTile) {
 		// (GamePanel.HEIGHT / GameManager.TILESIZE)/2;
 		
-		for(int row=0; row < (GamePanel.HEIGHT / GameManager.TILESIZE)+1; row++) {
-			for(int col=0; col < (GamePanel.WIDTH / GameManager.TILESIZE)+1; col++) {
+		for(int row=0; row < (GamePanel.HEIGHT / GameAssistant.TILESIZE)+1; row++) {
+			for(int col=0; col < (GamePanel.WIDTH / GameAssistant.TILESIZE)+1; col++) {
 				try {
-					data[playerY+row-(GamePanel.HEIGHT / GameManager.TILESIZE)/2][playerX+col-(GamePanel.WIDTH / GameManager.TILESIZE)/2].draw(g, col, row);
+					data[playerY+row-(GamePanel.HEIGHT / GameAssistant.TILESIZE)/2][playerX+col-(GamePanel.WIDTH / GameAssistant.TILESIZE)/2].draw(g, col, row);
 				} catch(Exception e) {
 					outOfBoundsTile.draw(g, col, row);
 				}
@@ -116,7 +116,7 @@ public class Tilemap {
 		for(int i=0; i<resources.size(); i++) {
 			Resource r = resources.get(i);
 			
-			g.drawImage(r.getImg(), (r.getPos().x-playerX+(GamePanel.WIDTH / GameManager.TILESIZE)/2)*GameManager.TILESIZE-GameManager.TILESIZE/2+1, (r.getPos().y-playerY+(GamePanel.HEIGHT / GameManager.TILESIZE)/2)*GameManager.TILESIZE-GameManager.TILESIZE/2+1, null);
+			g.drawImage(r.getImg(), (r.getPos().x-playerX+(GamePanel.WIDTH / GameAssistant.TILESIZE)/2)*GameAssistant.TILESIZE-GameAssistant.TILESIZE/2+1, (r.getPos().y-playerY+(GamePanel.HEIGHT / GameAssistant.TILESIZE)/2)*GameAssistant.TILESIZE-GameAssistant.TILESIZE/2+1, null);
 		}
 	}
 

@@ -34,6 +34,7 @@ public class Sprite {
 		image = ii.getImage();
 	}
 	
+	
 	public Image getImage() {
 		return image;
 	}
