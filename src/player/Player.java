@@ -2,89 +2,52 @@ package player;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import engine.GamePanel;
 import engine.Item;
-import engine.Keys;
-import engine.Resource;
-import engine.Vec2;
+import engine.Sprite;
 
-public class Player {
+public class Player extends Sprite implements KeyListener {
 
-	Vec2 pos;
 	public PlayerAttributes attributes;
-	BufferedImage img;
-	BufferedImage upImg;
-	BufferedImage downImg;
-	BufferedImage leftImg;
-	BufferedImage rightImg;
+	private int dx;
+	private int dy;
 	
-	Direction dir;
+	public boolean grabbing;
 
-	public Player(Vec2 pos) {
+	public Player(int x, int y) {
+		super(x, y);
 		attributes = new PlayerAttributes();
-		this.pos = pos;
-		try {
-			img = ImageIO.read(this.getClass().getResourceAsStream("/assets/player.png"));
-		} catch (IOException e) {  }
-		try {
-			upImg = ImageIO.read(this.getClass().getResourceAsStream("/assets/playerup.png"));
-		} catch (IOException e) {  }
-		try {
-			downImg = ImageIO.read(this.getClass().getResourceAsStream("/assets/playerdown.png"));
-		} catch (IOException e) {  }
-		try {
-			leftImg = ImageIO.read(this.getClass().getResourceAsStream("/assets/playerleft.png"));
-		} catch (IOException e) {  }
-		try {
-			rightImg = ImageIO.read(this.getClass().getResourceAsStream("/assets/playerright.png"));
-		} catch (IOException e) {  }
+		grabbing = false;
+		initPlayer();
+	}
+	
+	private void initPlayer() {
+		loadImage("src/assets/player.png");
+		getImageDimensions();
+	}
+	
+	public void move() {
+		x += dx;
+		y += dy;
 		
-		dir = Direction.NULL;
+		if (x < 1) {
+			x = 1;
+		}
+		if (y < 1) {
+			y = 1;
+		}
 	}
-
-	public Vec2 getPos() {
-		return pos;
-	}
-
-	public Vec2 setPos(Vec2 p) {
-		pos = p;
-		return pos;
-	}
-
-	public Player(Vec2 startPos, BufferedImage img) {
-		pos = startPos;
-		this.img = img;
+	
+	public void setPos(int x, int y) {
+		this.x = x;
+		this.y = y;
 	}
 
 	public void draw(Graphics2D g) {
-
-		g.drawImage(img, GamePanel.WIDTH/2-img.getWidth()/2, GamePanel.HEIGHT/2-img.getHeight()/2, null);
-
-		// System.out.println("PLAYER DRAWN");
-		// g.drawImage(img, GamePanel.WIDTH/2-img.getWidth()/2, GamePanel.HEIGHT/2-img.getHeight()/2, null);
-		BufferedImage drawImg = img;
-		switch (dir) {
-		case UP:
-			drawImg = upImg;
-			break;
-		case DOWN:
-			drawImg = downImg;
-			break;
-		case LEFT:
-			drawImg = leftImg;
-			break;
-		case RIGHT:
-			drawImg = rightImg;
-			break;
-		default:
-			break;
-		}
-		g.drawImage(drawImg, GamePanel.WIDTH/2-img.getWidth()/2, GamePanel.HEIGHT/2-img.getHeight()/2, null);
+		g.drawImage(getImage(), getX(), getY(), null);
 
 		
 		g.setColor(Color.WHITE);
@@ -98,66 +61,62 @@ public class Player {
 		}
 	}
 	
-	public void update(boolean abovePassable, boolean belowPassable, boolean leftPassable, boolean rightPassable, Resource aboveResource, Resource belowResource, Resource leftResource, Resource rightResource) {
-		if(Keys.isDown(Keys.UP)) {
-			if(abovePassable && aboveResource == null) pos.y--; else attributes.removeHealth(1);
-			dir = Direction.UP;
-		//} else if(Keys.isDown(Keys.LEFT) && !(Keys.isDown(Keys.UP) || Keys.isDown(Keys.DOWN) || Keys.isDown(Keys.RIGHT))) {
-		} else if(Keys.isDown(Keys.LEFT)) {
-			if(leftPassable && leftResource == null) pos.x--; else attributes.removeHealth(1);
-			dir = Direction.LEFT;
-		} else if(Keys.isDown(Keys.DOWN)) {
-			if(belowPassable && belowResource == null) pos.y++; else attributes.removeHealth(1);
-			dir = Direction.DOWN;
-		} else if(Keys.isDown(Keys.RIGHT) && !(Keys.isDown(Keys.UP) || Keys.isDown(Keys.LEFT) || Keys.isDown(Keys.DOWN))) {
-			if(rightPassable && rightResource == null) pos.x++; else attributes.removeHealth(1);
-			dir = Direction.RIGHT;
+	@Override
+	public void keyPressed(KeyEvent e) {
+		System.out.println("[[KEYPRESS]]");
+		int key = e.getKeyCode();
+		if(key == KeyEvent.VK_W) {
+			loadImage("src/assets/playerup.png");
+			getImageDimensions();
+			dy = -1;
 		}
-
-//		if(Keys.sword == true) {
-//			try {
-//				attributes.addItem(new Item("Sword", ImageIO.read(this.getClass().getResourceAsStream("/assets/player.png"))));
-//			} catch (IOException e) { e.printStackTrace();	}
-//			System.out.println("I have a sword! :D");
-//		}
-
-		if (Keys.isDown(Keys.PICKUP)) {
-			try {
-				switch(dir) {
-				case UP:
-					Item item = aboveResource.grabItem();
-					if (item != null)
-						attributes.addItem(item);
-					break;
-				case DOWN:
-					item = belowResource.grabItem();
-					if (item != null)
-						attributes.addItem(item);
-					break;
-				case LEFT:
-					item = leftResource.grabItem();
-					if (item != null)
-						attributes.addItem(item);
-					break;
-				case RIGHT:
-					item = rightResource.grabItem();
-					if (item != null)
-						attributes.addItem(item);
-					break;
-				default:
-					break;
-				}
-			} catch (Exception e) {  }
+		if(key == KeyEvent.VK_A) {
+			loadImage("src/assets/playerleft.png");
+			getImageDimensions();
+			dx = -1;
 		}
-
+		if(key == KeyEvent.VK_S) {
+			loadImage("src/assets/playerdown.png");
+			getImageDimensions();
+			dy = 1;
+		}
+		if(key == KeyEvent.VK_D) {
+			loadImage("src/assets/playerright.png");
+			getImageDimensions();
+			dx = 1;
+		}
+		if(key == KeyEvent.VK_Q) {
+			grabbing = true;
+		}
 	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		System.out.println("[[KEYRELEASE]]");
+		int key = e.getKeyCode();
+		if(key == KeyEvent.VK_UP) {
+			dy = 0;
+		}
+		if(key == KeyEvent.VK_LEFT) {
+			dx = 0;
+		}
+		if(key == KeyEvent.VK_DOWN) {
+			dy = 0;
+		}
+		if(key == KeyEvent.VK_RIGHT) {
+			dx = 0;
+		}
+		if(key == KeyEvent.VK_Q) {
+			grabbing = false;
+		}
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {  }
+	
 	
 	public void addItem(Item i) {
 		this.attributes.addItem(i);
-	}
-	
-	public Direction getDir() {
-		return dir;
 	}
 }
 

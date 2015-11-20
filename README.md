@@ -35,3 +35,4 @@ TODO
 * Synchronize with Game State Machine
 * * (sort into categories)
 * Simplify Code
+* Revamp with sprites on layers

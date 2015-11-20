@@ -6,9 +6,7 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Random;
-import java.util.Map.Entry;
 
 public class Tilemap {
 
@@ -95,13 +93,13 @@ public class Tilemap {
 		}
 	}
 	
-	public void draw(Graphics2D g, Vec2 playerPos, Tile outOfBoundsTile) {
+	public void draw(Graphics2D g, int playerX, int playerY, Tile outOfBoundsTile) {
 		// (GamePanel.HEIGHT / GameManager.TILESIZE)/2;
 		
 		for(int row=0; row < (GamePanel.HEIGHT / GameManager.TILESIZE)+1; row++) {
 			for(int col=0; col < (GamePanel.WIDTH / GameManager.TILESIZE)+1; col++) {
 				try {
-					data[playerPos.y+row-(GamePanel.HEIGHT / GameManager.TILESIZE)/2][playerPos.x+col-(GamePanel.WIDTH / GameManager.TILESIZE)/2].draw(g, col, row);
+					data[playerY+row-(GamePanel.HEIGHT / GameManager.TILESIZE)/2][playerX+col-(GamePanel.WIDTH / GameManager.TILESIZE)/2].draw(g, col, row);
 				} catch(Exception e) {
 					outOfBoundsTile.draw(g, col, row);
 				}
@@ -118,7 +116,7 @@ public class Tilemap {
 		for(int i=0; i<resources.size(); i++) {
 			Resource r = resources.get(i);
 			
-			g.drawImage(r.getImg(), (r.getPos().x-playerPos.x+(GamePanel.WIDTH / GameManager.TILESIZE)/2)*GameManager.TILESIZE-GameManager.TILESIZE/2+1, (r.getPos().y-playerPos.y+(GamePanel.HEIGHT / GameManager.TILESIZE)/2)*GameManager.TILESIZE-GameManager.TILESIZE/2+1, null);
+			g.drawImage(r.getImg(), (r.getPos().x-playerX+(GamePanel.WIDTH / GameManager.TILESIZE)/2)*GameManager.TILESIZE-GameManager.TILESIZE/2+1, (r.getPos().y-playerY+(GamePanel.HEIGHT / GameManager.TILESIZE)/2)*GameManager.TILESIZE-GameManager.TILESIZE/2+1, null);
 		}
 	}
 
