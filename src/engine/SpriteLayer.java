@@ -1,15 +1,22 @@
 package engine;
 
+import java.awt.Graphics2D;
+
+import player.Player;
+
 public class SpriteLayer {
 
-	Sprite[][] data;
+	WizardSprite wizard;
+	Player player;
 	
-	public SpriteLayer(Sprite[][] data) {
-		this.data = data;
+	public SpriteLayer(WizardSprite wizard, Player player) {
+		this.wizard = wizard;
+		this.player = player;
 	}
 	
-	public Sprite spriteAt(int x, int y) {
-		return data[y][x];
+	public void draw(Graphics2D g) {
+		g.drawImage(wizard.getImage(), wizard.getX(), wizard.getY(), null);
+		g.drawImage(player.getImage(), player.getX(), player.getY(), null);
 	}
 
 }
