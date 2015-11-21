@@ -18,3 +18,4 @@ TODO
 * * (sort into categories)
 * Simplify Code
 * Revamp with sprites on layers
+* **REDO EVERYTHING EXCEPT FOR WIZARD LOGIC AND TILEMAP**
