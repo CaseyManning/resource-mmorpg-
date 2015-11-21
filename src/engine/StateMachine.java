@@ -14,7 +14,6 @@ public class StateMachine {
 	public StateMachine(int size) {
 
 		stackSize = size;
-
 		stackArray = new String[size];
 		Arrays.fill(stackArray, "-1");
 	}
@@ -68,11 +67,12 @@ public class StateMachine {
 		
 		for(int n = 0; n < 61; n++)System.out.print("-");
 		
+		System.out.println();
 		for(int n = 0; n < stackSize; n++) {
 			
-			if(stackArray[n].equals("-1")) System.out.print("|	");
+			if(stackArray[n].equals("-1")) System.out.print("|     ");
 			
-			else System.out.println(String.format("| %2s " + " ", stackArray[n]));
+			else System.out.print(String.format("| %2s " + " ", stackArray[n]));
 		}
 		
 		System.out.println("|");
@@ -99,7 +99,6 @@ public class StateMachine {
 	
 	public void inventory() {
 		GamePanel.invOpen = true;
-		Keys.keySet(Keys.INVENTORY, false);
 	}
 	
 	public void talkingWithWizard() {
@@ -113,6 +112,11 @@ public class StateMachine {
 	public void game() {
 		game = new Frame();
 	}
+	
+	public void updateState() {
+		//gp.update(gp.g);
+	}
+	
 	
 	
 }

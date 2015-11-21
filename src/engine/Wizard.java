@@ -45,7 +45,13 @@ public class Wizard extends JPanel implements KeyListener {
 		}
 		for(String s : playerattributes) {
 			try {
-				Item i = new Item(s, ImageIO.read(this.getClass().getResourceAsStream("/assets/" + s + ".png")));
+				Item i
+				= new Item
+				(s, 
+						ImageIO.read(
+								this.getClass()
+						.getResourceAsStream
+						("/assets/" + s + ".png")));
 				attributes.addItem(i);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -134,15 +140,9 @@ class HappyListener implements KeyListener{
 	}
 
 	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void keyPressed(KeyEvent e) {  }
 
 	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void keyReleased(KeyEvent e) {  }
 	
 }

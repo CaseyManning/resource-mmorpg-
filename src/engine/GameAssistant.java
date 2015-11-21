@@ -2,6 +2,8 @@ package engine;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -11,7 +13,7 @@ import javax.imageio.ImageIO;
 
 import player.Player;
 
-public class GameAssistant {
+public class GameAssistant implements KeyListener {
 
 	Player player;
 	Tilemap map;
@@ -30,7 +32,7 @@ public class GameAssistant {
 	
 	public GameAssistant(Wizard w) {
 		wizard = new WizardSprite(700, 50);
-		player = new Player(new Vec2(0, 0), wizard);
+		player = new Player(0, 0);
 		this.w = w;
 		
 		
@@ -65,7 +67,7 @@ public class GameAssistant {
 	}
 	
 	public void draw(Graphics2D g) {
-		map.draw(g, player.getPos(), tree);
+		map.draw(g, player.getX(), player.getY(), tree);
 		// System.out.println("Relative Rectangle Drawn");
 		// g.drawRect(GamePanel.WIDTH/2-player.getPos().x*TILESIZE-TILESIZE/2, GamePanel.HEIGHT/2-player.getPos().y*TILESIZE-TILESIZE/2, TILESIZE, TILESIZE);
 
@@ -78,39 +80,6 @@ public class GameAssistant {
 
 	public void update(int elapsed) {
 		map.update(elapsed);
-
-		Vec2 current = player.getPos();
-		
-		boolean abovePassable = false;
-		try {
-			abovePassable = map.getTile(current.x, current.y-1).isPassable();
-		} catch(Exception e) {  }
-		
-		boolean belowPassable = false;
-		try {
-			belowPassable = map.getTile(current.x, current.y+1).isPassable();
-		} catch(Exception e) {  }
-
-		boolean leftPassable = false;
-		try {
-			leftPassable = map.getTile(current.x-1, current.y).isPassable();
-		} catch(Exception e) {  }
-
-		boolean rightPassable = false;
-		try {
-			rightPassable = map.getTile(current.x+1, current.y).isPassable();
-		} catch(Exception e) {  }
-		
-		
-		player.update(
-			abovePassable,
-			belowPassable,
-			leftPassable,
-			rightPassable,
-			map.resourceAt(current.x, current.y-1),
-			map.resourceAt(current.x, current.y+1),
-			map.resourceAt(current.x-1, current.y),
-			map.resourceAt(current.x+1, current.y));
 	}
 	
 	public Tile addTile(Tile t, String img, boolean passable, char c) {
@@ -121,6 +90,19 @@ public class GameAssistant {
 		}
 		tileChars.put(c, t);
 		return t;
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {  }
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		player.keyPressed(e);
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		player.keyReleased(e);
 	}
 
 }

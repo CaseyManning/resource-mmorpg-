@@ -4,36 +4,32 @@ public class WizardSprite extends Sprite {
 
 	Vec2 PPP; //PreviousPlayerPosition
 	
-	int x;
-	int y;
+	
 	
 	public WizardSprite(int x, int y) {
 		super(x, y);
-		this.x = x;
-		this.y = y;
-		loadImage("/assets/wizard2");
+		
+	wizard();
 	}
 	
-	public void playerMove(Vec2 p) {
-		System.out.println("Moving Player at" + x + ", " + y);
-		int changeInX = Math.abs(p.x - PPP.x);
-		int changeInY = Math.abs(p.y - PPP.y);
+	//public void playerMove(Vec2 p) {
+		//System.out.println("Moving Player at" + x + ", " + y);
+		//int changeInX = Math.abs(p.x - PPP.x);
+		//int changeInY = Math.abs(p.y - PPP.y);
 		
-		x = x - changeInX;
+		//x = x - changeInX;
 		
-		y = y - changeInY;
+		//y = y - changeInY;
+	//}
+	
+	public void wizard(){
+		
+		loadImage("/assets/wizard2.png");
+		getImageDimensions();
+		
+		
+		
 	}
 	
-	@Override
-	public int getX() {
-		return x;
-		
-	}
-	
-	@Override
-	public int getY() {
-		return y;
-		
-	}
 
 }
