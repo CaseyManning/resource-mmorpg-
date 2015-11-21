@@ -2,6 +2,8 @@ package engine;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -11,7 +13,7 @@ import javax.imageio.ImageIO;
 
 import player.Player;
 
-public class GameAssistant {
+public class GameAssistant implements KeyListener {
 
 	Player player;
 	Tilemap map;
@@ -88,6 +90,19 @@ public class GameAssistant {
 		}
 		tileChars.put(c, t);
 		return t;
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {  }
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		player.keyPressed(e);
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		player.keyReleased(e);
 	}
 
 }

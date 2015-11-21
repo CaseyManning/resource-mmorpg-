@@ -72,7 +72,7 @@ public class Tilemap {
 	public Vec2 randomEmptyPosition() {
 		Random r=new Random();
 		Vec2 pos = new Vec2(r.nextInt(this.getSize().x), r.nextInt(this.getSize().y));
-		while (!(this.resourceAt(pos) == null && this.getTile(pos).isPassable())) {
+		while (this.resourceAt(pos) != null && this.getTile(pos).isPassable()) {
 			pos = new Vec2(r.nextInt(this.getSize().x), r.nextInt(this.getSize().y));
 		}
 		return pos;

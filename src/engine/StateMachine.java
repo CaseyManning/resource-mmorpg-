@@ -99,7 +99,6 @@ public class StateMachine {
 	
 	public void inventory() {
 		GamePanel.invOpen = true;
-		Keys.keySet(Keys.INVENTORY, false);
 	}
 	
 	public void talkingWithWizard() {

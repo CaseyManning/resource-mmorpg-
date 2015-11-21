@@ -16,6 +16,7 @@ public class Player extends Sprite implements KeyListener {
 
 	private int dx;
 	private int dy;
+	private int speed;
 	
 	public boolean grabbing;
 
@@ -23,6 +24,9 @@ public class Player extends Sprite implements KeyListener {
 		super(x, y);
 		attributes = new PlayerAttributes();
 		grabbing = false;
+		speed = 4;
+		dx = 0;
+		dy = 0;
 		initPlayer();
 	}
 	
@@ -34,16 +38,10 @@ public class Player extends Sprite implements KeyListener {
 	public void move() {
 		x += dx;
 		y += dy;
-		
-		if (x < 1) {
-			x = 1;
-		}
-		if (y < 1) {
-			y = 1;
-		}
 	}
 
 	public void draw(Graphics2D g) {
+		move();
 		g.drawImage(getImage(), getX(), getY(), null);
 
 		
@@ -65,22 +63,22 @@ public class Player extends Sprite implements KeyListener {
 		if(key == KeyEvent.VK_W) {
 			loadImage("src/assets/playerup.png");
 			getImageDimensions();
-			dy = -1;
+			dy = -speed;
 		}
 		if(key == KeyEvent.VK_A) {
 			loadImage("src/assets/playerleft.png");
 			getImageDimensions();
-			dx = -1;
+			dx = -speed;
 		}
 		if(key == KeyEvent.VK_S) {
 			loadImage("src/assets/playerdown.png");
 			getImageDimensions();
-			dy = 1;
+			dy = speed;
 		}
 		if(key == KeyEvent.VK_D) {
 			loadImage("src/assets/playerright.png");
 			getImageDimensions();
-			dx = 1;
+			dx = speed;
 		}
 		if(key == KeyEvent.VK_Q) {
 			grabbing = true;
@@ -91,16 +89,16 @@ public class Player extends Sprite implements KeyListener {
 	public void keyReleased(KeyEvent e) {
 		System.out.println("[[KEYRELEASE]]");
 		int key = e.getKeyCode();
-		if(key == KeyEvent.VK_UP) {
+		if(key == KeyEvent.VK_W) {
 			dy = 0;
 		}
-		if(key == KeyEvent.VK_LEFT) {
+		if(key == KeyEvent.VK_A) {
 			dx = 0;
 		}
-		if(key == KeyEvent.VK_DOWN) {
+		if(key == KeyEvent.VK_S) {
 			dy = 0;
 		}
-		if(key == KeyEvent.VK_RIGHT) {
+		if(key == KeyEvent.VK_D) {
 			dx = 0;
 		}
 		if(key == KeyEvent.VK_Q) {

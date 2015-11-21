@@ -19,8 +19,6 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import engine.Keys;
-
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel implements Runnable, KeyListener, MouseListener {
 
@@ -132,22 +130,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 	// updates game
 	private void update(int elapsed) {
 		gm.update(elapsed);
-		Keys.update();
-
-		if (Keys.isDown(Keys.INVENTORY) && invOpen == false) {
-			//invOpen = true;
-			//Keys.keySet(Keys.INVENTORY, false);
-		} else if (Keys.isDown(Keys.INVENTORY) && invOpen == true) {
-			invOpen = false;
-		}
-
-		if (Keys.isDown(Keys.WIZARD)) {
-
-			//w = new Wizard();
-			//add(w);
-
-		}
-
 	}
 
 
@@ -180,11 +162,12 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 
 	}
 
-	public void keyPressed(KeyEvent key) {
-		Keys.keySet(key.getKeyCode(), true);
+	public void keyPressed(KeyEvent e) {
+		gm.keyPressed(e);
 	}
-	public void keyReleased(KeyEvent key) {
-		Keys.keySet(key.getKeyCode(), false);
+	
+	public void keyReleased(KeyEvent e) {
+		gm.keyReleased(e);
 	}
 
 	@Override
@@ -227,29 +210,3 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 	}
 
 }
-
-//class AttributesPanel extends JPanel {
-//	
-//	GamePanel gp;
-//	JLabel l;
-//	public AttributesPanel(GamePanel gp) {
-//		super();
-//		this.gp = gp;
-//		setSize(100, 100);
-//		l = new JLabel("Health = " + Integer.toString(gp.pa.getHealth()));
-//		l.setFont(l.getFont().deriveFont(18.0f));
-//		l.setOpaque(true);
-//	}
-//
-//
-//	public void draw(Graphics g) {
-//		l.setOpaque(false);
-//		l.setText("Health = " + Integer.toString(gp.pa.getHealth()));
-//		//add(l);
-//		g.setFont(l.getFont().deriveFont(8.0f));
-//		g.drawString("Health = " + Integer.toString(gp.pa.getHealth()), 50, 10);
-//		for(Item t : gp.pa.getItems()) {
-//			t.draw(gp.g, gp.pa.getItems().indexOf(t)*20 + 10, 5);
-//		}
-//	}
-//}
