@@ -58,7 +58,6 @@ public class Player extends Sprite implements KeyListener {
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
-		System.out.println("[[KEYPRESS]]");
 		int key = e.getKeyCode();
 		if(key == KeyEvent.VK_W) {
 			loadImage("src/assets/playerup.png");
@@ -87,7 +86,6 @@ public class Player extends Sprite implements KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		System.out.println("[[KEYRELEASE]]");
 		int key = e.getKeyCode();
 		if(key == KeyEvent.VK_W) {
 			dy = 0;
