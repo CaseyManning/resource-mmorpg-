@@ -25,7 +25,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -75,7 +74,5 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
 		// TODO Auto-generated method stub
 		
 	}
-
-
 
 }
