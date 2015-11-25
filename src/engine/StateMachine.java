@@ -2,9 +2,10 @@ package engine;
 
 import java.util.Arrays;
 
+import javax.swing.JFrame;
+
 public class StateMachine {
 	
-	private Frame game;
 
 	private String[] stackArray;
 	private int stackSize;
@@ -90,6 +91,12 @@ public class StateMachine {
 		
 		stack.pop();
 		
+		JFrame frame = new JFrame();
+		GamePanel game = new GamePanel();
+		TileMap tileMap = new TileMap();
+		frame.add(game);
+		game.add(tileMap);
+		
 	}
 	
 	public void normalState() {
@@ -98,10 +105,10 @@ public class StateMachine {
 	}
 	
 	public void inventory() {
-		GamePanel.invOpen = true;
+		
 	}
 	
-	public void talkingWithWizard() {
+	public void wizardState() {
 		//Wizard.startWizard(null, 2,2)
 	}
 	
@@ -109,9 +116,6 @@ public class StateMachine {
 		
 	}
 	
-	public void game() {
-		game = new Frame();
-	}
 	
 	public void updateState() {
 		//gp.update(gp.g);
