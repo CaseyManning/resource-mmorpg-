@@ -24,6 +24,10 @@ public class StateMachine {
 		game = new GamePanel();
 		tilemap = prepTilemap();
 		frame.add(game);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);
+		frame.setSize(600, 440);
+		frame.setVisible(true);
 	}
 
 	public void push(String input) {
