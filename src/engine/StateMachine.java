@@ -11,12 +11,18 @@ public class StateMachine {
 	private int stackSize;
 	
 	private int topOfStack = -1;
+	private Tilemap tilemap;
+	private GamePanel game;
+	private JFrame frame;
 
 	public StateMachine(int size) {
-
 		stackSize = size;
 		stackArray = new String[size];
 		Arrays.fill(stackArray, "-1");
+		frame = new JFrame();
+		game = new GamePanel();
+		tilemap = new Tilemap(null, "testMap.txt", 8);
+		frame.add(game);
 	}
 
 	public void push(String input) {
@@ -90,13 +96,6 @@ public class StateMachine {
 		stack.push("17");
 		
 		stack.pop();
-		
-		JFrame frame = new JFrame();
-		GamePanel game = new GamePanel();
-		Tilemap tileMap = new Tilemap(null, "testMap.txt", 8);
-		frame.add(game);
-		game.add(tileMap);
-		
 	}
 	
 	public Tilemap prepTileMap() {
