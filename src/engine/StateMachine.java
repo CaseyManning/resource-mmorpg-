@@ -1,6 +1,7 @@
 package engine;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 import javax.swing.JFrame;
 
@@ -92,10 +93,17 @@ public class StateMachine {
 		
 		JFrame frame = new JFrame();
 		GamePanel game = new GamePanel();
-		Tilemap tileMap = new Tilemap();
+		Tilemap tileMap = new Tilemap(null, "testMap.txt", 8);
 		frame.add(game);
 		game.add(tileMap);
 		
+	}
+	
+	public Tilemap prepTileMap() {
+		HashMap<Character, Tile> tiles = new HashMap<Character, Tile>();
+		tiles.put('#', new Tile(null, false));
+		Tilemap tileMap = new Tilemap(null, "testMap.txt", 8);
+		return tileMap;
 	}
 	
 	public void normalState() {
