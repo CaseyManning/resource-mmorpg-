@@ -4,24 +4,27 @@ import java.awt.Graphics2D;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
 public class Tilemap {
 
 	protected Tile[][] data;
+	protected int tilesize;
 	
-	public Tilemap(Tile[][] data) {
+	public Tilemap(Tile[][] data, int tilesize) {
 		this.data = data;
+		this.tilesize = tilesize;
 	}
 	
-	public Tilemap(HashMap<Character, Tile> key, InputStream is, Charset encoding) {
+	public Tilemap(HashMap<Character, Tile> key, String filepath, int tilesize) {
+		this.tilesize = tilesize;
 		try {
+			InputStream is = this.getClass().getResourceAsStream(filepath);
 			byte[] encoded = new byte[4096];
 			is.read(encoded);
 			is.close();
-			String contents = new String(encoded, encoding);
+			String contents = new String(encoded, Charset.availableCharsets().get("UTF-8"));
 			String[] lines = contents.split("\\n");
 			data = new Tile[lines.length][lines[0].length()];
 			for(int line = 0; line < lines.length; line++) {
@@ -62,10 +65,10 @@ public class Tilemap {
 	public void draw(Graphics2D g, int playerX, int playerY, Tile outOfBoundsTile) {
 		// (GamePanel.HEIGHT / GameManager.TILESIZE)/2;
 		
-		for(int row=0; row < (GamePanel.HEIGHT / GameAssistant.TILESIZE)+1; row++) {
-			for(int col=0; col < (GamePanel.WIDTH / GameAssistant.TILESIZE)+1; col++) {
+		for(int row=0; row < (GamePanel.HEIGHT / tilesize)+1; row++) {
+			for(int col=0; col < (GamePanel.WIDTH / tilesize)+1; col++) {
 				try {
-					data[playerY+row-(GamePanel.HEIGHT / GameAssistant.TILESIZE)/2][playerX+col-(GamePanel.WIDTH / GameAssistant.TILESIZE)/2].draw(g, col, row);
+					data[playerY+row-(GamePanel.HEIGHT / tilesize)/2][playerX+col-(GamePanel.WIDTH / tilesize)/2].draw(g, col, row);
 				} catch(Exception e) {
 					outOfBoundsTile.draw(g, col, row);
 				}

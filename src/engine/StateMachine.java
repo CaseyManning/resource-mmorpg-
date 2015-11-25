@@ -6,6 +6,10 @@ import javax.swing.JFrame;
 
 public class StateMachine {
 	
+<<<<<<< HEAD
+=======
+	private JFrame game;
+>>>>>>> origin/Remade_Game
 
 	private String[] stackArray;
 	private int stackSize;
@@ -116,6 +120,12 @@ public class StateMachine {
 		
 	}
 	
+<<<<<<< HEAD
+=======
+	public void game() {
+		game = new JFrame();
+	}
+>>>>>>> origin/Remade_Game
 	
 	public void updateState() {
 		//gp.update(gp.g);
