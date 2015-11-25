@@ -2,9 +2,11 @@ package engine;
 
 import java.util.Arrays;
 
+import javax.swing.JFrame;
+
 public class StateMachine {
 	
-	private Frame game;
+	private JFrame game;
 
 	private String[] stackArray;
 	private int stackSize;
@@ -110,7 +112,7 @@ public class StateMachine {
 	}
 	
 	public void game() {
-		game = new Frame();
+		game = new JFrame();
 	}
 	
 	public void updateState() {
