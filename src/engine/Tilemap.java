@@ -68,9 +68,9 @@ public class Tilemap {
 		for(int row=0; row < (GamePanel.HEIGHT / tilesize)+1; row++) {
 			for(int col=0; col < (GamePanel.WIDTH / tilesize)+1; col++) {
 				try {
-					data[playerY+row-(GamePanel.HEIGHT / tilesize)/2][playerX+col-(GamePanel.WIDTH / tilesize)/2].draw(g, col, row);
+					data[playerY+row-(GamePanel.HEIGHT / tilesize)/2][playerX+col-(GamePanel.WIDTH / tilesize)/2].draw(g, col, row, tilesize);
 				} catch(Exception e) {
-					outOfBoundsTile.draw(g, col, row);
+					outOfBoundsTile.draw(g, col, row, tilesize);
 				}
 //				try {
 //					g.drawImage(data[row+playerPos.y-(GamePanel.HEIGHT / GameManager.TILESIZE)/2][col+playerPos.x-(GamePanel.WIDTH / GameManager.TILESIZE)/2].getImg(), row*GameManager.TILESIZE-GameManager.TILESIZE/2, col*GameManager.TILESIZE-GameManager.TILESIZE/2, null);

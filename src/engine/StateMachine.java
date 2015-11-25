@@ -5,11 +5,6 @@ import java.util.Arrays;
 import javax.swing.JFrame;
 
 public class StateMachine {
-	
-<<<<<<< HEAD
-=======
-	private JFrame game;
->>>>>>> origin/Remade_Game
 
 	private String[] stackArray;
 	private int stackSize;
