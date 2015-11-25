@@ -29,7 +29,11 @@ public class Tilemap {
 			data = new Tile[lines.length][lines[0].length()];
 			for(int line = 0; line < lines.length; line++) {
 				for(int ch = 0; ch < lines[0].length(); ch++) {
-					data[line][ch] = key.get(lines[line].charAt(ch));
+					data[line]
+							[ch] = 
+							key.get
+							(lines[line]
+									.charAt(ch));
 				}
 			}
 		} catch (IOException e) {

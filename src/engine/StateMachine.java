@@ -3,6 +3,7 @@ package engine;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class StateMachine {
@@ -21,7 +22,7 @@ public class StateMachine {
 		Arrays.fill(stackArray, "-1");
 		frame = new JFrame();
 		game = new GamePanel();
-		tilemap = new Tilemap(null, "testMap.txt", 8);
+		tilemap = prepTilemap();
 		frame.add(game);
 	}
 
@@ -98,9 +99,11 @@ public class StateMachine {
 		stack.pop();
 	}
 	
-	public Tilemap prepTileMap() {
+	public Tilemap prepTilemap() {
 		HashMap<Character, Tile> tiles = new HashMap<Character, Tile>();
-		tiles.put('#', new Tile(null, false));
+		tiles.put('#', new Tile(new ImageIcon("/assets/tree2.png"), false));
+		tiles.put('.', new Tile(new ImageIcon("/assets/grass2.png"), true));
+		tiles.put('~', new Tile(new ImageIcon("/assets/water2.png"), false));
 		Tilemap tileMap = new Tilemap(tiles, "testMap.txt", 8);
 		return tileMap;
 	}

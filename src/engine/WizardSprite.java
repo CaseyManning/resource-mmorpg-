@@ -28,7 +28,6 @@ public class WizardSprite extends Sprite {
 		getImageDimensions();
 		
 		
-		
 	}
 	
 
