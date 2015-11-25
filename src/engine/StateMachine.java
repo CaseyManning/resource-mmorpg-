@@ -101,7 +101,7 @@ public class StateMachine {
 	public Tilemap prepTileMap() {
 		HashMap<Character, Tile> tiles = new HashMap<Character, Tile>();
 		tiles.put('#', new Tile(null, false));
-		Tilemap tileMap = new Tilemap(null, "testMap.txt", 8);
+		Tilemap tileMap = new Tilemap(tiles, "testMap.txt", 8);
 		return tileMap;
 	}
 	
