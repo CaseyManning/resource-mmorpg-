@@ -97,7 +97,7 @@ public class StateMachine {
 		
 		JFrame frame = new JFrame();
 		GamePanel game = new GamePanel();
-		TileMap tileMap = new TileMap();
+		Tilemap tileMap = new Tilemap();
 		frame.add(game);
 		game.add(tileMap);
 		
@@ -120,17 +120,7 @@ public class StateMachine {
 		
 	}
 	
-<<<<<<< HEAD
-=======
-	public void game() {
-		game = new JFrame();
-	}
->>>>>>> origin/Remade_Game
-	
 	public void updateState() {
 		//gp.update(gp.g);
 	}
-	
-	
-	
 }
