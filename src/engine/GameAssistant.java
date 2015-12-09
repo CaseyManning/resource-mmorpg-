@@ -56,13 +56,7 @@ public class GameAssistant implements KeyListener {
 		
 		w = new Wizard();
 		
-		map = new Tilemap(tileChars, this.getClass().getResourceAsStream("testMap.txt"), Charset.forName("UTF8"), new ArrayList<Resource>());
-		
-		for(int i=0; i<5; i++) {
-			Resource r = woodR;
-			r.setPos(map.randomEmptyPosition());
-			map.addResource(r);
-		}
+		map = new Tilemap(tileChars, this.getClass().getResourceAsStream("testMap.txt"), Charset.forName("UTF8"));
 		
 	}
 	
